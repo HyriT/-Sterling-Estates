@@ -7,6 +7,9 @@ import http from 'http';
 import { Server } from 'socket.io'; 
 import connectDB from './Config/db_config.js';
 
+import authRoutes from './Routes/authRoutes.js';
+
+
 dotenv.config(); 
 connectDB();
 
@@ -36,6 +39,10 @@ app.use((req, res, next) => {
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+
+//routes
+app.use('/api/auth', authRoutes);
+
 
 // Conection with WebSocket
 io.on('connection', (socket) => {
