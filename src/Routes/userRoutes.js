@@ -4,7 +4,8 @@ import {verifyAdmin,verifyUser} from '../Middleware/authMiddlawere.js';
 
 const router =express.Router();
 
-router.get("/test",test);
+router.get("/test",test); //test route
+
 router.post('/update/:id',verifyAdmin,updateUser)
 router.delete('/delete/:id',deleteUser)
 router.get('/listing/:id',getUserListing)

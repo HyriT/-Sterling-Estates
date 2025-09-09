@@ -26,7 +26,7 @@ export const verifyUser = (req, res, next) => {
 export const verifyAdmin = (req, res, next) => {
   verifyToken(req, res, (err) => {
     if (err) return next(err);
-    if (!req.user.isAdmin) {
+    if (req.user.role !== "admin") {
       return next(errorHandler(403, 'Forbidden: Admins only'));
     }
     next();
