@@ -1,7 +1,7 @@
 import express from 'express';
 const router =express.Router();
 import {createListing,deleteListing,updateListing,getListing,getListings,getListingsFiltered, getAllListings } from '../Controllers/listingController.js'
-import {verifyAdmin} from '../Middleware/verifyUser.js';
+import {verifyAdmin} from '../Middleware/authMiddleware.js';
 
 router.post('/create',verifyAdmin,createListing)
 router.post('/delete/:id',verifyAdmin,deleteListing)

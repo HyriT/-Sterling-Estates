@@ -11,7 +11,6 @@ import userRoutes from './Routes/userRoutes.js';
 import authRoutes from './Routes/authRoutes.js';
 import listingRoutes from './Routes/listingRoutes.js'; 
 import appraisalRoutes from './Routes/AppraisalRoutes.js';
-import contactRoutes from './Routes/contactRoutes.js';
 
 dotenv.config(); 
 connectDB();
@@ -47,7 +46,6 @@ app.use(cookieParser());
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/listing', listingRoutes);
-app.use('/api', contactRoutes);
 app.use('/api', appraisalRoutes(io)); 
 
 

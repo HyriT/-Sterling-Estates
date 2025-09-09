@@ -1,6 +1,6 @@
 import express from 'express';
 import { createAppraisal, getAppraisal } from '../Controllers/appraisalController.js';
-import {verifyAdmin} from '../Middleware/verifyAdmin.js';
+import {verifyAdmin} from '../Middleware/authMiddleware.js';
 
 export default function(io) {
   const router = express.Router();

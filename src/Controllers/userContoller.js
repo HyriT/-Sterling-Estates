@@ -5,7 +5,7 @@ import Listing from '../Models/listingModel.js';
 
 export const test = (req, res) => {
     res.json({
-        message: 'Hello World',
+        message: 'Woelcome in our Real Estate website',
     });
 };
 //Update User
@@ -39,16 +39,16 @@ export const updateUser = async (req, res, next) => {
     }
 };
 
-// Delete User
-export const deleteUser = async (req, res, next) => {
-    if (req.user.id !== req.params.id) {
-        return next(errorHandler(401, "You can only delete your own account!"));
-    }
-
+export const deactivateUser = async (req, res, next) => {
     try {
-        await User.findByIdAndDelete(req.params.id);
+        const user = await User.findByIdAndUpdate(
+            req.user.id,
+            { isActive: false },
+            { new: true }
+        );
+
         res.clearCookie('access_token');
-        res.status(200).json({ message: 'User has been deleted...' });
+        res.status(200).json({ message: 'Your account has been deactivated.' });
     } catch (error) {
         next(error);
     }
