@@ -7,8 +7,11 @@ import http from 'http';
 import { Server } from 'socket.io'; 
 import connectDB from './Config/db_config.js';
 
+import userRoutes from './Routes/userRoutes.js';
 import authRoutes from './Routes/authRoutes.js';
-
+import listingRoutes from './Routes/listingRoutes.js'; 
+import appraisalRoutes from './Routes/AppraisalRoutes.js';
+import contactRoutes from './Routes/contactRoutes.js';
 
 dotenv.config(); 
 connectDB();
@@ -40,8 +43,12 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(cookieParser());
 
-//routes
+// Routes
+app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/listing', listingRoutes);
+app.use('/api', contactRoutes);
+app.use('/api', appraisalRoutes(io)); 
 
 
 // Conection with WebSocket
