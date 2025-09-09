@@ -9,7 +9,7 @@ router.post('/update/:id',verifyAdmin,updateUser)
 router.delete('/delete/:id',deleteUser)
 router.get('/listing/:id',getUserListing)
 router.get('/allUsers',verifyAdmin, getAllUsers);
-router.put('/resetPassword/:id',resetPassword);
+router.put('/resetPassword/:id',verifyUser,verifyAdmin,resetPassword);
 router.get('/:id', getUser);
 
 
