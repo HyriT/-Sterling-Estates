@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties - MC Real Estate</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+
+</head>
+<body>
+    <!-- Header Section -->
+    <header id="main-header">
+          <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
+  <span style="color: #d4af37;">MC</span> Real Estate
+</div>
+       <nav>
+  <ul>
+    <li><a href="home.html">Home</a></li>
+    <li><a href="aboutUs.html">About Us</a></li>
+    
+    <!-- Link-e që shfaqen vetëm nëse je i loguar -->
+    <li class="protected-link"><a href="listing.html">Properties</a></li>
+    <li class="protected-link"><a href="blog.html">Blog</a></li>
+    <li class="protected-link"><a href="contact.html">Contact Us</a></li>
+
+    <li class="nav-btn"><a href="login.html">Log In</a></li>
+
+    <li id="profile-menu" class="profile hidden">
+      <div class="avatar" onclick="toggleDropdown()">👤</div>
+      <ul class="dropdown hidden" id="dropdown-menu">
+        <li><a href="profile.html">My Profile</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <!-- Properties Section -->
+    <section class="properties-section">
+        <div class="filter-section">
+            <h2>Find Your Perfect Property</h2>
+            <form id="filter-form">
+                <div class="filter-group">
+                    <label for="price-min">Min Price</label>
+                    <input type="number" id="price-min" placeholder="Min Price ($)" min="0" step="1000">
+                </div>
+                <div class="filter-group">
+                    <label for="price-max">Max Price</label>
+                    <input type="number" id="price-max" placeholder="Max Price ($)" min="0" step="1000">
+                </div>
+                <div class="filter-group">
+                    <label for="bedrooms">Bedrooms</label>
+                    <select id="bedrooms">
+                        <option value="">Any</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="bathrooms">Bathrooms</label>
+                    <select id="bathrooms">
+                        <option value="">Any</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3+</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Enter city or address">
+                </div>
+                <button type="submit">Filter Properties</button>
+            </form>
+        </div>
+        <div class="properties-grid" id="properties-grid">
+            <!-- Properties will be dynamically populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MC Real Estate</h3>
+                <p>Your trusted partner in finding the perfect property.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="aboutUs.html">About Us</a></li>
+                    <li><a href="listing.html">Properties</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@mcrealestate.com</p>
+                <p>Phone: (123) 456-7890</p>
+                <p>Address: 123 Real Estate Ave, Dream City</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 MC Real Estate. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="listing.js"></script>
+</body>
+</html>
