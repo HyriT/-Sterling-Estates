@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agent Dashboard - MC Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .dashboard-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #1c1c1e;
+      color: #fff;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      color: #f5c518;
+    }
+
+    .sidebar a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .sidebar a:hover {
+      color: #f5c518;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .main-content h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .add-listing {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 40px;
+    }
+
+    .add-listing h2 {
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    .add-listing input,
+    .add-listing textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    .add-listing button {
+      background-color: #f5c518;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .add-listing button:hover {
+      background-color: #e0ae12;
+    }
+
+    .listings h2 {
+      margin-bottom: 20px;
+    }
+
+    .listing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .listing-card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+    }
+
+    .listing-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .listing-card h3 {
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .listing-card p {
+      margin-bottom: 5px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    .actions {
+      margin-top: 10px;
+    }
+
+    .actions button {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+
+    .actions .edit {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    .actions .delete {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    .actions button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <h2><i class="fas fa-building"></i> Agent Panel</h2>
+      <a href="#"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="#"><i class="fas fa-plus-circle"></i> Add Listing</a>
+      <a href="#"><i class="fas fa-list"></i> My Listings</a>
+      <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </aside>
+
+    <main class="main-content">
+      <h1>Welcome back, Agent!</h1>
+
+      <section class="add-listing">
+        <h2>Add New Property</h2>
+        <form id="add-listing-form">
+          <input type="text" id="title" placeholder="Title" required />
+          <textarea id="description" placeholder="Description" rows="4" required></textarea>
+          <input type="text" id="location" placeholder="Location" required />
+          <input type="number" id="price" placeholder="Price" required />
+          <input type="text" id="type" placeholder="Type (e.g. For Sale, For Rent)" required />
+          <button type="submit">Add Listing</button>
+        </form>
+      </section>
+
+      <section class="listings">
+        <h2>My Properties</h2>
+        <div class="listing-grid">
+          <div class="listing-card">
+            <h3>Modern Apartment in Prishtina</h3>
+            <p><strong>Location:</strong> Prishtina</p>
+            <p><strong>Price:</strong> €800/month</p>
+            <p><strong>Type:</strong> For Rent</p>
+            <div class="actions">
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </div>
+          </div>
+
+          <!-- More listings dynamically loaded here -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
