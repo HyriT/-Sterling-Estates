@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Appraisals | Admin Panel</title>
+  <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <div>
+        <h2>MC Admin</h2>
+          <ul>
+  <li><a href="admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+  <li class="active"><a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a></li>
+  <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+        <li ><a href="agent.html"><i class="fas fa-user-tie"></i> Agent</a></li>
+
+  <li><a href="properties.html"><i class="fas fa-building"></i> Properties</a></li>
+  <li><i class="fas fa-chart-bar"></i> Statistics</li>
+  <li><i class="fas fa-cog"></i> Settings</li>
+</ul>
+      </div>
+      <p style="font-size: 13px;">&copy; 2025 MC Real Estate</p>
+    </aside>
+
+    <main class="main-panel">
+      <header>
+        <h1>Mange Appraisals</h1>
+        <div class="admin-user">
+          <div class="avatar" onclick="toggleDropdown()">A</div>
+          <div class="dropdown" id="profile-dropdown">
+            <a href="#">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </div>
+      </header>
+      
+      <section class="content-section">
+        <div class="controls">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Search appraisals...">
+          </div>
+        </div>
+
+      <section class="content-section">
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="appraisal-table-body"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    async function fetchAppraisals() {
+      try {
+        const res = await fetch("http://localhost:3000/api/appraisal");
+        const data = await res.json();
+
+        const tableBody = document.getElementById("appraisal-table-body");
+        tableBody.innerHTML = "";
+
+        data.forEach(appraisal => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${appraisal.email}</td>
+            <td>${appraisal.mobile}</td>
+            <td>${new Date(appraisal.createdAt).toLocaleString()}</td>
+            <td>${appraisal.status}</td>
+          `;
+          tableBody.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Error fetching appraisals:", err);
+      }
+    }
+
+    function toggleDropdown() {
+      const dropdown = document.getElementById("profile-dropdown");
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function logout() {
+      alert("Logging out...");
+      localStorage.removeItem("user");
+      window.location.href = "login.html";
+    }
+
+    window.addEventListener("click", function(e) {
+      if (!e.target.closest(".admin-user")) {
+        document.getElementById("profile-dropdown").style.display = "none";
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", fetchAppraisals);
+  </script>
+</body>
+</html>

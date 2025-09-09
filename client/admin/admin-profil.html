@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Profile | MC Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f1f5f9;
+      color: #333;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background-color: #1e3a8a;
+      width: 220px;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sidebar h2 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+    .sidebar nav a {
+      display: block;
+      margin-bottom: 15px;
+      color: #cbd5e0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      color: #facc15;
+      font-weight: 600;
+    }
+    .sidebar .copyright {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 30px 40px;
+      background: #f8fafc;
+      overflow-y: auto;
+    }
+    .main-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .main-header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin: 0;
+    }
+    .admin-btn {
+      background: #facc15;
+      border: none;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Profile Layout */
+    .profile-content {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .profile-card, .activity-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .profile-header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .profile-header h2 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .profile-info p {
+      margin: 6px 0;
+    }
+    .label {
+      font-weight: 600;
+      color: #1e3a8a;
+    }
+    .status {
+      color: green;
+      font-weight: bold;
+    }
+
+    .activity-card h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      color: #1e3a8a;
+    }
+    .activity-item {
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+    .activity-date {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    @media (max-width: 768px) {
+      .layout {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .main {
+        padding: 20px;
+      }
+      .profile-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <h2>MC Admin</h2>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="appraisals.html">Appraisals</a>
+          <a href="#">Users</a>
+          <a href="#">Properties</a>
+          <a href="#">Statistics</a>
+        </nav>
+      </div>
+      <p class="copyright">&copy; 2025 MC Real Estate</p>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+      <div class="main-header">
+        <h1>Admin Profile</h1>
+        <button class="admin-btn">👤 Admin</button>
+      </div>
+
+      <div class="profile-content">
+        <!-- Profile Info -->
+        <div class="profile-card">
+          <div class="profile-header">
+            <img src="https://i.pravatar.cc/100?img=5" alt="Admin Picture">
+            <div>
+              <h2>Clay Jensen</h2>
+              <p>Northridge, California (CA)</p>
+            </div>
+          </div>
+
+          <div class="profile-info">
+            <p><span class="label">Age:</span> 24</p>
+            <p><span class="label">Gender:</span> Male</p>
+            <p><span class="label">Status:</span> <span class="status">Active</span></p>
+            <p><span class="label">Role:</span> Administrator</p>
+            <p><span class="label">Email:</span> clay.jensen@email.com</p>
+            <p><span class="label">Contact:</span> (+61) (45687) (45687)</p>
+            <p><span class="label">Region:</span> Central US</p>
+          </div>
+        </div>
+
+        <!-- Activities -->
+        <div class="activity-card">
+          <h3>Recent Activities</h3>
+          <div class="activity-item">✅ You added a role <i>'Sales Lead'</i></div>
+          <div class="activity-date">19/02/2023 10:40:55 AM</div>
+
+          <div class="activity-item">🔧 Assigned task <i>'API Integration'</i> to role <i>'Technical Lead - BE'</i></div>
+          <div class="activity-date">19/02/2023 09:40:55 AM</div>
+
+          <div class="activity-item">🔧 Assigned task <i>'API Integration'</i> to role <i>'Technical Lead - BE'</i></div>
+          <div class="activity-date">19/02/2023 09:40:55 AM</div>
+
+          <hr style="margin: 20px 0;">
+
+          <h3>Team Activities</h3>
+          <div class="activity-item">👤 Bryce Walker added role <i>'Worker - 2'</i></div>
+          <div class="activity-date">11/02/2023 10:40:55 AM</div>
+
+          <div class="activity-item">📌 Bryce Walker assigned task to role <i>'Worker - 1'</i></div>
+          <div class="activity-date">11/02/2023 10:40:55 AM</div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

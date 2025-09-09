@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | MC Real Estate</title>
+  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="admin.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <div>
+        <h2>MC Admin</h2>
+      <ul>
+  <li class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
+  <li><a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a></li>
+  <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+      <li ><a href="agent.html"><i class="fas fa-user-tie"></i> Agent</a></li>
+  <li><a href="properties.html"><i class="fas fa-building"></i> Properties</a></li>
+  <li><i class="fas fa-chart-bar"></i> Statistics</li>
+  <li><i class="fas fa-cog"></i> Settings</li>
+</ul>
+
+      </div>
+      <p style="font-size: 13px;">&copy; 2025 MC Real Estate</p>
+    </aside>
+
+  
+    <main class="main-panel">
+      <header>
+        <h1>Dashboard</h1>
+        <div class="admin-user">
+          <div class="avatar" onclick="toggleDropdown()">A</div>
+          <div class="dropdown" id="profile-dropdown">
+            <a href="#">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="notification-section">
+        <h2>Real-Time Appraisal Requests</h2>
+        <ul id="notification-list"></ul>
+      </section>
+    </main>
+  </div>
+<script>
+  // Initialize socket
+  const socket = io('http://localhost:3000', {
+    query: { role: 'admin' }
+  });
+
+  socket.on('connect', () => {
+    console.log('Connected as Admin:', socket.id);
+  });
+
+  socket.on('new_appraisal', (data) => {
+    const list = document.getElementById('notification-list');
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <strong>Email:</strong> ${data.data.email}<br>
+      <strong>Mobile:</strong> ${data.data.mobile}<br>
+      <strong>Time:</strong> ${new Date(data.data.createdAt).toLocaleString()}
+    `;
+    list.prepend(li);
+  });
+
+  socket.on('disconnect', () => {
+    console.warn('Disconnected from WebSocket');
+  });
+
+  // Toggle profile dropdown
+  function toggleDropdown() {
+    const dropdown = document.getElementById("profile-dropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  // Logout
+  function logout() {
+    alert("Logging out...");
+    fetch("http://localhost:3000/api/auth/logout", {
+      method: "POST",
+      credentials: "include"
+    }).finally(() => {
+      window.location.href = "./admin-login.html";
+    });
+  }
+
+  // Close dropdown on outside click
+  window.addEventListener("click", function(e) {
+    if (!e.target.closest(".admin-user")) {
+      document.getElementById("profile-dropdown").style.display = "none";
+    }
+  });
+
+  // Fetch admin data 
+  async function fetchAdminData() {
+    try {
+      const res = await fetch("http://localhost:3000/api/admin/dashboard", {
+        method: "GET",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (!res.ok) {
+        alert("Session expired. Please log in again.");
+        window.location.href = "./admin-login.html";
+        return;
+      }
+
+      const data = await res.json();
+      console.log("Admin data:", data);
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  }
+
+  // Call fetch on page load
+  fetchAdminData();
+</script>
+</body>
+</html>

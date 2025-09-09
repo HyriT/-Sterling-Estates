@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Admin Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #2c3e50, #c3990e,#2c3e50);
+            padding: 20px;
+        }
+        
+        .login-container {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .login-image {
+            flex: 1;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1073&q=80') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-image h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .login-image p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .login-form {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: #fff;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo h1 {
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        
+        .logo span {
+            color: #2c3e50;
+        }
+        
+        .logo p {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            color: #7f8c8d;
+        }
+        
+        .input-group .error {
+            color: #c3990e;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .remember-forgot label {
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .remember-forgot input {
+            margin-right: 5px;
+        }
+        
+        .remember-forgot a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .security-notice {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .security-notice i {
+            margin-right: 5px;
+            color: #3498db;
+        }
+        
+        @media (max-width: 900px) {
+            .login-container {
+                flex-direction: column;
+                height: auto;
+                width: 100%;
+                max-width: 500px;
+            }
+            
+            .login-image {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-form {
+                padding: 30px 20px;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-image">
+            <h2>MC Real Estate Admin Portal</h2>
+            <p>Manage properties, listings, clients, and transactions from a single dashboard. Secure access for authorized personnel only.</p>
+        </div>
+        
+        <div class="login-form">
+            <div class="logo">
+                <h1>MC<span>Real Estate</span></h1>
+                <p>Administrator Dashboard</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">Admin Email</label>
+                    <i class="fas fa-user"></i>
+                    <input type="email" id="email" placeholder="Enter your admin email" required>
+                    <div class="error" id="emailError">Please enter a valid email address</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <div class="error" id="passwordError">Password must be at least 10 characters</div>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox" id="remember">
+                        Remember this device
+                    </label>
+                    <a href="#">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="login-button">Secure Login</button>
+            </form>
+            
+            <div class="security-notice">
+                <i class="fas fa-shield-alt"></i>
+                You are accessing a secure system. Unauthorized access is prohibited.
+            </div>
+        </div>
+    </div>
+
+   <script>
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const emailError = document.getElementById('emailError');
+  const passwordError = document.getElementById('passwordError');
+  const button = document.querySelector('.login-button');
+
+  let isValid = true;
+
+  // Email validation
+  if (!validateEmail(email)) {
+    emailError.style.display = 'block';
+    isValid = false;
+  } else {
+    emailError.style.display = 'none';
+  }
+
+  // Password validation (more strict for admin)
+  if (password.length < 10) {
+    passwordError.style.display = 'block';
+    isValid = false;
+  } else {
+    passwordError.style.display = 'none';
+  }
+
+  if (!isValid) return;
+
+  try {
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
+    button.disabled = true;
+
+    const res = await fetch("http://localhost:3000/api/auth/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include", // important for cookies
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || "Login failed!");
+      button.innerHTML = 'Secure Login';
+      button.disabled = false;
+      return;
+    }
+
+    // Check if user is admin
+    const isAdmin = data.user && data.user.role === "admin";
+    if (isAdmin) {
+      alert("Login successful! Redirecting to admin dashboard...");
+      window.location.href = "./admin.html"; // redirect
+    } else {
+      alert("Access denied: You are not an admin!");
+      button.innerHTML = 'Secure Login';
+      button.disabled = false;
+    }
+
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Something went wrong. Please try again.");
+    button.innerHTML = 'Secure Login';
+    button.disabled = false;
+  }
+});
+
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+</script>
+
+
+</body>
+</html>
