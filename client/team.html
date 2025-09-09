@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Find an Agent - MC Real Estate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="script.js"></script>
+  <style>
+
+    :root {
+      --primary-color: #003366;
+      --accent-color: #d4af37;
+      --light-color: #f8f9fa;
+      --dark-color: #2c3e50;
+      --text-color: #333;
+      --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      line-height: 1.6;
+      background-color: #f5f5f5;
+    }
+    
+    /* Header Styles */
+    header {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+    
+    .logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+    }
+    
+    .logo span {
+      color: var(--accent-color);
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: var(--accent-color);
+    }
+    
+    .nav-btn a {
+      background-color: var(--accent-color);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      color: var(--dark-color);
+      font-weight: 600;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1973&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    /* Search Section */
+    .search-section {
+      background-color: white;
+      max-width: 1000px;
+      margin: -2rem auto 2rem;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+    }
+    
+    .search-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    
+    .search-input {
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .search-btn {
+      background-color: var(--accent-color);
+      color: var(--dark-color);
+      border: none;
+      padding: 0.8rem;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .search-btn:hover {
+      background-color: #c19b2e;
+    }
+    
+    /* Agents Grid */
+    .agents-section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--dark-color);
+      font-size: 2rem;
+    }
+    
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    
+    .agent-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s;
+    }
+    
+    .agent-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .agent-img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    
+    .agent-info {
+      padding: 1.5rem;
+    }
+    
+    .agent-name {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--dark-color);
+    }
+    
+    .agent-role {
+      color: var(--accent-color);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
+    .agent-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      border-top: 1px solid #eee;
+      padding-top: 1rem;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary-color);
+    }
+    
+    .stat-label {
+      font-size: 0.8rem;
+      color: #777;
+    }
+    
+    .agent-contact {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .contact-btn {
+      flex: 1;
+      padding: 0.6rem;
+      border: none;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .message-btn {
+      background-color: var(--primary-color);
+      color: white;
+      margin-right: 0.5rem;
+    }
+    
+    .message-btn:hover {
+      background-color: #002244;
+    }
+    
+    .call-btn {
+      background-color: var(--accent-color);
+      color: var(--dark-color);
+    }
+    
+    .call-btn:hover {
+      background-color: #c19b2e;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: #dcdcdc;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      nav ul {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .search-form {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+    
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span>MC</span> Real Estate
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="team.html" class="active">Agents</a></li>
+        <li class="protected-link"><a href="listing.html">Properties</a></li>
+        <li class="protected-link"><a href="blog.html">Blog</a></li>
+        <li class="protected-link"><a href="contact.html">Contact Us</a></li>
+        <li class="nav-btn"><a href="login.html">Log In</a></li>
+        <li id="profile-menu" class="profile hidden">
+          <div class="avatar">👤</div>
+          <ul class="dropdown hidden">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Find Your Perfect Real Estate Agent</h1>
+    <p>Connect with experienced professionals who understand your needs and the local market</p>
+  </section>
+
+  <section class="search-section">
+    <form class="search-form">
+      <input type="text" class="search-input" placeholder="Search by name">
+      <select class="search-input">
+        <option value="">All Locations</option>
+        <option value="tirane">Tiranë</option>
+        <option value="durres">Durrës</option>
+        <option value="vlore">Vlorë</option>
+      </select>
+      <select class="search-input">
+        <option value="">All Specialties</option>
+        <option value="residential">Residential</option>
+        <option value="commercial">Commercial</option>
+        <option value="luxury">Luxury Homes</option>
+      </select>
+      <select class="search-input">
+        <option value="">Experience</option>
+        <option value="5plus">5+ years</option>
+        <option value="10plus">10+ years</option>
+        <option value="15plus">15+ years</option>
+      </select>
+      <button type="submit" class="search-btn">Find Agents</button>
+    </form>
+  </section>
+
+  <section class="agents-section">
+    <h2 class="section-title">Our Professional Agents</h2>
+    <div class="agents-grid">
+      <!-- Agent 1 -->
+      <div class="agent-card">
+        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Sarah Johnson" class="agent-img">
+        <div class="agent-info">
+          <h3 class="agent-name">Sarah Johnson</h3>
+          <p class="agent-role">Lead Property Advisor</p>
+          <div class="agent-stats">
+            <div class="stat">
+              <div class="stat-number">127</div>
+              <div class="stat-label">Properties Sold</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">98%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">8+</div>
+              <div class="stat-label">Years</div>
+            </div>
+          </div>
+          <div class="agent-contact">
+            <button class="contact-btn message-btn">Message</button>
+            <button class="contact-btn call-btn">Call</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Agent 2 -->
+      <div class="agent-card">
+        <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg" alt="David Lee" class="agent-img">
+        <div class="agent-info">
+          <h3 class="agent-name">David Lee</h3>
+          <p class="agent-role">Senior Real Estate Agent</p>
+          <div class="agent-stats">
+            <div class="stat">
+              <div class="stat-number">203</div>
+              <div class="stat-label">Properties Sold</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">99%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">12+</div>
+              <div class="stat-label">Years</div>
+            </div>
+          </div>
+          <div class="agent-contact">
+            <button class="contact-btn message-btn">Message</button>
+            <button class="contact-btn call-btn">Call</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Agent 3 -->
+      <div class="agent-card">
+        <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg" alt="Amanda Smith" class="agent-img">
+        <div class="agent-info">
+          <h3 class="agent-name">Amanda Smith</h3>
+          <p class="agent-role">Customer Relations</p>
+          <div class="agent-stats">
+            <div class="stat">
+              <div class="stat-number">94</div>
+              <div class="stat-label">Properties Sold</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">97%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">6+</div>
+              <div class="stat-label">Years</div>
+            </div>
+          </div>
+          <div class="agent-contact">
+            <button class="contact-btn message-btn">Message</button>
+            <button class="contact-btn call-btn">Call</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Agent 4 -->
+      <div class="agent-card">
+        <img src="https://images.pexels.com/photos/3775531/pexels-photo-3775531.jpeg" alt="Michael Brown" class="agent-img">
+        <div class="agent-info">
+          <h3 class="agent-name">Michael Brown</h3>
+          <p class="agent-role">Valuation Specialist</p>
+          <div class="agent-stats">
+            <div class="stat">
+              <div class="stat-number">156</div>
+              <div class="stat-label">Properties Sold</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">98%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">10+</div>
+              <div class="stat-label">Years</div>
+            </div>
+          </div>
+          <div class="agent-contact">
+            <button class="contact-btn message-btn">Message</button>
+            <button class="contact-btn call-btn">Call</button>
+          </div>
+        </div>
+      </div>
+        <!-- Agent 5 -->
+      <div class="agent-card">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuPuLhPq5wRHUwjx3rrTCNuHcoPTCRxWyOvYI1jV7UPUIOREqXBiDXyhfBWT4mII8HPF0&usqp=CAU" alt="Sarah Johnson" class="agent-img">
+        <div class="agent-info">
+          <h3 class="agent-name">Emi Johnson</h3>
+          <p class="agent-role">Lead Property Advisor</p>
+          <div class="agent-stats">
+            <div class="stat">
+              <div class="stat-number">112</div>
+              <div class="stat-label">Properties Sold</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">94%</div>
+              <div class="stat-label">Satisfaction</div>
+            </div>
+            <div class="stat">
+              <div class="stat-number">6+</div>
+              <div class="stat-label">Years</div>
+            </div>
+          </div>
+          <div class="agent-contact">
+            <button class="contact-btn message-btn">Message</button>
+            <button class="contact-btn call-btn">Call</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MC Real Estate. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Basic search functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchForm = document.querySelector('.search-form');
+      const agentCards = document.querySelectorAll('.agent-card');
+      
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nameInput = document.querySelector('input[type="text"]').value.toLowerCase();
+        const locationSelect = document.querySelectorAll('select')[0].value;
+        const specialtySelect = document.querySelectorAll('select')[1].value;
+        
+        agentCards.forEach(card => {
+          const agentName = card.querySelector('.agent-name').textContent.toLowerCase();
+          let matchesSearch = true;
+          
+          if (nameInput && !agentName.includes(nameInput)) {
+            matchesSearch = false;
+          }
+          
+          // In a real implementation, you would check against data attributes for location and specialty
+          
+          if (matchesSearch) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+      
+      // Reset search when inputs are cleared
+      const inputs = searchForm.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.addEventListener('input', function() {
+          if (!this.value) {
+            agentCards.forEach(card => {
+              card.style.display = 'block';
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
