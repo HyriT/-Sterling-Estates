@@ -261,7 +261,7 @@
 
 
   <script>
-    // Dropdown toggle për profile menu
+    // Dropdown 
     function toggleDropdown() {
       const dropdown = document.getElementById('dropdown-menu');
       dropdown.classList.toggle('hidden');
@@ -276,7 +276,7 @@
     if (res.ok) {
       localStorage.removeItem("user");
 
-      window.location.href = "login.html";
+      window.location.href = "auth.html";
     } else {
       alert("Something went wrong during logout.");
     }
@@ -285,7 +285,7 @@
     alert("Logout failed!");
   }
 }
-    // Optional: Mbyll dropdown kur klikoj jashtë
+    // Optional
     window.addEventListener('click', function(e){
       const dropdown = document.getElementById('dropdown-menu');
       const avatar = document.querySelector('.avatar');
@@ -373,12 +373,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchForm = document.getElementById("search-form");
 
   searchForm.addEventListener("submit", function(e) {
-    e.preventDefault(); // ndalon submit-in default
+    e.preventDefault();
 
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!user || !user.email) {
-      window.location.href = "login.html";
+      window.location.href = "auth.html";
     } else {
      
       this.submit(); 
@@ -401,7 +401,7 @@ function startCounting() {
         counter.innerText = Math.ceil(count);
         requestAnimationFrame(update);
       } else {
-        counter.innerText = target + "+"; // add "+" after counting
+        counter.innerText = target + "+";
       }
     };
 
