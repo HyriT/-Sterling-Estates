@@ -268,7 +268,7 @@
     }
    async function logout() {
   try {
-    const res = await fetch("http://localhost:3000/api/auth/signout", {
+    const res = await fetch("http://localhost:5000/api/auth/signout", {
       method: "POST",
       credentials: "include", 
     });
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (minPrice) params.append('minPrice', minPrice);
     if (maxPrice) params.append('maxPrice', maxPrice);
 
-    const url = `http://localhost:3000/api/listing/filtered?${params.toString()}`;
+    const url = `http://localhost:5000/api/listing/filtered?${params.toString()}`;
 
     try {
       const res = await fetch(url);

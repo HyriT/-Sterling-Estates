@@ -68,7 +68,7 @@
   <script>
     async function fetchUsers() {
       try {
-        const res = await fetch("http://localhost:3000/api/user/allUsers");
+        const res = await fetch("http://localhost:5000/api/user/allUsers");
         const data = await res.json();
 
         const tableBody = document.getElementById("users-table-body");

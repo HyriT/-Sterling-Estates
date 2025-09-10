@@ -65,7 +65,7 @@
   <script>
     async function fetchAppraisals() {
       try {
-        const res = await fetch("http://localhost:3000/api/appraisal");
+        const res = await fetch("http://localhost:5000/api/appraisal");
         const data = await res.json();
 
         const tableBody = document.getElementById("appraisal-table-body");

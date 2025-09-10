@@ -256,7 +256,7 @@ button.delete-btn {
     // Fetch and render properties
     async function fetchProperties() {
       try {
-        const res = await fetch("http://localhost:3000/api/listing/getAll");
+        const res = await fetch("http://localhost:5000/api/listing/getAll");
         if (!res.ok) throw new Error('Failed to fetch properties');
         const data = await res.json();
 
@@ -342,14 +342,14 @@ button.delete-btn {
         let response;
         if (id) {
           // Update existing listing
-          response = await fetch(`http://localhost:3000/api/listing/${id}`, {
+          response = await fetch(`http://localhost:5000/api/listing/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
           });
         } else {
           // Create new listing
-          response = await fetch(`http://localhost:3000/api/listing`, {
+          response = await fetch(`http://localhost:5000/api/listing`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
@@ -379,7 +379,7 @@ button.delete-btn {
       if (e.target.classList.contains('update-btn')) {
         // Fetch listing details and fill form for update + open modal
         try {
-          const res = await fetch(`http://localhost:3000/api/listing/${id}`);
+          const res = await fetch(`http://localhost:5000/api/listing/${id}`);
           if (!res.ok) throw new Error('Failed to fetch listing');
           const listing = await res.json();
           fillForm(listing);
@@ -393,7 +393,7 @@ button.delete-btn {
         if (!confirm('Are you sure you want to delete this listing?')) return;
 
         try {
-          const res = await fetch(`http://localhost:3000/api/listing/${id}`, {
+          const res = await fetch(`http://localhost:5000/api/listing/${id}`, {
             method: 'DELETE',
           });
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard | MC Real Estate</title>
-  <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+  <script src="http://localhost:5000/socket.io/socket.io.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="admin.css" rel="stylesheet">
@@ -50,7 +50,7 @@
   </div>
 <script>
   // Initialize socket
-  const socket = io('http://localhost:3000', {
+  const socket = io('http://localhost:5000', {
     query: { role: 'admin' }
   });
 
@@ -82,7 +82,7 @@
   // Logout
   function logout() {
     alert("Logging out...");
-    fetch("http://localhost:3000/api/auth/logout", {
+    fetch("http://localhost:5000/api/auth/logout", {
       method: "POST",
       credentials: "include"
     }).finally(() => {
@@ -100,7 +100,7 @@
   // Fetch admin data 
   async function fetchAdminData() {
     try {
-      const res = await fetch("http://localhost:3000/api/admin/dashboard", {
+      const res = await fetch("http://localhost:5000/api/admin/dashboard", {
         method: "GET",
         credentials: "include",
         headers: { "Content-Type": "application/json" }
