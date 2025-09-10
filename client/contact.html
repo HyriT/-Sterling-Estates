@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us - MC Real Estate</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <script src="script.js"></script>
+  <style>
+    .contact-section {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+      background-image: url('https://static.vecteezy.com/system/resources/thumbnails/027/717/341/small_2x/successful-real-estate-transaction-realtor-and-buyer-shaking-hands-generative-ai-photo.jpg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 20px;
+      max-width: 1200px;
+      margin: 40px auto;
+      overflow: hidden;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      align-items: stretch;
+    }
+
+    .contact-info {
+      flex-basis: 50%;
+      padding: 40px 30px;
+      color: #fff;
+      background: rgba(99, 139, 226, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+
+    .contact-info h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-info p {
+      line-height: 1.6;
+    }
+
+    .contact-info span {
+      font-weight: 600;
+      margin-top: 10px;
+      display: block;
+    }
+
+    .contact-form {
+      flex-basis: 50%;
+      padding: 40px 30px;
+      background: rgba(255, 255, 255, 0.3); 
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      max-width: 500px;
+      width: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-form h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: #1a2a6c;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .row input {
+      flex: 1;
+    }
+
+    input,
+    textarea {
+      padding: 12px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      width: 100%;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .inquiry-types {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .inquiry-types button {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: #f4f4f4;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .inquiry-types button.active {
+      background: #1a2a6c;
+      color: #fff;
+      border-color: #1a2a6c;
+    }
+
+    .submit-button {
+      background: #1a2a6c;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .submit-button:hover {
+      background: #143163;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #1a2a6c;
+      color: white;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 800px) {
+      .contact-section {
+        flex-direction: column;
+        background-image: url('images/contact-bg.jpg');
+        border-radius: 20px;
+      }
+
+      .contact-info {
+        width: 100%;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .contact-form {
+        border-radius: 0 0 20px 20px;
+        width: 100%;
+        margin-top: 0;
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
+  <span style="color: #d4af37;">MC</span> Real Estate
+</div>
+
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="aboutUs.html">About Us</a></li>
+        <li class="protected-link"><a href="listing.html">Properties</a></li>
+        <li class="protected-link"><a href="blog.html">Blog</a></li>
+        <li class="protected-link"><a href="contact.html">Contact Us</a></li>
+        <li class="nav-btn"><a href="login.html">Log In</a></li>
+        <li id="profile-menu" class="profile hidden">
+          <div class="avatar" onclick="toggleDropdown()">👤</div>
+          <ul class="dropdown hidden" id="dropdown-menu">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="contact-section">
+    <div class="contact-info">
+      <h2>You Have Questions,<br />We Have Answers</h2>
+      <p>We’d love to hear from you! Whether it’s an inquiry, appraisal, or general real estate question — we’re here to help.</p>
+      <span>Phone:</span>
+      <p>+1 (555) 123-4567</p>
+      <span>Email:</span>
+      <p>contact@mc-realestate.com</p>
+      <span>Address:</span>
+      <p>123 Main Street, Cityville, USA</p>
+      <span>Hours:</span>
+      <p>Mon - Fri: 9 AM - 6 PM</p>
+    </div>
+
+    <div class="contact-form">
+      <h3>Tell Us What You Need</h3>
+      <form id="contactForm" action="#" method="POST" novalidate>
+        <div class="row">
+          <input type="text" placeholder="First Name" required />
+          <input type="text" placeholder="Last Name" required />
+        </div>
+        <div class="row">
+          <input type="text" placeholder="Country" />
+          <input type="text" placeholder="Phone Number" />
+        </div>
+        <input type="email" placeholder="Email Address" required />
+
+        <textarea placeholder="Your message..." required></textarea>
+
+        <label><input type="checkbox" /> I'd like to receive updates and listings</label>
+
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 MC Real Estate. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.inquiry-types button').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.inquiry-types button').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!this.checkValidity()) {
+        alert('Please fill in all required fields correctly.');
+        return;
+      }
+      alert('Thank you for reaching out! We will get back to you shortly.');
+      this.reset();
+      const inquiryBtns = document.querySelectorAll('.inquiry-types button');
+      inquiryBtns.forEach((b) => b.classList.remove('active'));
+      if (inquiryBtns.length) inquiryBtns[0].classList.add('active');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contactForm');
+      const inquiryButtons = document.querySelectorAll('.inquiry-types button');
+
+      inquiryButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          inquiryButtons.forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!form.checkValidity()) {
+          alert('Please fill in all required fields correctly.');
+          return;
+        }
+
+        const data = {
+          firstName: form.querySelector('input[placeholder="First Name"]').value.trim(),
+          lastName: form.querySelector('input[placeholder="Last Name"]').value.trim(),
+          country: form.querySelector('input[placeholder="Country"]').value.trim(),
+          phone: form.querySelector('input[placeholder="Phone Number"]').value.trim(),
+          email: form.querySelector('input[placeholder="Email Address"]').value.trim(),
+          inquiryType: document.querySelector('.inquiry-types button.active')?.textContent || 'General',
+          message: form.querySelector('textarea').value.trim(),
+        };
+
+        try {
+          const response = await fetch('http://localhost:3000/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert(result.message || 'Contact form submitted successfully!');
+            form.reset();
+
+            // Reset inquiry type buttons
+            inquiryButtons.forEach((b) => b.classList.remove('active'));
+            inquiryButtons[0].classList.add('active');
+          } else {
+            alert(result.error || 'Something went wrong while submitting.');
+          }
+        } catch (error) {
+          console.error('Submit failed:', error);
+          alert('Error submitting the form.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
