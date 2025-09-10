@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blog - REX Real Estate</title>
+<link href="style.css" rel="stylesheet">
+<script src="script.js"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+
+  /* Blog Section Styling */
+  .blog-section {
+    padding: 70px 20px;
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    min-height: 80vh;
+  }
+
+  .blog-section h2 {
+    font-size: 3rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+  }
+
+  .blog-post {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgb(44 62 80 / 0.07);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+
+  .blog-post:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgb(44 62 80 / 0.15);
+  }
+
+  .blog-post img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .blog-post:hover img {
+    transform: scale(1.05);
+  }
+
+  .blog-content {
+    padding: 25px 30px 35px;
+  }
+
+  .blog-content h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .blog-content p {
+    font-size: 1rem;
+    color: #666c7a;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+
+  .blog-content a {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: #f5c518;
+    color: #222;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    box-shadow: 0 6px 12px rgb(245 197 24 / 0.4);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .blog-content a:hover {
+    background-color: #ddb510;
+    box-shadow: 0 8px 18px rgb(221 181 16 / 0.6);
+    color: #111;
+  }
+
+  /* Footer Styling */
+  footer {
+    background-color: #2c3e50;
+    color: #dcdcdc;
+    text-align: center;
+    padding: 25px 15px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    header {
+      padding: 20px 30px;
+    }
+    nav ul {
+      gap: 18px;
+    }
+    .blog-section {
+      padding: 50px 15px;
+      margin-bottom: 60px;
+    }
+    .blog-grid {
+      gap: 30px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    nav ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+  }
+  .nav-btn a {
+    background-color: #ffd700;
+    color: #003366 !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-btn a:hover {
+    background-color: #e6c200;
+    transform: translateY(-2px);
+  }
+  .more-text {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.hidden {
+  display: none;
+}
+
+</style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+  <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
+  <span style="color: #d4af37;">MC</span> Real Estate
+</div>
+   <nav>
+  <ul>
+    <li><a href="home.html">Home</a></li>
+    <li><a href="aboutUs.html">About Us</a></li>
+    
+    <li class="protected-link"><a href="listing.html">Properties</a></li>
+    <li class="protected-link"><a href="blog.html">Blog</a></li>
+    <li class="protected-link"><a href="contact.html">Contact Us</a></li>
+
+    <li class="nav-btn"><a href="login.html">Log In</a></li>
+
+    <li id="profile-menu" class="profile hidden">
+      <div class="avatar" onclick="toggleDropdown()">👤</div>
+      <ul class="dropdown hidden" id="dropdown-menu">
+        <li><a href="profile.html">My Profile</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Blog Section -->
+  <section class="blog-section">
+    <h2>Our Blog</h2>
+    <div class="blog-grid">
+     <!-- Blog Post 1 -->
+<div class="blog-post">
+  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Blog Post 1" />
+  <div class="blog-content">
+    <h3>Top 5 Tips for First-Time Home Buyers</h3>
+    <p>Buying your first home can be overwhelming. Here are our top 5 tips to make the process smoother, from setting a budget to understanding the market.</p>
+    <a href="#" class="read-more-btn">Read More</a>
+    <p class="more-text hidden">
+      1. Set a clear budget before house hunting.<br>
+      2. Get pre-approved for a mortgage.<br>
+      3. Research different neighborhoods.<br>
+      4. Don’t skip the home inspection.<br>
+      5. Work with a trusted real estate agent.
+    </p>
+  </div>
+</div>
+
+<!-- Blog Post 2 -->
+  <div class="blog-post">
+    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Blog Post 2" />
+    <div class="blog-content">
+      <h3>How to Stage Your Home for a Quick Sale</h3>
+      <p>Staging your home can make a big difference in attracting buyers. Learn our expert tips on decluttering, decorating, and more.</p>
+      <a href="#" class="read-more-btn">Read More</a>
+      <p class="more-text hidden">
+        - Remove personal items and depersonalize rooms.<br>
+        - Use neutral colors and lighting to open up space.<br>
+        - Highlight key areas like the kitchen and living room.<br>
+        - Add small plants or decor to freshen the look.<br>
+        - Keep everything clean, organized, and welcoming.
+      </p>
+    </div>
+  </div>
+
+  <!-- Blog Post 3 -->
+  <div class="blog-post">
+    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Blog Post 3" />
+    <div class="blog-content">
+      <h3>The Benefits of Investing in Real Estate in 2025</h3>
+      <p>Real estate remains a solid investment. Discover why 2025 is a great year to invest and how to get started.</p>
+      <a href="#" class="read-more-btn">Read More</a>
+      <p class="more-text hidden">
+        • Rising property demand due to urban growth.<br>
+        • Long-term rental income opportunities.<br>
+        • Real estate tends to outperform inflation.<br>
+        • Tax advantages for property owners.<br>
+        • High ROI in emerging neighborhoods.
+      </p>
+    </div>
+  </div>
+
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>© 2025 REX Real Estate. All Rights Reserved.</p>
+  </footer>
+<script>
+  console.log("Blog page loaded successfully!");
+
+  // FUNKSIONALITETI I READ MORE / READ LESS
+  document.querySelectorAll('.read-more-btn').forEach(button => {
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      const moreText = this.nextElementSibling;
+      if (moreText.classList.contains('hidden')) {
+        moreText.classList.remove('hidden');
+        this.textContent = 'Read Less';
+      } else {
+        moreText.classList.add('hidden');
+        this.textContent = 'Read More';
+      }
+    });
+  });
+
+  // FUNKSIONALITETI I PROFILIT & AUTENTIKIMIT
+  const carousel = document.getElementById("team-carousel");
+  const leftArrow = document.querySelector(".left-arrow");
+  const rightArrow = document.querySelector(".right-arrow");
+
+  leftArrow?.addEventListener("click", () => carousel.scrollBy({ left: -300, behavior: "smooth" }));
+  rightArrow?.addEventListener("click", () => carousel.scrollBy({ left: 300, behavior: "smooth" }));
+
+  function updateArrowVisibility() {
+    if (!carousel) return;
+    leftArrow.style.display = carousel.scrollLeft <= 0 ? 'none' : 'block';
+    rightArrow.style.display = (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) ? 'none' : 'block';
+  }
+
+  carousel?.addEventListener('scroll', updateArrowVisibility);
+  window.addEventListener('resize', updateArrowVisibility);
+  window.addEventListener('load', updateArrowVisibility);
+
+</script>
+
+
+</body>
+</html>
