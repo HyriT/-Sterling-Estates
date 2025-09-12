@@ -3,17 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Properties - MC Real Estate</title>
+    <title>Properties - Sterling Estates</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <script src="script.js"></script>
+<style>
+    .most-viewed-section {
+  margin: 60px auto;
+  max-width: 1200px;
+  padding: 20px;
+  text-align: center;
+}
+
+.most-viewed-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.property-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.property-card:hover {
+  transform: translateY(-5px);
+}
+
+.property-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.property-info {
+  padding: 15px;
+  text-align: left;
+}
+
+.property-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+/* Filter Section */
+.filter-section {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 2px 13px 25px rgba(24, 9, 226, 0.1);
+  background-color: white;
+  margin-top:30px
+}
+
+.filter-section::after {
+  content: "";
+  position: absolute;
+  bottom: -20px; 
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 20px solid #fff; 
+}
+
+
+.filter-section h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.filter-group input, .filter-group select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.filter-group input:focus, .filter-group select:focus {
+    border-color: #888886;
+}
+
+#filter-form button {
+    padding: 11px 28px;
+    background-color: #8d8d89;
+    border: none;
+    border-radius: 8px;
+    color: #f1f1f1;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 24px;
+}
+
+#filter-form button:hover {
+    background-color: #000000;
+    transform: translateY(-2px);
+    color: #e0e0e0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+</style>
 </head>
 <body>
     <!-- Header Section -->
     <header id="main-header">
           <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
-  <span style="color: #d4af37;">MC</span> Real Estate
+  <span style="color: #f1f1f1;"><i class="fas fa-home"></i> </i> Sterling Estates</span>
 </div>
        <nav>
   <ul>
@@ -80,6 +235,39 @@
         </div>
         <div class="properties-grid" id="properties-grid">
             <!-- Properties will be dynamically populated by JavaScript -->
+        </div>
+    </section>
+    <!-- Most Viewed Listings -->
+    <section class="most-viewed-section">
+        <h2> Most Viewed Listings</h2>
+        <div class="properties-grid">
+            <div class="property-card">
+                <img src="/client/images/viktoriia-kondratiuk-zXfCrYNbGFE-unsplash.jpg" alt="Luxury Villa">
+                <div class="property-info">
+                    <h3>Luxury Villa in Dream City</h3>
+                    <p>Price: $850,000</p>
+                    <p>4 Bed • 3 Bath</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Dream City</p>
+                </div>
+            </div>
+            <div class="property-card">
+                <img src="/client/images/john-fornander-G-QUgli6re0-unsplash.jpg" alt="Modern Apartment">
+                <div class="property-info">
+                    <h3>Modern Apartment Downtown</h3>
+                    <p>Price: $420,000</p>
+                    <p>2 Bed • 2 Bath</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Downtown</p>
+                </div>
+            </div>
+            <div class="property-card">
+                <img src="/client/images/sanju-pandita-Nz-mHsgMwzg-unsplash.jpg" alt="Cozy Suburban Home">
+                <div class="property-info">
+                    <h3>Cozy Suburban Home</h3>
+                    <p>Price: $320,000</p>
+                    <p>3 Bed • 2 Bath</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Green Valley</p>
+                </div>
+            </div>
         </div>
     </section>
 

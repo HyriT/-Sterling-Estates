@@ -107,36 +107,40 @@ export const getListings = async (req, res, next) => {
 }
 export const getListingsFiltered = async (req, res, next) => {
   try {
-    const {
-      location, 
-      type,
-      minPrice,
-      maxPrice,
-      sort = 'createdAt',
-      order = 'desc',
-    } = req.query;
 
+    const { location, type, maxPrice, sort = 'createdAt', order = 'desc' } = req.query;
+    console.log("Query params:", { location, type, maxPrice, sort, order }); 
     const query = {};
 
     if (location) {
       query.address = { $regex: location, $options: 'i' };
+      console.log("Filtering by location:", query.address);
     }
 
     if (type && type !== 'all') {
       query.type = type;
+      console.log("Filtering by type:", query.type);
     }
 
-    if (minPrice || maxPrice) {
-      query.regularPrice = {};
-      if (minPrice) query.regularPrice.$gte = parseInt(minPrice);
-      if (maxPrice) query.regularPrice.$lte = parseInt(maxPrice);
+    if (maxPrice) {
+      query.regularPrice = { $lte: Number(maxPrice) };
+      console.log("Filtering by maxPrice <= ", maxPrice);
     }
+
+    console.log("MongoDB query object:", query);
 
     const listings = await Listing.find(query)
-      .sort({ [sort]: order === 'asc' ? 1 : -1 });
+      .sort({ [sort]: order === 'asc' ? 1 : -1 })
+      .lean();
+
+    console.log("Listings found:", listings.length); 
+    if (listings.length > 0) {
+      console.log("First listing:", listings[0]); 
+    }
 
     res.status(200).json(listings);
   } catch (error) {
+    console.error("Error in getListingsFiltered:", error);
     next(error);
   }
 };

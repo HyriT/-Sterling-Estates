@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>MC Real Estate</title>
+  <title>Sterling Estates</title>
   <link href="style.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
 <script src="https://cdn.socket.io/4.5.1/socket.io.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
 <script src="script.js"></script>
 <style>
 /* Simple styling for the results grid and cards */
@@ -45,21 +49,7 @@
   margin: 0 16px 16px;
   color: #444;
 }
-.stats {
-  display: flex;
-  justify-content: space-around;
-  padding: 50px 20px;
-  background-color: #f8f9fa;
-}
 
-.stat-box {
-  text-align: center;
-}
-
-.stat-box h3 {
-  font-size: 2.5rem;
-  color: #007BFF;
-}
 @keyframes slideFadeIn {
   0% {
     opacity: 0;
@@ -77,14 +67,13 @@
   animation-delay: 0.8s;
 }
 
-
 </style>
 </head>
 <body>
   <!-- Header Section -->
   <header id="main-header">
       <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
-  <span style="color: #d4af37;">MC</span> Real Estate
+  <span style="color: #f1f1f1;"><i class="fas fa-home"></i> </i> Sterling Estates</span>
 </div>
    <nav>
   <ul>
@@ -95,7 +84,9 @@
     <li class="protected-link"><a href="blog.html">Blog</a></li>
     <li class="protected-link"><a href="contact.html">Contact Us</a></li>
 
-    <li class="nav-btn"><a href="login.html">Log In</a></li>
+
+     <li ><a href="auth.html"> Sign in</a></li>
+    <li class="nav-btn"><a href="auth.html">Sign up</a></li>
 
     <li id="profile-menu" class="profile hidden">
       <div class="avatar" onclick="toggleDropdown()">👤</div>
@@ -122,37 +113,99 @@
     </div>
   </section>
 
-  <!-- Featured Properties -->
-  <section class="featured-properties">
-    <h2>Featured Properties</h2>
-    <div class="property-slider">
-      <div class="property-card">
-        <img src="https://media.inmobalia.com/imgV1/B98Le8~d7M9k3DegigWkzHXQlgzMFGqGJJp6ZRUcpX033lqadFBp2i4GGW4X2J1jIJ9Pwc6GsJX5cPSaC8Y5L~JfyHdu4Kip1k1BUXOH79lk7UcgFRZZpz08Gq0XYvIoCuFBwkVo2_1gNz0CTjMM~nwMCacKVSnxFqgAjshcyFNEvo8Fm3zMfXm8a2BuiMGTw81AkKEafL2ZAp0y1lW5B5RxQ6FNnWTdiWrtyg0F1cO~VDzRzkR1CTxT34_zjr6lGTeh170IIeV0PT~AiMWNy2EmULLO7ynh6qSTGVgY9TMnOMGTZlUA1MdNmkChpsEtmA--.jpg" alt="Modern Villa" />
-        <h3>Modern Villa</h3>
-        <p>$500,000 · 4 Beds · 3 Baths</p>
-      </div>
-      <div class="property-card">
-        <img src="https://sumesshmenonassociates.com/wp-content/uploads/2022/11/luxury-apartments-banner-new.webp" alt="Luxury Apartment" />
-        <h3>Luxury Apartment</h3>
-        <p>$320,000 · 2 Beds · 2 Baths</p>
-      </div>
-      <div class="property-card">
-        <img src="https://i.ytimg.com/vi/nOWuGCGtz9Q/maxresdefault.jpg" alt="Cozy Cottage" />
-        <h3>Cozy Cottage</h3>
-        <p>$250,000 · 3 Beds · 2 Baths</p>
-      </div>
-       <div class="property-card">
-        <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iuz.11VRRK8c/v0/-1x-1.webp" alt="Cozy Cottage" />
-        <h3>Penthouse</h3>
-        <p>$250,000 · 3 Beds · 2 Baths</p>
-      </div>
-       <div class="property-card">
-        <img src="https://admin.albanianpost.com/wp-content/uploads/2021/06/Duplex-house-for-sale-in-Woodside-Park-01.jpg" alt="Cozy Cottage" />
-        <h3>Duplex</h3>
-        <p>$250,000 · 3 Beds · 2 Baths</p>
-      </div>
+<section class="properties-section">
+  <h2>Featured Properties</h2>
+
+  <!-- Property 1 -->
+  <div class="property-row">
+    <div class="property-image">
+      <img src="/client/images/esref-yasa-549nOjXh1E4-unsplash.jpg" alt="Property 1">
     </div>
-  </section>
+    <div class="property-description">
+      <h3>Luxury Villa in the Hills</h3>
+      <p>This beautiful villa offers stunning views, modern amenities, and a spacious garden perfect for relaxation.</p>
+      <ul class="property-info">
+        <li>💤 Bedrooms: 4</li>
+        <li>🛁 Bathrooms: 3</li>
+        <li>📐 Area: 3500 sq ft</li>
+        <li>💰 Price: $1,200,000</li>
+      </ul>
+      <button class="view-property-btn">View Property</button>
+        <div class="property-reviews">
+    <span class="stars">⭐⭐⭐⭐☆</span>
+    <span class="review-count">(24 reviews)</span>
+  </div>
+</div>
+    </div>
+  </div>
+
+  <!-- Property 2 -->
+  <div class="property-row reverse">
+    <div class="property-image">
+      <img src="/client/images/connie-garrad-VGtMvqHDpFw-unsplash.jpg" alt="Property 2">
+    </div>
+    <div class="property-description">
+      <h3>Modern Apartment Downtown</h3>
+      <p>Located in the heart of the city, this apartment combines comfort with convenience for an urban lifestyle.</p>
+      <ul class="property-info">
+        <li>💤 Bedrooms: 2</li>
+        <li>🛁 Bathrooms: 2</li>
+        <li>📐 Area: 1200 sq ft</li>
+        <li>💰 Price: $750,000</li>
+      </ul>
+      <button class="view-property-btn">View Property</button>
+       <div class="property-reviews">
+    <span class="stars">⭐⭐⭐☆☆</span>
+    <span class="review-count">(20 reviews)</span>
+  </div>
+    </div>
+  </div>
+
+  <!-- Property 3 -->
+  <div class="property-row">
+    <div class="property-image">
+      <img src="/client/images/durian-bullet-JCMQo028t3Q-unsplash.jpg" alt="Property 3">
+    </div>
+    <div class="property-description">
+      <h3>Cozy Suburban Home</h3>
+      <p>Perfect for families, this home features a large backyard, modern kitchen, and close proximity to schools.</p>
+      <ul class="property-info">
+        <li>💤 Bedrooms: 3</li>
+        <li>🛁 Bathrooms: 2</li>
+        <li>📐 Area: 1800 sq ft</li>
+        <li>💰 Price: $500,000</li>
+      </ul>
+      <button class="view-property-btn">View Property</button>
+         <div class="property-reviews">
+    <span class="stars">⭐⭐⭐⭐☆</span>
+    <span class="review-count">(27 reviews)</span>
+  </div>
+    </div>
+  </div>
+
+  <!-- Property 4 -->
+  <div class="property-row reverse">
+    <div class="property-image">
+      <img src="/client/images/timo-wielink-fUazXkugSAM-unsplash.jpg" alt="Property 4">
+    </div>
+    <div class="property-description">
+      <h3>Seaside Cottage</h3>
+      <p>Enjoy serene ocean views from this charming cottage with cozy interiors and outdoor deck space.</p>
+      <ul class="property-info">
+        <li>💤 Bedrooms: 2</li>
+        <li>🛁 Bathrooms: 1</li>
+        <li>📐 Area: 900 sq ft</li>
+        <li>💰 Price: $350,000</li>
+      </ul>
+      <button class="view-property-btn">View Property</button>
+         <div class="property-reviews">
+    <span class="stars">⭐⭐⭐⭐</span>
+    <span class="review-count">(30 reviews)</span>
+  </div>
+    </div>
+  </div>
+
+</section>
 
  <!-- Search Section -->
 <section class="search-section">
@@ -164,7 +217,6 @@
       <option value="sale">Sale</option>
       <option value="rent">Rent</option>
     </select>
-    <input type="number" name="minPrice" placeholder="Min Price" />
     <input type="number" name="maxPrice" placeholder="Max Price" />
     <button type="submit">Search</button>
   </form>
@@ -192,24 +244,15 @@
 
   <!-- Testimonials -->
   <section class="testimonials">
-    <h2 style="color: #d4af37;">What Our Clients Say</h2>
+    <h2>What Our Clients Say</h2>
     <div class="testimonial">
-      <p>"MC Real Estate made buying our first home a breeze!"</p>
-      <h4 style="color: #d4af37;">– Sarah T.</h4>
+      <p>"Sterling Estates made buying our first home a breeze!"</p>
+      <h4 >– Eliada.S</h4>
     </div>
     <div class="testimonial">
       <p>"Professional, reliable, and highly recommended!"</p>
-      <h4 style="color: #d4af37;">– James K.</h4>
+      <h4>-Geraldina.S</h4>
     </div>
-  </section>
-
-  <!-- Newsletter -->
-  <section class="newsletter">
-    <h2>Subscribe to Our Newsletter</h2>
-    <form id="newsletter-form">
-      <input type="email" placeholder="Enter your email" required />
-      <button type="submit">Subscribe</button>
-    </form>
   </section>
 <!-- Footer Section -->
 <footer>
@@ -217,7 +260,7 @@
     
     <!-- Brand Info -->
     <div class="footer-section">
-      <h3>MC Real Estate</h3>
+      <h3>Sterling Estates</h3>
       <p>Your trusted partner in finding the perfect property. We combine local knowledge with digital tools to help you make the right move.</p>
     </div>
 
@@ -254,173 +297,145 @@
   </div>
 
   <div class="footer-bottom">
-    <p>&copy; 2025 MC Real Estate. All Rights Reserved.</p>
+    <p>&copy; 2025 Sterling Estates. All Rights Reserved.</p>
   </div>
 </footer>
 
 
 
-  <script>
-    // Dropdown 
-    function toggleDropdown() {
-      const dropdown = document.getElementById('dropdown-menu');
-      dropdown.classList.toggle('hidden');
-    }
-   async function logout() {
-  try {
-    const res = await fetch("http://localhost:5000/api/auth/signout", {
-      method: "POST",
-      credentials: "include", 
-    });
-
-    if (res.ok) {
-      localStorage.removeItem("user");
-
-      window.location.href = "auth.html";
-    } else {
-      alert("Something went wrong during logout.");
-    }
-  } catch (err) {
-    console.error("Logout error:", err);
-    alert("Logout failed!");
+ <script>
+  // Dropdown 
+  function toggleDropdown() {
+    const dropdown = document.getElementById('dropdown-menu');
+    dropdown.classList.toggle('hidden');
   }
-}
-    // Optional
-    window.addEventListener('click', function(e){
-      const dropdown = document.getElementById('dropdown-menu');
-      const avatar = document.querySelector('.avatar');
-      if (!avatar.contains(e.target) && !dropdown.contains(e.target)) {
-        dropdown.classList.add('hidden');
-      }
-    });
 
-    function createListingCard(listing) {
-  const card = document.createElement('div');
-  card.className = 'listing-card';
-  card.innerHTML = `
-    <img src="${listing.imageUrls?.[0] || 'https://via.placeholder.com/300'}" alt="${listing.name}">
-    <h3>${listing.name}</h3>
-    <p>${listing.bedrooms} Beds · ${listing.bathrooms} Baths</p>
-    <p><strong>$${listing.regularPrice.toLocaleString()}</strong></p>
-  `;
-  return card;
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('search-form');
-  const resultsDiv = document.getElementById('results');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const location = form.elements['location'].value.trim();
-    const type = form.elements['type'].value;
-    const minPrice = form.elements['minPrice'].value;
-    const maxPrice = form.elements['maxPrice'].value;
-
-    const params = new URLSearchParams();
-    if (location) params.append('location', location);
-    if (type && type !== 'all') params.append('type', type);
-    if (minPrice) params.append('minPrice', minPrice);
-    if (maxPrice) params.append('maxPrice', maxPrice);
-
-    const url = `http://localhost:5000/api/listing/filtered?${params.toString()}`;
-
+  async function logout() {
     try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('Network response was not ok');
-
-      const listings = await res.json();
-
-      resultsDiv.innerHTML = '';
-
-      if (listings.length === 0) {
-        resultsDiv.textContent = 'No properties match your search.';
-        return;
-      }
-
-      listings.forEach(listing => {
-        resultsDiv.appendChild(createListingCard(listing));
+      const res = await fetch("http://localhost:5000/api/auth/signout", {
+        method: "POST",
+        credentials: "include", 
       });
+
+      if (res.ok) {
+        localStorage.removeItem("user");
+        window.location.href = "auth.html";
+      } else {
+        alert("Something went wrong during logout.");
+      }
     } catch (err) {
-      console.error('Search failed:', err);
-      resultsDiv.textContent = 'Something went wrong. Please try again.';
+      console.error("Logout error:", err);
+      alert("Logout failed!");
+    }
+  }
+
+  window.addEventListener('click', function(e){
+    const dropdown = document.getElementById('dropdown-menu');
+    const avatar = document.querySelector('.avatar');
+    if (avatar && !avatar.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.add('hidden');
     }
   });
 
   function createListingCard(listing) {
     const card = document.createElement('div');
-    card.className = 'result=card';
-    card.style.border = '1px solid #ccc';
-    card.style.padding = '10px';
-    card.style.marginBottom = '10px';
-    card.style.borderRadius = '5px';
+    card.className = 'listing-card';
 
     card.innerHTML = `
+      <img src="${listing.imageUrls?.[0] || 'https://via.placeholder.com/300'}" alt="${listing.name}">
       <h3>${listing.name}</h3>
       <p><strong>Type:</strong> ${listing.type}</p>
-      <p><strong>Price:</strong> €${listing.regularPrice}</p>
+      <p><strong>Price:</strong> €${listing.regularPrice.toLocaleString()}</p>
       <p><strong>Location:</strong> ${listing.address}</p>
-      <p>${listing.description}</p>
-      ${listing.imageUrls && listing.imageUrls.length > 0 
-        ? `<img src="${listing.imageUrls[0]}" alt="Image" style="max-width:100%; height:auto; margin-top:10px;">` 
-        : ''}
+      <p>${listing.description || ''}</p>
     `;
     return card;
   }
-});
-document.addEventListener("DOMContentLoaded", () => {
-  const searchForm = document.getElementById("search-form");
 
-  searchForm.addEventListener("submit", function(e) {
-    e.preventDefault();
+  // Search form
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('search-form');
+    const resultsDiv = document.getElementById('results');
 
-    const user = JSON.parse(localStorage.getItem("user"));
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    if (!user || !user.email) {
-      window.location.href = "auth.html";
-    } else {
-     
-      this.submit(); 
-    }
-  });
-});
-const counters = document.querySelectorAll('.stat-box h3');
-let started = false;
-
-function startCounting() {
-  counters.forEach(counter => {
-    const target = +counter.getAttribute('data-target');
-    let count = 0;
-
-    const update = () => {
-      const increment = target / 100;
-
-      if (count < target) {
-        count += increment;
-        counter.innerText = Math.ceil(count);
-        requestAnimationFrame(update);
-      } else {
-        counter.innerText = target + "+";
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user || !user.email) {
+        window.location.href = "auth.html";
+        return;
       }
-    };
 
-    update();
+      const location = form.elements['location'].value.trim();
+      const type = form.elements['type'].value;
+      const maxPrice = form.elements['maxPrice'].value;
+
+      const params = new URLSearchParams();
+      if (location) params.append('location', location);
+      if (type && type !== 'all') params.append('type', type);
+      if (maxPrice) params.append('maxPrice', maxPrice);
+
+      const url = `http://localhost:5000/api/listing/filtered?${params.toString()}`;
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('Network response was not ok');
+
+        const listings = await res.json();
+        resultsDiv.innerHTML = '';
+
+        if (listings.length === 0) {
+          resultsDiv.textContent = 'No properties match your search.';
+          return;
+        }
+
+        listings.forEach(listing => {
+          resultsDiv.appendChild(createListingCard(listing));
+        });
+
+        
+        resultsDiv.scrollIntoView({ behavior: "smooth" });
+      } catch (err) {
+        console.error('Search failed:', err);
+        resultsDiv.textContent = 'Something went wrong. Please try again.';
+      }
+    });
   });
-}
 
-const observer = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting && !started) {
-    started = true;
-    startCounting();
+  // Stats counting
+  const counters = document.querySelectorAll('.stat-box h3');
+  let started = false;
+
+  function startCounting() {
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      let count = 0;
+
+      const update = () => {
+        const increment = target / 100;
+
+        if (count < target) {
+          count += increment;
+          counter.innerText = Math.ceil(count);
+          requestAnimationFrame(update);
+        } else {
+          counter.innerText = target + "+";
+        }
+      };
+
+      update();
+    });
   }
-}, {
-  threshold: 0.5
-});
 
-observer.observe(document.querySelector('.stats'));
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !started) {
+      started = true;
+      startCounting();
+    }
+  }, { threshold: 0.5 });
 
+  observer.observe(document.querySelector('.stats'));
+</script>
 
-  </script>
 </body>
 </html>

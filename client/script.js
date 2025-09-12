@@ -66,7 +66,7 @@ console.log("Mobile:", mobile);
       submitBtn.textContent = "Sending...";
 
       try {
-        const response = await fetch("http://localhost:3000/api/new", {
+        const response = await fetch("http://localhost:5000/api/new", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, mobile }),
@@ -89,30 +89,6 @@ console.log("Mobile:", mobile);
     });
   }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const backgrounds = [
-    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1350&q=80",
-    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1350&q=80",
-    "https://images.unsplash.com/photo-1512917774080-9991f7c4c60d?auto=format&fit=crop&w=1350&q=80",
-  ];
-
-  let currentBgIndex = 1; 
-  const heroSection = document.querySelector(".hero");
-
-  const changeBackground = () => {
-    const img = new Image();
-    img.src = backgrounds[currentBgIndex];
-
-    img.onload = () => {
-      heroSection.style.backgroundImage = `url(${backgrounds[currentBgIndex]})`;
-      heroSection.style.backgroundSize = 'cover';
-      heroSection.style.backgroundPosition = 'center';
-      currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
-    };
-  };
-
-  setInterval(changeBackground, 5000);
-});
 
 });
 
