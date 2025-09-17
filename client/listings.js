@@ -148,3 +148,54 @@ function displayProperties() {
 
 window.onload = displayProperties;
 
+//Filter Properties
+
+document.getElementById("filter-form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const minPrice = document.getElementById("price-min").value;
+  const maxPrice = document.getElementById("price-max").value;
+  const bedrooms = document.getElementById("bedrooms").value;
+  const bathrooms = document.getElementById("bathrooms").value;
+  const location = document.getElementById("location").value;
+
+  // Build query string
+  const queryParams = new URLSearchParams({
+    ...(minPrice && { minPrice }),
+    ...(maxPrice && { maxPrice }),
+    ...(bedrooms && { bedroom: bedrooms }),
+    ...(bathrooms && { bathroom: bathrooms }),
+    ...(location && { location }),
+  });
+
+  try {
+    const res = await fetch(`http://localhost:5000/api/listing/filter?${queryParams.toString()}`);
+    const data = await res.json();
+
+    const grid = document.getElementById("properties-grid");
+    grid.innerHTML = "";
+
+    if (data.length === 0) {
+      grid.innerHTML = "<p>No properties found.</p>";
+      return;
+    }
+
+    // Populate listings dynamically
+    data.forEach(property => {
+      const card = document.createElement("div");
+      card.classList.add("property-card");
+      card.innerHTML = `
+        <h3>${property.title}</h3>
+        <p>${property.address}</p>
+        <p><strong>Price:</strong> $${property.regularPrice}</p>
+        <p><strong>Bedrooms:</strong> ${property.bedroom}</p>
+        <p><strong>Bathrooms:</strong> ${property.bathroom}</p>
+      `;
+      grid.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Error fetching properties:", error);
+  }
+});
+
+

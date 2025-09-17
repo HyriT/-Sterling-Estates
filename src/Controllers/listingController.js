@@ -154,5 +154,54 @@ export const getAllListings= async (req, res, next) => {
     next(error);
   }
 };
+export const getProperties = async (req, res, next) => {
+  try {
+
+    const { location, type,bathroom,bedroom, maxPrice, sort = 'createdAt', order = 'desc' } = req.query;
+    console.log("Query params:", { location, type,bathroom,bedroom, maxPrice, sort, order }); 
+    const query = {};
+
+    if (location) {
+      query.address = { $regex: location, $options: 'i' };
+      console.log("Filtering by location:", query.address);
+    }
+     if (type && type !== 'all') {
+      query.type = type;
+      console.log("Filtering by type:", query.type);
+    }
+
+    if (bathroom) {
+      query.bathroom = Number(bathroom);
+      console.log("Filtering by type:", query.bathroom);
+    }
+     if (bedroom) {
+      query.bedroom = Number(bedroom);
+      console.log("Filtering by type:", query.bedroom);
+    }
+
+     if (minPrice || maxPrice) {
+      query.regularPrice = {};
+      if (minPrice) query.regularPrice.$gte = Number(minPrice);
+      if (maxPrice) query.regularPrice.$lte = Number(maxPrice);
+      console.log("Filtering price ", minPrice,maxPrice);
+    }
+
+    console.log("MongoDB query object:", query);
+
+    const listings = await Listing.find(query)
+      .sort({ [sort]: order === 'asc' ? 1 : -1 })
+      .lean();
+
+    console.log("Listings found:", listings.length); 
+    if (listings.length > 0) {
+      console.log("First listing:", listings[0]); 
+    }
+
+    res.status(200).json(listings);
+  } catch (error) {
+    console.error("Error in getListingsFiltered:", error);
+    next(error);
+  }
+};
 
 

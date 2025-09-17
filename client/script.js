@@ -173,3 +173,20 @@ window.addEventListener("scroll", function() {
     header.classList.remove("scrolled");
   }
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const propertyRows = document.querySelectorAll(".property-row");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, { threshold: 0.1 }); 
+
+  propertyRows.forEach(row => {
+    observer.observe(row);
+  });
+});
+

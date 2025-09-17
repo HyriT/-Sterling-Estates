@@ -221,7 +221,7 @@ nav ul li a:hover {
 }
 
 .property-image img {
-  width: 100%;
+  width: 70%;
   max-width: 500px;
   border-radius: 16px;
   object-fit: cover;
@@ -293,6 +293,16 @@ nav ul li a:hover {
 .property-reviews .review-count {
   font-size: 0.95rem;
   color: #666;
+}
+.property-row {
+  opacity: 0;
+  transform: translateY(50px); 
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.property-row.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Responsive design */
@@ -575,8 +585,9 @@ nav ul li a:hover {
   border: 2px solid #e0e0e0;
   border-radius: 8px;
   transition: border-color 0.3s, box-shadow 0.3s;
+  text-align: center;
+  color: #292929;
 }
-
 #search-form input:focus,
 #search-form select:focus {
   border-color: #00bcd4;
@@ -599,6 +610,27 @@ nav ul li a:hover {
   background: #0097a7;
   transform: translateY(-2px);
 }
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-group i {
+  position: absolute;
+  left: 16px;    
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+.input-group input,
+.input-group select {
+  padding-left: 50px; 
+}
+
 
 /* ───────── TESTIMONIALS ───────── */
 .testimonials {
@@ -655,7 +687,6 @@ nav ul li a:hover {
   }
 }
 
-/* Rezultatet - grid me 3 kolona (ri-përshtatet) */
 .results-grid {
   max-width: 900px;
   margin: 20px auto 50px;
@@ -664,7 +695,6 @@ nav ul li a:hover {
   gap: 20px;
 }
 
-/* Kartat e pronave */
 .results-card {
   background: white;
   border: 1px solid #ddd;
@@ -697,8 +727,7 @@ nav ul li a:hover {
   height: auto;
   display: block;
 }
-
-/* Mesazhi "No properties" */
+/* 
 #results:empty::before {
   content: "No properties match your search.";
   display: block;
@@ -706,4 +735,4 @@ nav ul li a:hover {
   color: #888;
   font-style: italic;
   margin-top: 30px;
-}
+} */

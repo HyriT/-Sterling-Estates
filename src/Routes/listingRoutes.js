@@ -1,6 +1,6 @@
 import express from 'express';
 const router =express.Router();
-import {createListing,deleteListing,updateListing,getListing,getListings,getListingsFiltered, getAllListings } from '../Controllers/listingController.js'
+import {createListing,deleteListing,updateListing,getListing,getListings,getListingsFiltered, getAllListings ,getProperties} from '../Controllers/listingController.js'
 import {verifyAdmin} from '../Middleware/authMiddleware.js';
 
 router.post('/create',verifyAdmin,createListing)
@@ -10,6 +10,7 @@ router.get('/get/:id',verifyAdmin,getListing)
 router.get('/get',getListings);
 router.get('/filtered',getListingsFiltered);
 router.get('/getAll',getAllListings);
+router.get('/filter',getProperties);
 
 export default router;
 

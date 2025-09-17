@@ -3,151 +3,146 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Blog - REX Real Estate</title>
-<link href="style.css" rel="stylesheet">
+<title>Blog - Sterling Estates</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script src="script.js"></script>
+  <link href="style.css" rel="stylesheet">
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+.nav-btn a {
+  background-color: #3a8e7a;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
 
-  /* Blog Section Styling */
-  .blog-section {
-    padding: 70px 20px;
-    max-width: 1200px;
-    margin: 0 auto 80px;
-    min-height: 80vh;
-  }
+.nav-btn a:hover {
+  background-color: #1d816a;
+}
 
-  .blog-section h2 {
-    font-size: 3rem;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 60px;
-    font-weight: 700;
-    letter-spacing: 1.1px;
-  }
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+  color: #fff;
+  text-align: center;
+  padding: 120px 20px 80px;
+}
 
-  .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
-  }
+.hero-section h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
 
-  .blog-post {
-    background: #fff;
-    border-radius: 20px;
-    box-shadow: 0 18px 45px rgb(44 62 80 / 0.07);
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-  }
+.hero-section p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
 
-  .blog-post:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 25px 50px rgb(44 62 80 / 0.15);
-  }
+.hero-section a {
+  background-color: #3a8e7a;
+  color: #fff;
+  padding: 12px 28px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
 
-  .blog-post img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
+.hero-section a:hover {
+  background-color: #3a8e7a;
+}
 
-  .blog-post:hover img {
-    transform: scale(1.05);
-  }
+/* Main Blog Section */
+.blog-section {
+  padding: 70px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+}
 
-  .blog-content {
-    padding: 25px 30px 35px;
-  }
+.blog-section h2 {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 50px;
+  color: #222;
+  font-weight: 700;
+}
 
-  .blog-content h3 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-    margin-bottom: 18px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-  }
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
 
-  .blog-content p {
-    font-size: 1rem;
-    color: #666c7a;
-    line-height: 1.7;
-    margin-bottom: 25px;
-  }
+/* Blog Posts */
+.blog-post {
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgb(0 0 0 / 10%);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
 
-  .blog-content a {
-    display: inline-block;
-    padding: 10px 22px;
-    background-color: #f5c518;
-    color: #222;
-    text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
-    box-shadow: 0 6px 12px rgb(245 197 24 / 0.4);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
+.blog-post:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgb(0 0 0 / 15%);
+}
 
-  .blog-content a:hover {
-    background-color: #ddb510;
-    box-shadow: 0 8px 18px rgb(221 181 16 / 0.6);
-    color: #111;
-  }
+.blog-post img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
 
-  /* Footer Styling */
-  footer {
-    background-color: #2c3e50;
-    color: #dcdcdc;
-    text-align: center;
-    padding: 25px 15px;
-    font-size: 14px;
-    letter-spacing: 0.5px;
-  }
+.blog-post:hover img {
+  transform: scale(1.05);
+}
 
-  /* Responsive */
-  @media (max-width: 900px) {
-    header {
-      padding: 20px 30px;
-    }
-    nav ul {
-      gap: 18px;
-    }
-    .blog-section {
-      padding: 50px 15px;
-      margin-bottom: 60px;
-    }
-    .blog-grid {
-      gap: 30px;
-    }
-  }
+.blog-content {
+  padding: 25px 30px 35px;
+}
 
-  @media (max-width: 600px) {
-    nav ul {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-  }
-  .nav-btn a {
-    background-color: #ffd700;
-    color: #003366 !important;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .nav-btn a:hover {
-    background-color: #e6c200;
-    transform: translateY(-2px);
-  }
-  .more-text {
+.blog-content h3 {
+  font-size: 1.5rem;
+  color: #222;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.blog-content p {
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.blog-content a.read-more-btn {
+  background-color: #3a8e7a;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.blog-content a.read-more-btn:hover {
+  background-color: #54ac97;
+}
+
+.more-text {
   margin-top: 10px;
   font-size: 0.95rem;
-  color: #555;
+  color: #666;
   line-height: 1.6;
 }
 
@@ -155,105 +150,278 @@
   display: none;
 }
 
+/* Sidebar / Trending Topics */
+.sidebar {
+  margin-top: 0;
+}
+
+.sidebar h4 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #222;
+  font-weight: 600;
+}
+
+.trending-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+.trend-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 10%);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trend-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgb(0 0 0 / 15%);
+}
+
+.trend-icon {
+  font-size: 2rem;
+  color: #3a8e7a;
+  margin-bottom: 10px;
+}
+
+.trend-card h5 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.trend-card p {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.trend-card a {
+  font-size: 0.9rem;
+  color: #3a8e7a;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.trend-card a:hover {
+  color: #1d816a;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .blog-section {
+    grid-template-columns: 1fr;
+    padding: 50px 15px;
+    gap: 40px;
+  }
+  nav ul {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .hero-section h2 {
+    font-size: 2rem;
+  }
+}
+h1{
+  color:white;
+}
 </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
-  <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
+
+<!-- Header -->
+  <header id="main-header">
+      <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
   <span style="color: #f1f1f1;"><i class="fas fa-home"></i> </i> Sterling Estates</span>
-</div>
-   <nav>
-  <ul>
-    <li><a href="home.html">Home</a></li>
-    <li><a href="aboutUs.html">About Us</a></li>
-    
-    <li class="protected-link"><a href="listing.html">Properties</a></li>
-    <li class="protected-link"><a href="blog.html">Blog</a></li>
-    <li class="protected-link"><a href="">Contact Us</a></li>
-
-    <li class="nav-btn"><a href="login.html">Log In</a></li>
-
-    <li id="profile-menu" class="profile hidden">
-      <div class="avatar" onclick="toggleDropdown()">👤</div>
-      <ul class="dropdown hidden" id="dropdown-menu">
-        <li><a href="profile.html">My Profile</a></li>
-        <li><a href="#" onclick="logout()">Logout</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-
+</div>   <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="team.html" class="active">Agents</a></li>
+        <li class="protected-link"><a href="listing.html">Properties</a></li>
+        <li class="protected-link"><a href="blog.html">Blog</a></li>
+        <li class="protected-link"><a href="contact.html">Contact Us</a></li>
+        <li class="nav-btn"><a href="login.html">Log In</a></li>
+        <li id="profile-menu" class="profile hidden">
+          <div class="avatar">👤</div>
+          <ul class="dropdown hidden">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
-  </header>
 
-  <!-- Blog Section -->
-  <section class="blog-section">
-    <h2>Our Blog</h2>
-    <div class="blog-grid">
-     <!-- Blog Post 1 -->
-<div class="blog-post">
-  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Blog Post 1" />
-  <div class="blog-content">
-    <h3>Top 5 Tips for First-Time Home Buyers</h3>
-    <p>Buying your first home can be overwhelming. Here are our top 5 tips to make the process smoother, from setting a budget to understanding the market.</p>
-    <a href="#" class="read-more-btn">Read More</a>
-    <p class="more-text hidden">
-      1. Set a clear budget before house hunting.<br>
-      2. Get pre-approved for a mortgage.<br>
-      3. Research different neighborhoods.<br>
-      4. Don’t skip the home inspection.<br>
-      5. Work with a trusted real estate agent.
-    </p>
-  </div>
-</div>
+</header>
 
-<!-- Blog Post 2 -->
-  <div class="blog-post">
-    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Blog Post 2" />
-    <div class="blog-content">
-      <h3>How to Stage Your Home for a Quick Sale</h3>
-      <p>Staging your home can make a big difference in attracting buyers. Learn our expert tips on decluttering, decorating, and more.</p>
-      <a href="#" class="read-more-btn">Read More</a>
-      <p class="more-text hidden">
-        - Remove personal items and depersonalize rooms.<br>
-        - Use neutral colors and lighting to open up space.<br>
-        - Highlight key areas like the kitchen and living room.<br>
-        - Add small plants or decor to freshen the look.<br>
-        - Keep everything clean, organized, and welcoming.
-      </p>
+<!-- Hero Section -->
+<section class="hero-section">
+  <h2>Explore Insights on Real Estate</h2>
+  <p>Discover expert tips, market trends, and property advice to help you make the best real estate decisions.</p>
+  <a href="#blog-section">Read Our Blog</a>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section" id="blog-section">
+  <h2>Latest Blog Posts</h2>
+
+  <div class="blog-grid">
+    <!-- Blog Post 1 -->
+    <div class="blog-post">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Home Tips" />
+      <div class="blog-content">
+        <h3>Top 5 Tips for First-Time Home Buyers</h3>
+        <p>Buying your first home can be overwhelming. Here are our top 5 tips to make the process smoother.</p>
+        <a href="#" class="read-more-btn">Read More</a>
+        <p class="more-text hidden">
+          1. Set a clear budget before house hunting.<br>
+          2. Get pre-approved for a mortgage.<br>
+          3. Research neighborhoods thoroughly.<br>
+          4. Don’t skip the home inspection.<br>
+          5. Work with a trusted real estate agent.
+        </p>
+      </div>
+    </div>
+
+    <!-- Blog Post 2 -->
+    <div class="blog-post">
+      <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Staging Home" />
+      <div class="blog-content">
+        <h3>How to Stage Your Home for a Quick Sale</h3>
+        <p>Staging your home can make a big difference in attracting buyers. Learn expert tips on decorating and decluttering.</p>
+        <a href="#" class="read-more-btn">Read More</a>
+        <p class="more-text hidden">
+          - Remove personal items and depersonalize rooms.<br>
+          - Use neutral colors and lighting.<br>
+          - Highlight key areas like kitchen and living room.<br>
+          - Add small plants or decor.<br>
+          - Keep everything clean and organized.
+        </p>
+      </div>
+    </div>
+
+    <!-- Blog Post 3 -->
+    <div class="blog-post">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Investing Real Estate" />
+      <div class="blog-content">
+        <h3>The Benefits of Investing in Real Estate in 2025</h3>
+        <p>Real estate remains a solid investment. Discover why 2025 is a great year to invest and how to get started.</p>
+        <a href="#" class="read-more-btn">Read More</a>
+        <p class="more-text hidden">
+          • Rising property demand due to urban growth.<br>
+          • Long-term rental income opportunities.<br>
+          • Real estate tends to outperform inflation.<br>
+          • Tax advantages for property owners.<br>
+          • High ROI in emerging neighborhoods.
+        </p>
+      </div>
     </div>
   </div>
 
-  <!-- Blog Post 3 -->
-  <div class="blog-post">
-    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Blog Post 3" />
-    <div class="blog-content">
-      <h3>The Benefits of Investing in Real Estate in 2025</h3>
-      <p>Real estate remains a solid investment. Discover why 2025 is a great year to invest and how to get started.</p>
-      <a href="#" class="read-more-btn">Read More</a>
-      <p class="more-text hidden">
-        • Rising property demand due to urban growth.<br>
-        • Long-term rental income opportunities.<br>
-        • Real estate tends to outperform inflation.<br>
-        • Tax advantages for property owners.<br>
-        • High ROI in emerging neighborhoods.
-      </p>
+  <!-- Sidebar / Trending Topics -->
+  <div class="sidebar">
+    <h4>Trending Topics</h4>
+    <div class="trending-grid">
+      <div class="trend-card">
+        <i class="fas fa-chart-line trend-icon"></i>
+        <h5>Real Estate Market Trends 2025</h5>
+        <p>Stay updated with the latest market trends and forecasts to make informed property decisions this year.</p>
+        <a href="#">Read More</a>
+      </div>
+
+      <div class="trend-card">
+        <i class="fas fa-hand-holding-dollar trend-icon"></i>
+        <h5>Tips for Property Investment</h5>
+        <p>Discover expert tips on investing in residential and commercial properties for high returns.</p>
+        <a href="#">Read More</a>
+      </div>
+
+      <div class="trend-card">
+        <i class="fas fa-couch trend-icon"></i>
+        <h5>Home Staging Secrets</h5>
+        <p>Learn how to stage your home effectively to attract buyers and sell faster.</p>
+        <a href="#">Read More</a>
+      </div>
+
+      <div class="trend-card">
+        <i class="fas fa-university trend-icon"></i>
+        <h5>Mortgage and Financing Advice</h5>
+        <p>Get guidance on mortgages, financing options, and how to secure the best rates.</p>
+        <a href="#">Read More</a>
+      </div>
+
+      <div class="trend-card">
+        <i class="fas fa-map-marker-alt trend-icon"></i>
+        <h5>Neighborhood Insights</h5>
+        <p>Explore detailed insights about neighborhoods, amenities, and property values before you buy.</p>
+        <a href="#">Read More</a>
+      </div>
     </div>
   </div>
+</section>
+<!-- Footer Section -->
+<footer>
 
+  <div class="footer-content">
+    
+    <!-- Brand Info -->
+    <div class="footer-section">
+      <h3>Sterling Estates</h3>
+      <p>Your trusted partner in finding the perfect property. We combine local knowledge with digital tools to help you make the right move.</p>
     </div>
-  </section>
 
-  <!-- Footer Section -->
-  <footer>
-    <p>© 2025 REX Real Estate. All Rights Reserved.</p>
-  </footer>
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="aboutUs.html">About Us</a></li>
+        <li><a href="listing.html">Properties</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <p>Email: info@mcrealestate.com</p>
+      <p>Phone: (123) 456-7890</p>
+      <p>Address: 123 Real Estate Ave, Dream City</p>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <ul style="display: flex; gap: 15px; padding: 0; list-style: none;">
+        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+      </ul>
+    </div>
+    
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Sterling Estates. All Rights Reserved.</p>
+  </div>
+</footer>
+
+
 <script>
-  console.log("Blog page loaded successfully!");
-
-  //  READ MORE / READ LESS
+  // READ MORE / READ LESS
   document.querySelectorAll('.read-more-btn').forEach(button => {
     button.addEventListener('click', function (e) {
       e.preventDefault();
@@ -267,27 +435,6 @@
       }
     });
   });
-
-  // FUNKSIONALITETI I PROFILIT & AUTENTIKIMIT
-  const carousel = document.getElementById("team-carousel");
-  const leftArrow = document.querySelector(".left-arrow");
-  const rightArrow = document.querySelector(".right-arrow");
-
-  leftArrow?.addEventListener("click", () => carousel.scrollBy({ left: -300, behavior: "smooth" }));
-  rightArrow?.addEventListener("click", () => carousel.scrollBy({ left: 300, behavior: "smooth" }));
-
-  function updateArrowVisibility() {
-    if (!carousel) return;
-    leftArrow.style.display = carousel.scrollLeft <= 0 ? 'none' : 'block';
-    rightArrow.style.display = (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) ? 'none' : 'block';
-  }
-
-  carousel?.addEventListener('scroll', updateArrowVisibility);
-  window.addEventListener('resize', updateArrowVisibility);
-  window.addEventListener('load', updateArrowVisibility);
-
 </script>
-
-
 </body>
 </html>

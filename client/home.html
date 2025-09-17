@@ -66,6 +66,33 @@
   animation: slideFadeIn 1s ease-out forwards;
   animation-delay: 0.8s;
 }
+.search-section h2 {
+  font-family: 'Baskerville', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin: 40px 0;
+  letter-spacing: 1px;
+}
+
+.search-section h2 span {
+  color: rgb(7, 131, 126);
+  font-style: italic;
+  display: inline-block;
+  position: relative;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 
 </style>
 </head>
@@ -103,8 +130,8 @@
   <!-- Hero Section -->
   <section class="hero" id="hero-section">
     <div class="hero-content">
-      <h2>Find Your <span>Dream Home</span> Today</h2>
-      <p>Book a free appraisal with our expert team!</p>
+    <h2>Discover Your <span>Home's</span> True Value</h2>
+      <p>"Book a free appraisal with our trusted experts"</p>
       <form id="appraisal-form">
         <input type="email" placeholder="Email Address" required />
 <input type="tel" name="mobile" placeholder="Mobile Number" required />
@@ -207,18 +234,28 @@
 
 </section>
 
- <!-- Search Section -->
+ 
+<!-- Search Section -->
 <section class="search-section">
-  <h2>Search Properties</h2>
+  <h2>Find Your <span>Dream Home</span>Today</h2>
   <form id="search-form">
-    <input type="text" name="location" placeholder="Location" />
-    <select name="type">
-      <option value="all">Property Type</option>
-      <option value="sale">Sale</option>
-      <option value="rent">Rent</option>
-    </select>
-    <input type="number" name="maxPrice" placeholder="Max Price" />
-    <button type="submit">Search</button>
+    <div class="input-group">
+      <i class="fa-solid fa-location-dot"></i>
+      <input type="text" name="location" placeholder="Location" />
+    </div>
+    <div class="input-group">
+      <i class="fa-solid fa-building"></i>
+      <select name="type">
+        <option value="all">Property Type</option>
+        <option value="sale">Sale</option>
+        <option value="rent">Rent</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <i class="fa-solid fa-dollar-sign"></i>
+      <input type="number" name="maxPrice" placeholder="Price Range" />
+    </div>
+    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
   </form>
 </section>
 
@@ -253,9 +290,10 @@
       <p>"Professional, reliable, and highly recommended!"</p>
       <h4>-Geraldina.S</h4>
     </div>
-  </section>
+  </section> 
 <!-- Footer Section -->
 <footer>
+
   <div class="footer-content">
     
     <!-- Brand Info -->

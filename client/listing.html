@@ -162,6 +162,74 @@
         opacity: 1;
     }
 }
+/* Preferred Locations Section */
+.preferred-locations {
+  margin: 80px auto;
+  padding: 40px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #858686, #e4e8ec);
+  border-radius: 20px;
+  color: #fff;
+  max-width: 1200px;
+}
+
+.preferred-locations h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.location-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.location-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  filter: brightness(80%);
+  transition: filter 0.3s ease;
+}
+
+.location-card:hover img {
+  filter: brightness(100%);
+}
+
+.location-info {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  text-align: left;
+}
+
+.location-info h3 {
+  font-size: 1.3rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.location-info p {
+  font-size: 0.9rem;
+  margin: 3px 0 0;
+  opacity: 0.9;
+}
+
 </style>
 </head>
 <body>
@@ -170,27 +238,23 @@
           <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
   <span style="color: #f1f1f1;"><i class="fas fa-home"></i> </i> Sterling Estates</span>
 </div>
-       <nav>
-  <ul>
-    <li><a href="home.html">Home</a></li>
-    <li><a href="aboutUs.html">About Us</a></li>
-    
-    <!-- Link-e që shfaqen vetëm nëse je i loguar -->
-    <li class="protected-link"><a href="listing.html">Properties</a></li>
-    <li class="protected-link"><a href="blog.html">Blog</a></li>
-    <li class="protected-link"><a href="contact.html">Contact Us</a></li>
-
-    <li class="nav-btn"><a href="login.html">Log In</a></li>
-
-    <li id="profile-menu" class="profile hidden">
-      <div class="avatar" onclick="toggleDropdown()">👤</div>
-      <ul class="dropdown hidden" id="dropdown-menu">
-        <li><a href="profile.html">My Profile</a></li>
-        <li><a href="#" onclick="logout()">Logout</a></li>
+        <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="team.html" class="active">Agents</a></li>
+        <li class="protected-link"><a href="listing.html">Properties</a></li>
+        <li class="protected-link"><a href="blog.html">Blog</a></li>
+        <li class="protected-link"><a href="contact.html">Contact Us</a></li>
+        <li class="nav-btn"><a href="login.html">Log In</a></li>
+        <li id="profile-menu" class="profile hidden">
+          <div class="avatar">👤</div>
+          <ul class="dropdown hidden">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
       </ul>
-    </li>
-  </ul>
-</nav>
+    </nav>
 
     </header>
 
@@ -270,6 +334,42 @@
             </div>
         </div>
     </section>
+    
+    <!-- Preferred Locations -->
+    <section class="preferred-locations">
+        <h2>Preferred Locations</h2>
+        <div class="locations-grid">
+            <div class="location-card">
+                <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/12/6e/30/40.jpg" alt="Tirana">
+                <div class="location-info">
+                    <h3>Tirana</h3>
+                    <p>320+ Listings</p>
+                </div>
+            </div>
+            <div class="location-card">
+                <img src="https://mediaim.expedia.com/destination/1/944e75613446335ef7152f11cdeef186.jpg" alt="Durres">
+                <div class="location-info">
+                    <h3>Durres</h3>
+                    <p>210+ Listings</p>
+                </div>
+            </div>
+            <div class="location-card">
+                <img src="https://media.istockphoto.com/id/2201815388/photo/shkod%C3%ABr-old-albanian-town-from-drone.jpg?s=612x612&w=0&k=20&c=6yaPOH5Jdh5ofsWeLRkaCEjRCNHgh6JUTf5C85j4ofM=" alt="Shkoder">
+                <div class="location-info">
+                    <h3>Shkoder</h3>
+                    <p>150+ Listings</p>
+                </div>
+            </div>
+            <div class="location-card">
+                <img src="https://www.wanderlustmagazine.com/wp-content/uploads/2023/11/vlore-albania-scaled.jpg" alt="Vlore">
+                <div class="location-info">
+                    <h3>Vlore</h3>
+                    <p>180+ Listings</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Footer Section -->
     <footer>
