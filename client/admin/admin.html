@@ -96,31 +96,6 @@
       document.getElementById("profile-dropdown").style.display = "none";
     }
   });
-
-  // Fetch admin data 
-  async function fetchAdminData() {
-    try {
-      const res = await fetch("http://localhost:5000/api/admin/dashboard", {
-        method: "GET",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" }
-      });
-
-      if (!res.ok) {
-        alert("Session expired. Please log in again.");
-        window.location.href = "./admin-login.html";
-        return;
-      }
-
-      const data = await res.json();
-      console.log("Admin data:", data);
-    } catch (err) {
-      console.error("Fetch error:", err);
-    }
-  }
-
-  // Call fetch on page load
-  fetchAdminData();
 </script>
 </body>
 </html>

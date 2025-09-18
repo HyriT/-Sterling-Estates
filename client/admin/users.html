@@ -64,49 +64,76 @@
       </section>
     </main>
   </div>
+<script>
+  async function fetchUsers() {
+    try {
+      const token = localStorage.getItem("token");
 
-  <script>
-    async function fetchUsers() {
-      try {
-        const res = await fetch("http://localhost:5000/api/user/allUsers");
-        const data = await res.json();
-
-        const tableBody = document.getElementById("users-table-body");
-        tableBody.innerHTML = "";
-
-        data.forEach(user => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${user.email}</td>
-            <td>${user.username || "-"}</td>
-            <td>${new Date(user.createdAt).toLocaleString()}</td>
-             <td>${user.avatar || "-"}</td>
-          `;
-          tableBody.appendChild(row);
-        });
-      } catch (err) {
-        console.error("Error fetching users:", err);
+      if (!token) {
+        alert("Nuk je i loguar! Kthehu te login.");
+        window.location.href = "login.html";
+        return;
       }
-    }
 
-    function toggleDropdown() {
+      const res = await fetch("http://localhost:5000/api/user/allUsers", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        }
+      });
+
+      if (!res.ok) {
+        if (res.status === 401 || res.status === 403) {
+          alert("Nuk ke akses! Kthehu te login.");
+          localStorage.removeItem("token");
+          window.location.href = "/admin-login.html";
+          return;
+        }
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      const tableBody = document.getElementById("users-table-body");
+      tableBody.innerHTML = "";
+
+      data.forEach(user => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${user.email}</td>
+          <td>${user.username || "-"}</td>
+          <td>${new Date(user.createdAt).toLocaleString()}</td>
+          <td><img src="${user.avatar || 'default.png'}" alt="avatar" width="40" height="40"></td>
+        `;
+        tableBody.appendChild(row);
+      });
+    } catch (err) {
+      console.error("Error fetching users:", err);
+    }
+  }
+
+  function toggleDropdown() {
+    const dropdown = document.getElementById("profile-dropdown");
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  }
+
+  function logout() {
+    alert("Logging out...");
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/admin-login.html";
+  }
+
+  window.addEventListener("click", function (e) {
+    if (!e.target.closest(".admin-user")) {
       const dropdown = document.getElementById("profile-dropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      if (dropdown) dropdown.style.display = "none";
     }
+  });
 
-    function logout() {
-      alert("Logging out...");
-      localStorage.removeItem("user");
-      window.location.href = "login.html";
-    }
+  document.addEventListener("DOMContentLoaded", fetchUsers);
+</script>
 
-    window.addEventListener("click", function(e) {
-      if (!e.target.closest(".admin-user")) {
-        document.getElementById("profile-dropdown").style.display = "none";
-      }
-    });
-
-    document.addEventListener("DOMContentLoaded", fetchUsers);
-  </script>
 </body>
 </html>
