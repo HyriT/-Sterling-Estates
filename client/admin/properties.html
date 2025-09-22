@@ -320,56 +320,64 @@ button.delete-btn {
       form.reset();
     }
 
-    // Handle form submit for create or update
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+   form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-      const id = document.getElementById('listing-id').value;
-      const data = {
-        name: document.getElementById('name').value.trim(),
-        description: document.getElementById('description').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        regularPrice: parseFloat(document.getElementById('regularPrice').value),
-        discountPrice: parseFloat(document.getElementById('discountPrice').value) || 0,
-        bathrooms: parseInt(document.getElementById('bathrooms').value) || 0,
-        bedrooms: parseInt(document.getElementById('bedrooms').value) || 0,
-        furnished: document.getElementById('furnished').checked,
-        parking: document.getElementById('parking').checked,
-        type: document.getElementById('type').value,
-        offer: document.getElementById('offer').checked,
-        image: document.getElementById('image').value.trim(),
-      };
+  const id = document.getElementById('listing-id').value;
 
-      try {
-        let response;
-        if (id) {
-          // Update existing listing
-          response = await fetch(`http://localhost:5000/api/listing/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          });
-        } else {
-          // Create new listing
-          response = await fetch(`http://localhost:5000/api/listing`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-          });
-        }
+  // Convert single image input to array
+  const imageInput = document.getElementById("image").value;
+  const imageUrls = imageInput ? [imageInput] : [];
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || 'Failed to save listing');
-        }
+  // Include userRef for admin
+  const userRef = "admin123"; 
 
-        closeModal();
-        await fetchProperties(); // Refresh table
-        alert(id ? 'Listing updated successfully!' : 'Listing created successfully!');
-      } catch (error) {
-        alert('Error: ' + error.message);
-      }
-    });
+  const data = {
+    name: document.getElementById('name').value.trim(),
+    description: document.getElementById('description').value.trim(),
+    address: document.getElementById('address').value.trim(),
+    regularPrice: parseFloat(document.getElementById('regularPrice').value),
+    discountPrice: parseFloat(document.getElementById('discountPrice').value) || 0,
+    bathrooms: parseInt(document.getElementById('bathrooms').value) || 0,
+    bedrooms: parseInt(document.getElementById('bedrooms').value) || 0,
+    furnished: document.getElementById('furnished').checked,
+    parking: document.getElementById('parking').checked,
+    type: document.getElementById('type').value,
+    offer: document.getElementById('offer').checked,
+    imageUrls,   
+    userRef      
+  };
+
+  try {
+    let response;
+    if (id) {
+      // Update existing listing
+      response = await fetch(`http://localhost:5000/api/listing/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+    } else {
+      // Create new listing
+      response = await fetch(`http://localhost:5000/api/listing/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+    }
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to save listing');
+    }
+
+    closeModal();
+    await fetchProperties(); // Refresh table
+    alert(id ? 'Listing updated successfully!' : 'Listing created successfully!');
+  } catch (error) {
+    alert('Error: ' + error.message);
+  }
+});
 
     // Handle Update and Delete buttons with event delegation
     tableBody.addEventListener('click', async (e) => {
@@ -381,7 +389,7 @@ button.delete-btn {
       if (e.target.classList.contains('update-btn')) {
         // Fetch listing details and fill form for update + open modal
         try {
-          const res = await fetch(`http://localhost:5000/api/listing/${id}`);
+          const res = await fetch(`http://localhost:5000/api/listing/update${id}`);
           if (!res.ok) throw new Error('Failed to fetch listing');
           const listing = await res.json();
           fillForm(listing);
