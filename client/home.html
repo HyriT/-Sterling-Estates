@@ -157,7 +157,7 @@
         <li>📐 Area: 3500 sq ft</li>
         <li>💰 Price: $1,200,000</li>
       </ul>
-      <button class="view-property-btn">View Property</button>
+<button class="view-property-btn" onclick="viewProperty(1)">View Property</button>
         <div class="property-reviews">
     <span class="stars">⭐⭐⭐⭐☆</span>
     <span class="review-count">(24 reviews)</span>
@@ -180,7 +180,7 @@
         <li>📐 Area: 1200 sq ft</li>
         <li>💰 Price: $750,000</li>
       </ul>
-      <button class="view-property-btn">View Property</button>
+<button class="view-property-btn" onclick="viewProperty(2)">View Property</button>
        <div class="property-reviews">
     <span class="stars">⭐⭐⭐☆☆</span>
     <span class="review-count">(20 reviews)</span>
@@ -202,7 +202,7 @@
         <li>📐 Area: 1800 sq ft</li>
         <li>💰 Price: $500,000</li>
       </ul>
-      <button class="view-property-btn">View Property</button>
+<button class="view-property-btn" onclick="viewProperty(3)">View Property</button>
          <div class="property-reviews">
     <span class="stars">⭐⭐⭐⭐☆</span>
     <span class="review-count">(27 reviews)</span>
@@ -224,7 +224,7 @@
         <li>📐 Area: 900 sq ft</li>
         <li>💰 Price: $350,000</li>
       </ul>
-      <button class="view-property-btn">View Property</button>
+<button class="view-property-btn" onclick="viewProperty(4)">View Property</button>
          <div class="property-reviews">
     <span class="stars">⭐⭐⭐⭐</span>
     <span class="review-count">(30 reviews)</span>
@@ -362,6 +362,9 @@
 
 
  <script>
+      function viewProperty(id) {
+    window.location.href = `listing.html?id=${id}`;
+  }
   // Dropdown 
   function toggleDropdown() {
     const dropdown = document.getElementById('dropdown-menu');

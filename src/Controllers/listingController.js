@@ -149,7 +149,7 @@ export const getListingsFiltered = async (req, res, next) => {
 export const getAllListings= async (req, res, next) => {
   try {
     const listing = await Listing.find();
-    res.status(200).json(lis);
+    res.status(200).json(listing);
   } catch (error) {
     next(error);
   }

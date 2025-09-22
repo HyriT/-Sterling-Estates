@@ -207,13 +207,26 @@ nav ul li a:hover {
 
 .property-row {
   display: flex;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 80px;
+  gap: 20px; 
+  padding: 15px;
+  border: 2px solid #ccc; 
+  border-radius: 10px; 
+  margin-bottom: 20px;
+  transition: transform 0.3s, box-shadow 0.3s; 
+  background-color: #ebeaea;
+  color: rgb(0, 0, 0);
 }
+
 
 .property-row.reverse {
   flex-direction: row-reverse;
+}
+.preferred-locations {
+  margin: 80px auto;
+  padding: 40px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #858686, #e4e8ec);
+  max-width: 1200px;
 }
 
 .property-image {
@@ -238,16 +251,16 @@ nav ul li a:hover {
 }
 
 .property-description h3 {
-  font-size: 2rem;
+  font-size: 30px;
   margin-bottom: 15px;
-  color: #111;
+  color: #000000;
 }
 
 .property-description p {
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 1.7;
   margin-bottom: 20px;
-  color: #444;
+  color: #000000;
 }
 
 .property-info {
@@ -257,9 +270,9 @@ nav ul li a:hover {
 }
 
 .property-info li {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 8px;
-  color: #333;
+  color: #000000;
 }
 
 .view-property-btn {
@@ -292,7 +305,7 @@ nav ul li a:hover {
 
 .property-reviews .review-count {
   font-size: 0.95rem;
-  color: #666;
+  color: #000000;
 }
 .property-row {
   opacity: 0;

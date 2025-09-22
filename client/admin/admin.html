@@ -14,7 +14,7 @@
   <div class="admin-container">
     <aside class="sidebar">
       <div>
-        <h2>MC Admin</h2>
+        <h2>Sterling Estates Admin</h2>
       <ul>
   <li class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
   <li><a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a></li>
@@ -41,10 +41,73 @@
           </div>
         </div>
       </header>
+        <section class="content-section">
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+          <div class="card">
+            <h3>Total Users</h3>
+            <p>1,250</p>
+          </div>
+          <div class="card">
+            <h3>Active Agents</h3>
+            <p>87</p>
+          </div>
+          <div class="card">
+            <h3>Total Properties</h3>
+            <p>320</p>
+          </div>
+          <div class="card">
+            <h3>New Appraisals</h3>
+            <p>14</p>
+          </div>
+        </div>
 
-      <section class="notification-section">
-        <h2>Real-Time Appraisal Requests</h2>
-        <ul id="notification-list"></ul>
+        <!-- Quick Actions -->
+        <div class="controls">
+          <button class="btn btn-primary">Add Property</button>
+          <button class="btn btn-success">Add Agent</button>
+          <button class="btn btn-danger">View Reports</button>
+        </div>
+
+        <!-- Real-Time Notifications -->
+        <section class="notification-section">
+          <h2>Real-Time Appraisal Requests</h2>
+          <ul id="notification-list"></ul>
+        </section>
+
+        <!-- Recent Users Table -->
+        <h2 style="margin-top:2rem;">Recent Users</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Joined</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sarah Johnson</td>
+              <td>sarah@example.com</td>
+              <td>User</td>
+              <td>2025-09-20</td>
+            </tr>
+            <tr>
+              <td>John Smith</td>
+              <td>john@example.com</td>
+              <td>Agent</td>
+              <td>2025-09-18</td>
+            </tr>
+            <tr>
+              <td>Emma Brown</td>
+              <td>emma@example.com</td>
+              <td>User</td>
+              <td>2025-09-17</td>
+            </tr>
+          </tbody>
+        </table>
+
       </section>
     </main>
   </div>

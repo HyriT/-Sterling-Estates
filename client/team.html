@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+
 
   <style>
     :root {
@@ -17,28 +19,27 @@
       --text-color: #333;
       --shadow: 0 5px 15px rgba(18, 17, 17, 0.08);
     }
-    
-    /* Hero Section */
-    .hero {
-      background-size: cover;
-      background-position: center;
-      color: white;
+
+    .hero1 {
+      background-color:f8f9fa ;
+      color: rgb(31, 31, 31);
       padding: 4rem 2rem;
       text-align: center;
+      margin-top: 50px;
     }
-    
+
     .hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
     }
-    
+
     .hero p {
       font-size: 1.2rem;
       max-width: 700px;
       margin: 0 auto 2rem;
     }
-    
-    /* Unique Search Section */
+
+    /* Search Section */
     .search-section {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(12px);
@@ -76,9 +77,7 @@
       padding: 0.9rem 1rem 0.9rem 2.7rem;
       border: none;
       border-radius: 50px;
-      font-family: 'Poppins', sans-serif;
       font-size: 0.95rem;
-      box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
       background: rgba(255, 255, 255, 0.9);
       transition: all 0.3s ease;
       width: 100%;
@@ -92,21 +91,20 @@
 
     .search-btn {
       grid-column: span 2;
-      background: linear-gradient(135deg, var(--accent-color), #ffd85e);
+      background-color:rgb(194, 219, 248) ;
       color: #000;
       border: none;
       padding: 1rem 1.5rem;
       border-radius: 50px;
       font-weight: 700;
-      font-size: 1rem;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 200, 0, 0.3);
       transition: all 0.3s ease;
+      margin-left: 230px;
     }
 
     .search-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 200, 0, 0.4);
+      box-shadow: 0 8px 20px rgba(5, 199, 186, 0.4);
     }
 
     /* Agents Grid */
@@ -115,20 +113,20 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    
+
     .section-title {
       text-align: center;
       margin-bottom: 2rem;
       color: var(--dark-color);
       font-size: 2rem;
     }
-    
+
     .agents-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 2rem;
     }
-    
+
     .agent-card {
       background-color: white;
       border-radius: 10px;
@@ -136,33 +134,33 @@
       box-shadow: var(--shadow);
       transition: transform 0.3s;
     }
-    
+
     .agent-card:hover {
       transform: translateY(-5px);
     }
-    
+
     .agent-img {
       width: 100%;
       height: 250px;
       object-fit: cover;
     }
-    
+
     .agent-info {
       padding: 1.5rem;
     }
-    
+
     .agent-name {
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
       color: var(--dark-color);
     }
-    
+
     .agent-role {
-      color: var(--accent-color);
+      color:rgb(103, 108, 103);
       font-weight: 500;
       margin-bottom: 1rem;
     }
-    
+
     .agent-stats {
       display: flex;
       justify-content: space-between;
@@ -170,58 +168,77 @@
       border-top: 1px solid #eee;
       padding-top: 1rem;
     }
-    
-    .stat {
-      text-align: center;
-    }
-    
+
     .stat-number {
       font-weight: 700;
       font-size: 1.2rem;
       color: var(--primary-color);
     }
-    
+
     .stat-label {
       font-size: 0.8rem;
       color: #777;
     }
-    
+
     .agent-contact {
       display: flex;
       justify-content: space-between;
     }
-    
+
     .contact-btn {
       flex: 1;
       padding: 0.6rem;
       border: none;
       border-radius: 4px;
-      font-family: 'Poppins', sans-serif;
       font-weight: 500;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
-    
+
     .message-btn {
       background-color: var(--primary-color);
       color: white;
       margin-right: 0.5rem;
     }
-    
-    .message-btn:hover {
-      background-color: #002244;
-    }
-    
+
     .call-btn {
-      background-color: var(--accent-color);
-      color: var(--dark-color);
+      background-color:rgb(11, 164, 128);
+      color:black;
     }
-    
-    .call-btn:hover {
-      background-color: #c19b2e;
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
-    
-    /* Footer */
+
+    .modal-content {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 1rem;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+
     footer {
       background-color: var(--dark-color);
       color: #dcdcdc;
@@ -229,48 +246,33 @@
       padding: 2rem 1rem;
       margin-top: 3rem;
     }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      nav ul {
-        margin-top: 1rem;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .search-form {
-        grid-template-columns: 1fr;
-      }
-      
-      .hero h1 {
-        font-size: 2rem;
-      }
-      
-      .hero p {
-        font-size: 1rem;
-      }
-      
-      .search-btn {
-        grid-column: span 1;
-      }
-    }
-    
-    .hidden {
-      display: none !important;
-    }
+     .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1rem;
+  }
+  .pagination button {
+    background: var(--accent-color);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .pagination button:hover {
+    background: #ffd966;
+  }
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <span style="color: #f1f1f1;"><i class="fas fa-home"></i> Sterling Estates</span>
-    </div>
-    <nav>
+   <!-- Header Section -->
+    <header id="main-header">
+          <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
+  <span style="color: #f1f1f1;"><i class="fas fa-home"></i> </i> Sterling Estates</span>
+</div>
+        <nav>
       <ul>
         <li><a href="home.html">Home</a></li>
         <li><a href="team.html" class="active">Agents</a></li>
@@ -287,116 +289,221 @@
         </li>
       </ul>
     </nav>
-  </header>
 
-  <section class="hero">
+    </header>
+  <section class="hero1">
     <h1>Find Your Perfect Real Estate Agent</h1>
     <p>Connect with experienced professionals who understand your needs and the local market</p>
   </section>
 
-  <section class="search-section">
-    <form class="search-form">
-      <div class="input-wrapper">
-        <i class="fas fa-user"></i>
-        <input type="text" class="search-input" placeholder="Search by name">
-      </div>
-      <div class="input-wrapper">
-        <i class="fas fa-map-marker-alt"></i>
-        <select class="search-input">
-          <option value="">All Locations</option>
-          <option value="tirane">Tiranë</option>
-          <option value="durres">Durrës</option>
-          <option value="vlore">Vlorë</option>
-        </select>
-      </div>
-      <div class="input-wrapper">
-        <i class="fas fa-briefcase"></i>
-        <select class="search-input">
-          <option value="">All Specialties</option>
-          <option value="residential">Residential</option>
-          <option value="commercial">Commercial</option>
-          <option value="luxury">Luxury Homes</option>
-        </select>
-      </div>
-      <div class="input-wrapper">
-        <i class="fas fa-award"></i>
-        <select class="search-input">
-          <option value="">Experience</option>
-          <option value="5plus">5+ years</option>
-          <option value="10plus">10+ years</option>
-          <option value="15plus">15+ years</option>
-        </select>
-      </div>
-      <button type="submit" class="search-btn">🔍 Find Agents</button>
-    </form>
-  </section>
-
-  <section class="agents-section">
-    <h2 class="section-title">Our Professional Agents</h2>
-    <div class="agents-grid">
-      <!-- Agent Cards here, same as your original code -->
-      <div class="agent-card">
-        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Sarah Johnson" class="agent-img">
-        <div class="agent-info">
-          <h3 class="agent-name">Sarah Johnson</h3>
-          <p class="agent-role">Lead Property Advisor</p>
-          <div class="agent-stats">
-            <div class="stat"><div class="stat-number">127</div><div class="stat-label">Properties Sold</div></div>
-            <div class="stat"><div class="stat-number">98%</div><div class="stat-label">Satisfaction</div></div>
-            <div class="stat"><div class="stat-number">8+</div><div class="stat-label">Years</div></div>
-          </div>
-          <div class="agent-contact">
-            <button class="contact-btn message-btn">Message</button>
-            <button class="contact-btn call-btn">Call</button>
-          </div>
-        </div>
-      </div>
-      <!-- Add the rest of your agents here -->
+<section class="search-section">
+  <form class="search-form" onsubmit="return false;">
+    <!-- Search by Name -->
+    <div class="input-wrapper" style="position:relative;">
+      <i class="fas fa-user"></i>
+      <input type="text" id="searchName" class="search-input" placeholder="Search by name">
+      <ul id="nameSuggestions" style="position:absolute; top:100%; left:0; right:0; background:#fff; list-style:none; padding:0; margin:0; border:1px solid #ccc; max-height:150px; overflow-y:auto; display:none; z-index:20;"></ul>
     </div>
-  </section>
+
+    <!-- Search by Location -->
+    <div class="input-wrapper">
+      <i class="fas fa-map-marker-alt"></i>
+      <select id="searchLocation" class="search-input">
+        <option value="">All Locations</option>
+        <option value="Tirane">Tiranë</option>
+        <option value="Durres">Durrës</option>
+        <option value="Vlore">Vlorë</option>
+        <option value="Shkoder">Shkodër</option>
+      </select>
+    </div>
+
+    <!-- Search by Role -->
+    <div class="input-wrapper">
+      <i class="fas fa-briefcase"></i>
+      <select id="searchRole" class="search-input">
+        <option value="">All Specialties</option>
+        <option value="Lead Property Advisor">Lead Property Advisor</option>
+        <option value="Commercial Specialist">Commercial Specialist</option>
+        <option value="Luxury Homes Expert">Luxury Homes Expert</option>
+        <option value="Residential Specialist">Residential Specialist</option>
+        <option value="Property Consultant">Property Consultant</option>
+        <option value="Investment Specialist">Investment Specialist</option>
+        <option value="Luxury Property Manager">Luxury Property Manager</option>
+        <option value="Commercial Property Expert">Commercial Property Expert</option>
+        <option value="Rental Specialist">Rental Specialist</option>
+      </select>
+    </div>
+
+    <button type="submit" class="search-btn">🔍 Find Agents</button>
+  </form>
+</section>
+
+<section class="agents-section">
+  <h2 class="section-title">Our Professional Agents</h2>
+  <div id="agentsGrid" class="agents-grid">
+    <!-- Agents will be inserted here dynamically -->
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button id="prevPage">« Prev</button>
+    <span id="pageInfo">Page 1 of 3</span>
+    <button id="nextPage">Next »</button>
+  </div>
+</section>
+
+<!-- Contact Modal -->
+<div class="modal" id="contactModal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h3 id="modalTitle">Contact Agent</h3>
+    <p id="modalText">Send a message or call your chosen agent.</p>
+    <form>
+      <input type="text" placeholder="Your Name" required style="width:100%;padding:0.8rem;margin:0.5rem 0;">
+      <input type="email" placeholder="Your Email" required style="width:100%;padding:0.8rem;margin:0.5rem 0;">
+      <textarea placeholder="Your Message" rows="4" style="width:100%;padding:0.8rem;margin:0.5rem 0;"></textarea>
+      <button type="submit" style="background:var(--accent-color);padding:0.8rem 1.2rem;border:none;border-radius:6px;cursor:pointer;font-weight:600;">Send</button>
+    </form>
+  </div>
+</div>
 
   <footer>
     <p>&copy; 2025 MC Real Estate. All Rights Reserved.</p>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchForm = document.querySelector('.search-form');
-      const agentCards = document.querySelectorAll('.agent-card');
-      
-      searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nameInput = document.querySelector('input[type="text"]').value.toLowerCase();
-        const locationSelect = document.querySelectorAll('select')[0].value;
-        const specialtySelect = document.querySelectorAll('select')[1].value;
-        
-        agentCards.forEach(card => {
-          const agentName = card.querySelector('.agent-name').textContent.toLowerCase();
-          let matchesSearch = true;
-          
-          if (nameInput && !agentName.includes(nameInput)) {
-            matchesSearch = false;
-          }
-          
-          if (matchesSearch) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
+<script>
+  const searchName = document.getElementById("searchName");
+const searchLocation = document.getElementById("searchLocation");
+const searchRole = document.getElementById("searchRole");
+const nameSuggestions = document.getElementById("nameSuggestions");
+const agentsGrid = document.getElementById("agentsGrid");
+const pageInfo = document.getElementById("pageInfo");
+const prevBtn = document.getElementById("prevPage");
+const nextBtn = document.getElementById("nextPage");
+  const modal = document.getElementById("contactModal");
+  const closeModal = document.querySelector(".close-modal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalText = document.getElementById("modalText");
 
-      const inputs = searchForm.querySelectorAll('input, select');
-      inputs.forEach(input => {
-        input.addEventListener('input', function() {
-          if (!this.value) {
-            agentCards.forEach(card => {
-              card.style.display = 'block';
-            });
-          }
-        });
-      });
+  // --- AGENTS DATA ---
+  const agents = [
+    { name: "Sarah Johnson", role: "Lead Property Advisor", location: "Tirane", img: "https://www.shutterstock.com/image-photo/portrait-smiling-asian-businesswoman-ceo-260nw-2459023481.jpg", description: "Sarah specializes in guiding clients through high-value transactions with a focus on premium real estate markets." },
+    { name: "Michael Smith", role: "Commercial Specialist", location: "Tirane", img: "https://wallpapergod.com/images/hd/people-4480X6720-wallpaper-viicqji0ywmqde2s.jpeg", description: "Michael has extensive experience in commercial properties, helping businesses find the perfect office and retail spaces." },
+    { name: "Emily Davis", role: "Luxury Homes Expert", location: "Durres", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIaMtfb0gi9bxtBdLaC___rlYScfV8VGeB-Q&s", description: "Emily is passionate about luxury living and has helped countless clients secure prestigious homes in prime neighborhoods." },
+    { name: "David Brown", role: "Residential Specialist", location: "Vlore", img: "https://www.shutterstock.com/image-photo/portrait-smiling-young-businessman-standing-260nw-55166731.jpg", description: "David focuses on family-friendly neighborhoods, guiding buyers and sellers through every step of the residential process." },
+    { name: "Olivia Wilson", role: "Property Consultant", location: "Durres", img: "https://img.pikbest.com/origin/10/51/47/98EpIkbEsT3wu.jpg!w700wp", description: "Olivia provides tailored property advice and market insights to match clients with homes that fit their lifestyle." },
+    { name: "James Taylor", role: "Investment Specialist", location: "Tirane", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXAg0RCrBSP2GV2ZYTw8_tMElgk1Zh3L5SJpqEKqFHSE4_UiBjTTlzNKqvEftMtJZPXjk&usqp=CAU", description: "James advises on real estate investments, ensuring clients maximize returns through smart property acquisitions." },
+    { name: "Sophia Miller", role: "Luxury Property Manager", location: "Vlore", img: "https://png.pngtree.com/thumb_back/fh260/background/20210910/pngtree-business-morning-business-office-lady-office-smile-photography-map-with-map-image_838068.jpg", description: "Sophia manages high-end properties for international clients, offering full service and discretion." },
+    { name: "Daniele Lee", role: "Commercial Property Expert", location: "Shkoder", img: "https://e0.pxfuel.com/wallpapers/1005/256/desktop-wallpaper-business-woman-business-women.jpg", description: "Daniele specializes in leasing and selling commercial properties, from office towers to retail outlets." },
+    { name: "Ava Martinez", role: "Rental Specialist", location: "Shkoder", img: "https://c1.wallpaperflare.com/preview/390/482/555/women-business-attractive-dynamic-thumbnail.jpg", description: "Ava connects tenants with ideal rental options, from city apartments to coastal villas." },
+    { name: "Mateo Davis", role: "Rental Specialist", location: "Tirane", img: "https://t3.ftcdn.net/jpg/03/23/76/28/360_F_323762886_vIE3lxiYsan2zR85t2CqXzB38wsTe8BP.jpg", description: "Mateo focuses on short-term and long-term rentals, making the leasing process smooth and transparent." },
+    { name: "Jason Smith", role: "Rental Specialist", location: "Durres", img: "https://img.freepik.com/free-photo/young-smiling-bearded-man-formalwear-holding-newspaper-cup-coffee_171337-10095.jpg?semt=ais_incoming&w=740&q=80", description: "Jason works with landlords and tenants, ensuring fair agreements and hassle-free rental experiences." },
+    { name: "Dea Dragon", role: "Rental Specialist", location: "Vlore", img: "https://www.shutterstock.com/image-photo/blond-haired-woman-smiling-sitting-600w-2612505925.jpg", description: "Dea specializes in urban rentals, helping clients find stylish and affordable apartments in vibrant city centers." }
+  ];
+
+  // --- PAGINATION SETUP ---
+// INITIAL PAGE SETUP
+let currentPage = 1;
+const perPage = 6;
+
+// Filter agents based on search inputs
+function filterAgents() {
+  const nameVal = searchName.value.toLowerCase();
+  const locationVal = searchLocation.value.toLowerCase();
+  const roleVal = searchRole.value.toLowerCase();
+
+  return agents.filter(agent => {
+    const matchName = !nameVal || agent.name.toLowerCase().includes(nameVal);
+    const matchLocation = !locationVal || agent.location.toLowerCase() === locationVal;
+    const matchRole = !roleVal || agent.role.toLowerCase().includes(roleVal);
+    return matchName && matchLocation && matchRole;
+  });
+}
+
+// Render agents with pagination
+function renderAgentsFiltered() {
+  const filtered = filterAgents();
+  const totalPagesFiltered = Math.ceil(filtered.length / perPage);
+  const start = (currentPage -1) * perPage;
+  const end = start + perPage;
+  const pageAgents = filtered.slice(start, end);
+
+  agentsGrid.innerHTML = "";
+  pageAgents.forEach(agent => {
+    agentsGrid.innerHTML += `
+      <div class="agent-card">
+        <img src="${agent.img}" alt="${agent.name}" class="agent-img">
+        <div class="agent-info">
+          <h3 class="agent-name">${agent.name}</h3>
+          <p class="agent-role">${agent.role}</p>
+          <div class="agent-contact">
+            <button class="contact-btn message-btn" data-agent="${agent.name}">Message</button>
+            <button class="contact-btn call-btn" data-agent="${agent.name}">Call</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  pageInfo.textContent = `Page ${currentPage} of ${totalPagesFiltered || 1}`;
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalPagesFiltered || totalPagesFiltered === 0;
+}
+
+// Event listeners
+prevBtn.addEventListener("click", () => { if(currentPage>1){currentPage--; renderAgentsFiltered();}});
+nextBtn.addEventListener("click", () => { const totalPagesFiltered = Math.ceil(filterAgents().length/perPage); if(currentPage<totalPagesFiltered){currentPage++; renderAgentsFiltered();}});
+
+searchName.addEventListener("input", () => {
+  const val = searchName.value.toLowerCase();
+  if(val.length<2){ 
+    nameSuggestions.style.display="none"; 
+    currentPage=1; 
+    renderAgentsFiltered(); 
+    return;
+  }
+  const matches = agents.filter(agent => agent.name.toLowerCase().includes(val));
+  nameSuggestions.innerHTML="";
+  matches.forEach(agent=>{
+    const li=document.createElement("li");
+    li.textContent=agent.name;
+    li.style.padding="0.5rem 1rem";
+    li.style.cursor="pointer";
+    li.addEventListener("click", ()=>{
+      searchName.value=agent.name;
+      nameSuggestions.style.display="none";
+      currentPage=1;
+      renderAgentsFiltered();
     });
-  </script>
+    nameSuggestions.appendChild(li);
+  });
+  nameSuggestions.style.display = matches.length ? "block" : "none";
+  currentPage=1;
+  renderAgentsFiltered();
+});
+
+searchLocation.addEventListener("change", ()=>{currentPage=1; renderAgentsFiltered();});
+searchRole.addEventListener("change", ()=>{currentPage=1; renderAgentsFiltered();});
+
+// Hide suggestions when clicking outside
+document.addEventListener("click", e=>{if(!nameSuggestions.contains(e.target) && e.target!==searchName){nameSuggestions.style.display="none";}});
+
+// Modal
+agentsGrid.addEventListener("click", e=>{
+  if(e.target.classList.contains("contact-btn")){
+    const agent = e.target.dataset.agent;
+    modalTitle.textContent = `Contact ${agent}`;
+    modalText.textContent = `You're about to ${e.target.classList.contains("call-btn") ? "call" : "message"} ${agent}.`;
+    modal.style.display = "flex";
+  }
+});
+closeModal.addEventListener("click", ()=>{modal.style.display="none";});
+window.addEventListener("click", e=>{if(e.target===modal) modal.style.display="none";});
+
+// --- INITIAL RENDER: show all agents ---
+renderAgentsFiltered();
+</script>
+
+
 </body>
 </html>

@@ -6,7 +6,7 @@ export default function(io) {
   const router = express.Router();
 
   router.post('/new', (req, res) => createAppraisal(req, res, io));
-  router.get('/appraisal',verifyAdmin,getAppraisal);
+  router.get('/appraisal',getAppraisal);
 
   return router; 
 };
