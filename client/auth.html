@@ -162,6 +162,26 @@ rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0
           <label for="login-password">Password</label>
           <input type="password" id="login-password" placeholder="Enter your password" required />
         </div>
+           <!-- Forgot password link -->
+    <p class="auth-link" style="margin-left:0; text-align:right;">
+      <a href="#" id="forgot-password">Forgot Password?</a>
+    </p>
+    <!-- Forgot Password Modal -->
+<div id="forgot-modal" class="hidden" 
+     style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
+            display: flex; align-items: center; justify-content: center; z-index: 1000;">
+  <div style="background: #fff; padding: 30px; border-radius: 10px; width: 380px; position: relative;">
+    <h3 style="margin-bottom: 20px; font-size: 22px; text-align:center;">Reset Password</h3>
+    <p id="forgot-error" style="color:red; font-size:14px; display:none; margin-bottom:10px;"></p>
+    <div class="form-group">
+      <label for="forgot-email" style="font-weight:600;">Enter your email</label>
+      <input type="email" id="forgot-email" placeholder="Enter your email" required />
+    </div>
+    <button id="forgot-submit" style="margin-top:15px; width:100%; padding:12px; border:none; background:#486973; color:#fff; border-radius:6px; cursor:pointer;">Send Reset Link</button>
+    <button id="forgot-close" style="margin-top:10px; width:100%; padding:10px; border:none; background:#ccc; color:#333; border-radius:6px; cursor:pointer;">Cancel</button>
+  </div>
+</div>
+
 
         <!-- Social login icons -->
         <div class="social-login">
@@ -208,133 +228,7 @@ rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0
       </form>
     </div>
   </section>
-
-<script>
-  const BASE_URL = "http://localhost:5000";
-  const LOGIN_URL = `${BASE_URL}/api/auth/signin`;
-  const REGISTER_URL = `${BASE_URL}/api/auth/signup`;
-
-  // Elementët
-  const loginForm = document.getElementById("login-form");
-  const registerForm = document.getElementById("register-form");
-  const showRegister = document.getElementById("show-register");
-  const showLogin = document.getElementById("show-login");
-  const loginContainer = document.getElementById("login-container");
-  const registerContainer = document.getElementById("register-container");
-
-  // Ndërrimi mes login/register
-  showRegister.addEventListener("click", (e) => {
-    e.preventDefault();
-    loginContainer.classList.add("hidden");
-    registerContainer.classList.remove("hidden");
-    clearErrorMessages();
-  });
-
-  showLogin.addEventListener("click", (e) => {
-    e.preventDefault();
-    registerContainer.classList.add("hidden");
-    loginContainer.classList.remove("hidden");
-    clearErrorMessages();
-  });
-
-  // Fshi mesazhet e gabimeve
-  function clearErrorMessages() {
-    document.querySelectorAll(".error-msg").forEach((el) => {
-      el.textContent = "";
-      el.style.display = "none";
-    });
-  }
-
-  function showError(form, message) {
-    const errorEl = form.querySelector(".error-msg");
-    if (errorEl) {
-      errorEl.textContent = message;
-      errorEl.style.display = "block";
-    }
-  }
-
-  // 🟢 Login
-  loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    clearErrorMessages();
-
-    const email = document.getElementById("login-email").value.trim();
-    const password = document.getElementById("login-password").value;
-
-    if (!email || !password) {
-      return showError(loginForm, "Email and password are required");
-    }
-
-    try {
-      const res = await fetch(LOGIN_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message || "Login failed");
-
-      // ✅ Store user info (not token)
-
-      localStorage.setItem("user", JSON.stringify(data.user || {}));
-      window.location.href = "home.html";
-    } catch (err) {
-      showError(loginForm, err.message);
-    }
-  });
-
-  // 🟢 Register
-  registerForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    clearErrorMessages();
-
-    const username = document.getElementById("register-username").value.trim();
-    const email = document.getElementById("register-email").value.trim();
-    const password = document.getElementById("register-password").value;
-    const confirm = document.getElementById("register-password-confirm").value;
-
-    if (!username || !email || !password || !confirm) {
-      return showError(registerForm, "All fields are required");
-    }
-
-    if (password !== confirm) {
-      return showError(registerForm, "Passwords do not match");
-    }
-
-    try {
-      const res = await fetch(REGISTER_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data.message || "Registration failed");
-
-      alert("Registration successful! Please log in.");
-      showLogin.click();
-    } catch (err) {
-      showError(registerForm, err.message);
-    }
-  });
-//   fetch('/api/auth/google', {
-//   method: 'POST',
-//   headers: { 'Content-Type': 'application/json' },
-//   body: JSON.stringify({
-//     email: googleUserEmail,
-//     name: googleUserName,
-//     photo: googleUserPhotoURL,
-//   }),
-//   credentials: 'include' 
-// });
-
-</script>
-
-
+<script src="auth.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 </body>
