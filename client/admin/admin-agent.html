@@ -3,20 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Agents | Admin Panel</title>
+    <link rel="stylesheet" href="admin.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { display: flex; min-height: 100vh; background: #f5f6fa; }
-    .admin-container { display: flex; width: 100%; }
-    aside.sidebar { width: 220px; background: #2c3e50; color: #fff; padding: 20px; }
-    aside.sidebar h2 { margin-bottom: 20px; }
-    aside.sidebar ul { list-style: none; padding: 0; }
-    aside.sidebar ul li { margin: 10px 0; }
-    aside.sidebar ul li a { color: #fff; text-decoration: none; display: block; }
-    aside.sidebar ul li.active a { font-weight: bold; color: #f1c40f; }
-    main.main-panel { flex: 1; padding: 20px; }
-    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    header h1 { font-size: 24px; color: #2c3e50; }
+  <style>  
     .admin-user { position: relative; cursor: pointer; }
     .admin-user .avatar { background: #3498db; color: #fff; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
     .admin-user .dropdown { position: absolute; right: 0; top: 45px; background: #fff; color: #333; border: 1px solid #ccc; border-radius: 6px; display: none; flex-direction: column; min-width: 120px; }
@@ -39,15 +28,29 @@
   <div class="admin-container">
     <aside class="sidebar">
       <div>
-        <h2>Sterling Estates Admin</h2>
+        <h2>SE Admin</h2>
       <ul>
-  <li class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
-  <li><a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a></li>
-  <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
-      <li ><a href="admin-agent.html"><i class="fas fa-user-tie"></i> Agent</a></li>
-  <li><a href="properties.html"><i class="fas fa-building"></i> Properties</a></li>
-  <li><i class="fas fa-chart-bar"></i> Statistics</li>
-  <li><i class="fas fa-cog"></i> Settings</li>
+  <li>
+    <a href="admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+  </li>
+  <li>
+    <a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a>
+  </li>
+  <li>
+    <a href="users.html"><i class="fas fa-users"></i> Users</a>
+  </li>
+   <li class="active"></li>
+    <a href="admin-agent.html"><i class="fas fa-user-tie"></i> Agent</a>
+  </li>
+  <li>
+    <a href="properties.html"><i class="fas fa-building"></i> Properties</a>
+  </li>
+  <li>
+    <a href="statistic.html"><i class="fas fa-chart-bar"></i> Statistics</a>
+  </li>
+  <li>
+    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+  </li>
 </ul>
 
       </div>

@@ -118,7 +118,7 @@ nav ul li a:hover {
     width: 1000px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     animation: fadeInUp 1s ease-out;
-    margin-top: 480px;
+    margin-top: 420px;
   }
   
   .hero-content h2 {
@@ -179,7 +179,7 @@ nav ul li a:hover {
     transform: translateY(-2px);
   }
 .properties-section {
-  width: 90%;
+  width: 70%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 60px 0;
@@ -248,49 +248,86 @@ nav ul li a:hover {
 
 .property-description {
   flex: 1;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.property-description:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Titulli */
 .property-description h3 {
-  font-size: 30px;
-  margin-bottom: 15px;
-  color: #000000;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1D4ED8;
+  margin-bottom: 12px;
 }
 
 .property-description p {
-  font-size: 1.2rem;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  color: #000000;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  color: #444;
 }
 
+/* Të dhënat */
 .property-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolonash */
+  gap: 12px;
   list-style: none;
   padding: 0;
   margin-bottom: 20px;
 }
 
 .property-info li {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: #000000;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 12px 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
 }
 
+.property-info li:hover {
+  background: #e0f2fe;
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+/* Ikonat dhe tekstet */
+.property-info li::before {
+  font-size: 1.2rem;
+}
+
+/* Butoni */
 .view-property-btn {
   padding: 12px 28px;
-  background-color: #1D4ED8;
+  background: linear-gradient(135deg, #2563eb, #1e40af);
   color: white;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .view-property-btn:hover {
-  background-color: #2563EB;
+  background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
   transform: translateY(-2px);
 }
+
 .property-reviews {
   margin-top: 12px;
   display: flex;

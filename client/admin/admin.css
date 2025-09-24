@@ -1,11 +1,26 @@
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
     body { display:flex; min-height:100vh; background:#f5f6fa; }
     .admin-container { display:flex; width:100%; }
-    aside.sidebar { width:220px; background:#2c3e50; color:#fff; padding:20px; }
+    aside.sidebar { width:220px; background:#88accf; color:#fff; padding:20px; }
     aside.sidebar h2 { margin-bottom:20px; }
     aside.sidebar ul { list-style:none; padding:0; }
     aside.sidebar ul li { margin:10px 0; }
-    aside.sidebar ul li a { color:#fff; text-decoration:none; display:block; }
+    aside.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 8px 12px;
+    border-radius: 8px; /* këndet e rrumbullakosura */
+    transition: all 0.3s ease; /* animim i butë për hover */
+}
+
+aside.sidebar ul li a:hover {
+    background: #3498db; /* ngjyra blu */
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); /* hije blu e butë */
+    transform: translateY(-2px); /* efekt i lehtë ngritjeje */
+}
+
     aside.sidebar ul li.active a { font-weight:bold; color:#f1c40f; }
     main.main-panel { flex:1; padding:20px; }
     header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
