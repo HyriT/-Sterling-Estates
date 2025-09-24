@@ -234,9 +234,7 @@
                 <div class="input-group">
                     <label for="password">Password</label>
                     <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="Enter your password" required>
-                    <!-- <div class="error" id="passwordError">Password must be at least 10 characters</div> -->
-                </div>
+                    <input type="password" id="password" placeholder="Enter your password" required>                </div>
                 
                 <div class="remember-forgot">
                     <label>
@@ -255,23 +253,19 @@
             </div>
         </div>
     </div>
-
-   <script>
+<script>
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value.trim();
   const emailError = document.getElementById('emailError');
-  const passwordError = document.getElementById('passwordError');
   const button = document.querySelector('.login-button');
 
-  let isValid = true;
-
-  // Email validation
+  // Validate email
   if (!validateEmail(email)) {
     emailError.style.display = 'block';
-    isValid = false;
+    return;
   } else {
     emailError.style.display = 'none';
   }
@@ -280,10 +274,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
     button.disabled = true;
 
+    // Send login request
     const res = await fetch("http://localhost:5000/api/auth/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      credentials: "include", 
       body: JSON.stringify({ email, password })
     });
 
@@ -298,29 +292,35 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     // Check if user is admin
     const isAdmin = data.user && data.user.role === "admin";
-    if (isAdmin) {
-      alert("Login successful! Redirecting to admin dashboard...");
-      window.location.href = "./admin.html"; 
-    } else {
+    if (!isAdmin) {
       alert("Access denied: You are not an admin!");
       button.innerHTML = 'Secure Login';
       button.disabled = false;
+      return;
     }
+
+    // Save token and user info to localStorage
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
+
+    alert("Login successful! Redirecting to admin dashboard...");
+    window.location.href = "./admin.html";
 
   } catch (error) {
     console.error("Login error:", error);
     alert("Something went wrong. Please try again.");
+  } finally {
     button.innerHTML = 'Secure Login';
     button.disabled = false;
   }
 });
 
+// Simple email validation
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 }
 </script>
-
 
 </body>
 </html>

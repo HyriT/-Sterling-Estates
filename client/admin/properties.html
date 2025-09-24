@@ -8,62 +8,149 @@
 
   <style>
    
-    #listing-modal {
-      display: none; 
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-    }
-    #listing-modal.active {
-      display: flex;
-    }
-    #listing-modal .modal-content {
-      background: white;
-      padding: 20px 25px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 600px;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      position: relative;
-    }
-    #listing-modal h2 {
-      margin-top: 0;
-    }
-    #listing-form input,
-    #listing-form select {
-      margin: 0.3rem 0.7rem 0.3rem 0;
-      padding: 0.4rem;
-      width: 140px;
-    }
-    #listing-form label {
-      margin-right: 1rem;
-      font-weight: normal;
-    }
-    #listing-form button {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-    }
-    #listing-modal .close-btn {
-      position: absolute;
-      top: 12px;
-      right: 15px;
-      font-size: 24px;
-      font-weight: bold;
-      color: #888;
-      cursor: pointer;
-      border: none;
-      background: none;
-    }
-    #listing-modal .close-btn:hover {
-      color: #333;
-    }
+  /* Modal overlay */
+#listing-modal {
+  display: none; 
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5); /* slightly lighter overlay */
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+#listing-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Modal content */
+#listing-modal .modal-content {
+  background: #fff;
+  padding: 30px 35px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  position: relative;
+  transform: translateY(-20px);
+  transition: transform 0.3s ease;
+}
+
+#listing-modal.active .modal-content {
+  transform: translateY(0);
+}
+
+/* Modal header */
+#listing-modal h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Close button */
+#listing-modal .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: color 0.2s;
+}
+
+#listing-modal .close-btn:hover {
+  color: #ff5c5c;
+}
+
+/* Form styling */
+#listing-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+#listing-form label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+  color: #555;
+}
+
+#listing-form input,
+#listing-form select {
+  width: calc(50% - 10px);
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+#listing-form input:focus,
+#listing-form select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Full width inputs */
+#listing-form input.full-width {
+  width: 100%;
+}
+
+/* Checkbox & radio */
+#listing-form .checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
+#listing-form button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+#listing-form button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+#listing-form button.cancel-btn {
+  background-color: #6c757d;
+}
+
+#listing-form button.cancel-btn:hover {
+  background-color: #5a6268;
+}
+
+/* Scrollbar for modal */
+#listing-modal .modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+#listing-modal .modal-content::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
+
 
     /* Update/Delete button styles */
     button.update-btn, button.delete-btn {
@@ -91,9 +178,6 @@ button.update-btn {
 button.delete-btn {
   background-color: #d9534f;
 }
-
-
-
     /* New Listing button */
     #new-listing-btn {
       margin-bottom: 1rem;
@@ -126,12 +210,12 @@ button.delete-btn {
   <div class="admin-container">
     <aside class="sidebar">
       <div>
-        <h2>MC Admin</h2>
+        <h2> Sterling Estates Admin</h2>
          <ul>
   <li><a href="admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</li>
   <li><a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a></li>
   <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
-        <li ><a href="agent.html"><i class="fas fa-user-tie"></i> Agent</a></li>
+        <li ><a href="admin-agent.html"><i class="fas fa-user-tie"></i> Agent</a></li>
   <li class="active"><a href="properties.html"><i class="fas fa-building"></i> Properties</a></li>
   <li><i class="fas fa-chart-bar"></i> Statistics</li>
   <li><i class="fas fa-cog"></i> Settings</li>
@@ -146,7 +230,7 @@ button.delete-btn {
         <div class="admin-user">
           <div class="avatar" onclick="toggleDropdown()">A</div>
           <div class="dropdown" id="profile-dropdown" style="display:none;">
-            <a href="#">My Profile</a>
+            <a href="admin-profil.html">My Profile</a>
             <a href="#" onclick="logout()">Logout</a>
           </div>
         </div>
@@ -225,221 +309,179 @@ button.delete-btn {
     </div>
   </div>
 
-  <script>
-    const modal = document.getElementById('listing-modal');
-    const newListingBtn = document.getElementById('new-listing-btn');
-    const closeBtn = modal.querySelector('.close-btn');
-    const cancelBtn = document.getElementById('cancel-btn');
-    const form = document.getElementById('listing-form');
-    const tableBody = document.getElementById('users-table-body');
+<script>
+const modal = document.getElementById('listing-modal');
+const newListingBtn = document.getElementById('new-listing-btn');
+const closeBtn = modal.querySelector('.close-btn');
+const cancelBtn = document.getElementById('cancel-btn');
+const form = document.getElementById('listing-form');
+const tableBody = document.getElementById('users-table-body');
 
-    // Open modal and clear form (for creating new listing)
-    newListingBtn.addEventListener('click', () => {
-      clearForm();
-      openModal();
+const token = localStorage.getItem("token");
+if (!token) {
+  alert("Unauthorized! Please login again.");
+  window.location.href = "./admin-login.html";
+}
+
+// Modal helpers
+newListingBtn.addEventListener('click', () => { clearForm(); openModal(); });
+closeBtn.addEventListener('click', closeModal);
+cancelBtn.addEventListener('click', closeModal);
+function openModal() { modal.classList.add('active'); }
+function closeModal() { modal.classList.remove('active'); clearForm(); }
+function clearForm() { document.getElementById('listing-id').value = ''; form.reset(); }
+
+// Fetch properties
+async function fetchProperties() {
+  try {
+    const res = await fetch("http://localhost:5000/api/listing/getAll", {
+      headers: { 'Authorization': `Bearer ${token}` }
     });
+    if (!res.ok) throw new Error('Unauthorized. Please login again.');
+    const data = await res.json();
 
-    // Close modal
-    closeBtn.addEventListener('click', closeModal);
-    cancelBtn.addEventListener('click', closeModal);
+    tableBody.innerHTML = "";
+    data.forEach(p => {
+      tableBody.innerHTML += `
+        <tr data-id="${p._id}">
+          <td>${p.name||"-"}</td>
+          <td>${p.description||"-"}</td>
+          <td>${p.address||"-"}</td>
+          <td>${p.regularPrice!==undefined?`$${p.regularPrice}`:"-"}</td>
+          <td>${p.discountPrice!==undefined?`$${p.discountPrice}`:"-"}</td>
+          <td>${p.bathrooms??"-"}</td>
+          <td>${p.bedrooms??"-"}</td>
+          <td>${p.furnished?"Yes":"No"}</td>
+          <td>${p.parking?"Yes":"No"}</td>
+          <td>${p.type||"-"}</td>
+          <td>${p.offer?"Yes":"No"}</td>
+          <td>${p.imageUrls && p.imageUrls.length>0 ? `<img src="${p.imageUrls[0]}" style="width:60px;"/>`:"-"}</td>
+          <td>
+            <button class="update-btn">Update</button>
+            <button class="delete-btn">Delete</button>
+          </td>
+        </tr>`;
+    });
+  } catch(err) {
+    alert(err.message);
+    console.error(err);
+    if(err.message.includes("Unauthorized")) window.location.href="login.html";
+  }
+}
 
-    // Open modal helper
-    function openModal() {
-      modal.classList.add('active');
-    }
-
-    // Close modal helper
-    function closeModal() {
-      modal.classList.remove('active');
-      clearForm();
-    }
-
-    // Fetch and render properties
-    async function fetchProperties() {
-      try {
-        const res = await fetch("http://localhost:5000/api/listing/getAll");
-        if (!res.ok) throw new Error('Failed to fetch properties');
-        const data = await res.json();
-
-        tableBody.innerHTML = "";
-
-        data.forEach(property => {
-          const row = `
-            <tr data-id="${property._id}">
-              <td>${property.name || "-"}</td>
-              <td>${property.description || "-"}</td>
-              <td>${property.address || "-"}</td>
-              <td>${property.regularPrice !== undefined ? `$${property.regularPrice}` : "-"}</td>
-              <td>${property.discountPrice !== undefined ? `$${property.discountPrice}` : "-"}</td>
-              <td>${property.bathrooms ?? "-"}</td>
-              <td>${property.bedrooms ?? "-"}</td>
-              <td>${property.furnished ? "Yes" : "No"}</td>
-              <td>${property.parking ? "Yes" : "No"}</td>
-              <td>${property.type || "-"}</td>
-              <td>${property.offer ? "Yes" : "No"}</td>
-              <td>
-              ${property.imageUrls && property.imageUrls.length > 0
-  ? `<img src="${property.imageUrls[0]}" alt="Property Image" style="width: 60px; height: auto;" />`
-  : "-"}
-
-              </td>
-              <td>
-                <button class="update-btn">Update</button>
-                <button class="delete-btn">Delete</button>
-              </td>
-            </tr>
-          `;
-          tableBody.innerHTML += row;
-        });
-      } catch (err) {
-        console.error("Error fetching properties:", err);
-        alert("Failed to load properties.");
-      }
-    }
-
-    // Fill form for update
-    function fillForm(listing) {
-      document.getElementById('listing-id').value = listing._id || '';
-      document.getElementById('name').value = listing.name || '';
-      document.getElementById('description').value = listing.description || '';
-      document.getElementById('address').value = listing.address || '';
-      document.getElementById('regularPrice').value = listing.regularPrice || '';
-      document.getElementById('discountPrice').value = listing.discountPrice || '';
-      document.getElementById('bathrooms').value = listing.bathrooms || '';
-      document.getElementById('bedrooms').value = listing.bedrooms || '';
-      document.getElementById('furnished').checked = listing.furnished || false;
-      document.getElementById('parking').checked = listing.parking || false;
-      document.getElementById('type').value = listing.type || 'sale';
-      document.getElementById('offer').checked = listing.offer || false;
-      document.getElementById('image').value = listing.image || '';
-    }
-
-    // Clear form
-    function clearForm() {
-      document.getElementById('listing-id').value = '';
-      form.reset();
-    }
-
-   form.addEventListener('submit', async (e) => {
+// Create / Update listing
+form.addEventListener('submit', async e => {
   e.preventDefault();
-
   const id = document.getElementById('listing-id').value;
-
-  // Convert single image input to array
   const imageInput = document.getElementById("image").value;
   const imageUrls = imageInput ? [imageInput] : [];
-
-  // Include userRef for admin
-  const userRef = "admin123"; 
+  const userRef = "687f53bce93325ab32b7355a";
 
   const data = {
     name: document.getElementById('name').value.trim(),
     description: document.getElementById('description').value.trim(),
     address: document.getElementById('address').value.trim(),
     regularPrice: parseFloat(document.getElementById('regularPrice').value),
-    discountPrice: parseFloat(document.getElementById('discountPrice').value) || 0,
-    bathrooms: parseInt(document.getElementById('bathrooms').value) || 0,
-    bedrooms: parseInt(document.getElementById('bedrooms').value) || 0,
+    discountPrice: parseFloat(document.getElementById('discountPrice').value)||0,
+    bathrooms: parseInt(document.getElementById('bathrooms').value)||0,
+    bedrooms: parseInt(document.getElementById('bedrooms').value)||0,
     furnished: document.getElementById('furnished').checked,
     parking: document.getElementById('parking').checked,
     type: document.getElementById('type').value,
     offer: document.getElementById('offer').checked,
-    imageUrls,   
-    userRef      
+    imageUrls, userRef
   };
 
   try {
-    let response;
-    if (id) {
-      // Update existing listing
-      response = await fetch(`http://localhost:5000/api/listing/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-    } else {
-      // Create new listing
-      response = await fetch(`http://localhost:5000/api/listing/create`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-    }
+    const url = id ? `http://localhost:5000/api/listing/update/${id}` : `http://localhost:5000/api/listing/create`;
+    const method = id ? "PUT" : "POST";
+    const res = await fetch(url, {
+      method,
+      headers: {
+        "Content-Type":"application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(data)
+    });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to save listing');
-    }
-
+    if(!res.ok) throw new Error("Unauthorized or failed to save listing");
     closeModal();
-    await fetchProperties(); // Refresh table
-    alert(id ? 'Listing updated successfully!' : 'Listing created successfully!');
-  } catch (error) {
-    alert('Error: ' + error.message);
+    await fetchProperties();
+    alert(id?"Updated successfully":"Created successfully");
+  } catch(err) {
+    alert(err.message);
+    if(err.message.includes("Unauthorized")) window.location.href="./admin-login.html";
   }
 });
 
-    // Handle Update and Delete buttons with event delegation
-    tableBody.addEventListener('click', async (e) => {
-      const row = e.target.closest('tr');
-      if (!row) return;
+// Update / Delete buttons
+tableBody.addEventListener('click', async e=>{
+  const row = e.target.closest('tr'); if(!row) return;
+  const id = row.dataset.id;
 
-      const id = row.getAttribute('data-id');
+  if(e.target.classList.contains('update-btn')) {
+    try {
+      const res = await fetch(`http://localhost:5000/api/listing/get/${id}`, {
+        headers:{ "Authorization":`Bearer ${token}`,
+              "Content-Type": "application/json"
+         }
+      });
+      if(!res.ok) throw new Error("Unauthorized");
+      const listing = await res.json();
+      Object.keys(listing).forEach(k=>{
+        if(document.getElementById(k)) document.getElementById(k).value = listing[k];
+      });
+      openModal();
+    } catch(err){ alert(err.message); }
+  }
 
-      if (e.target.classList.contains('update-btn')) {
-        // Fetch listing details and fill form for update + open modal
-        try {
-          const res = await fetch(`http://localhost:5000/api/listing/update${id}`);
-          if (!res.ok) throw new Error('Failed to fetch listing');
-          const listing = await res.json();
-          fillForm(listing);
-          openModal();
-        } catch (error) {
-          alert('Failed to load listing for update: ' + error.message);
-        }
-      }
+  if(e.target.classList.contains('delete-btn')) {
+    if(!confirm("Delete this listing?")) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/listing/delete/${id}`, {
+        method:"DELETE",
+        headers:{ "Authorization":`Bearer ${token}`,
+              "Content-Type": "application/json"
 
-      if (e.target.classList.contains('delete-btn')) {
-        if (!confirm('Are you sure you want to delete this listing?')) return;
+         }
+      });
+      if(!res.ok) throw new Error("Unauthorized");
+      await fetchProperties();
+      alert("Deleted successfully");
+    } catch(err){ alert(err.message); }
+  }
+});
 
-        try {
-          const res = await fetch(`http://localhost:5000/api/listing/${id}`, {
-            method: 'DELETE',
-          });
+// Logout
+function logout(){
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.href="./admin-login.html";
+}
 
-          if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.message || 'Failed to delete listing');
-          }
+document.addEventListener("DOMContentLoaded", fetchProperties);
+const searchInput = document.getElementById('search-input');
 
-          await fetchProperties(); // Refresh table
-          alert('Listing deleted successfully!');
-        } catch (error) {
-          alert('Error deleting listing: ' + error.message);
-        }
-      }
-    });
+searchInput.addEventListener('input', () => {
+  const filter = searchInput.value.toLowerCase();
+  const rows = tableBody.querySelectorAll('tr');
 
-    // Dropdown and logout (same as before)
-    function toggleDropdown() {
-      const dropdown = document.getElementById("profile-dropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  rows.forEach(row => {
+    const name = row.children[0].textContent.toLowerCase();
+    const description = row.children[1].textContent.toLowerCase();
+    const address = row.children[2].textContent.toLowerCase();
+
+    if (name.includes(filter) || description.includes(filter) || address.includes(filter)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
     }
+  });
+});
 
-    function logout() {
-      alert("Logging out...");
-      localStorage.removeItem("user");
-      window.location.href = "login.html";
-    }
+</script>
 
-    window.addEventListener("click", function(e) {
-      if (!e.target.closest(".admin-user")) {
-        document.getElementById("profile-dropdown").style.display = "none";
-      }
-    });
 
-    // Load listings initially
-    document.addEventListener("DOMContentLoaded", fetchProperties);
-  </script>
+
 </body>
 </html>

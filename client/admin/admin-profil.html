@@ -4,77 +4,51 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Profile | Sterling Estates</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f1f5f9;
-      color: #333;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+    body { background: #f5f6fa; color: #333; display: flex; min-height: 100vh; }
 
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* Sidebar */
-    .sidebar {
-      background-color: #1e3a8a;
+    /* Layout */
+    .admin-container { display: flex; width: 100%; }
+    aside.sidebar {
       width: 220px;
-      padding: 30px 20px;
+      background: #2c3e50;
+      color: #fff;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding: 20px;
     }
-    .sidebar h2 {
+    aside.sidebar h2 { font-size: 1.6rem; margin-bottom: 20px; }
+    aside.sidebar ul { list-style: none; padding: 0; }
+    aside.sidebar ul li { margin: 12px 0; }
+    aside.sidebar ul li a {
       color: #fff;
-      font-size: 1.5rem;
-      margin-bottom: 30px;
-    }
-    .sidebar nav a {
-      display: block;
-      margin-bottom: 15px;
-      color: #cbd5e0;
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 0;
+      transition: 0.2s;
     }
-    .sidebar nav a:hover,
-    .sidebar nav a.active {
-      color: #facc15;
+    aside.sidebar ul li a:hover, aside.sidebar ul li.active a {
+      color: #f1c40f;
       font-weight: 600;
     }
-    .sidebar .copyright {
-      font-size: 0.8rem;
-      color: #94a3b8;
-      text-align: center;
-      margin-top: 40px;
-    }
+    aside.sidebar p { font-size: 13px; margin-top: 50px; color: #bbb; }
 
-    /* Main content */
-    .main {
+    main.main-panel {
       flex: 1;
-      padding: 30px 40px;
+      padding: 25px 30px;
       background: #f8fafc;
       overflow-y: auto;
     }
-    .main-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    .main-header h1 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin: 0;
-    }
+    .main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+    .main-header h1 { font-size: 1.8rem; font-weight: 600; color: #2c3e50; }
     .admin-btn {
-      background: #facc15;
+      background: #f1c40f;
       border: none;
       padding: 10px 20px;
       font-weight: 600;
@@ -85,103 +59,62 @@
       gap: 8px;
     }
 
-    /* Profile Layout */
-    .profile-content {
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
+    /* Profile Section */
+    .profile-content { display: flex; gap: 25px; flex-wrap: wrap; }
     .profile-card, .activity-card {
       background: #fff;
-      border-radius: 12px;
+      border-radius: 10px;
       padding: 25px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
       flex: 1;
       min-width: 300px;
     }
+    .profile-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+    .profile-header img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+    .profile-header h2 { font-size: 1.4rem; color: #2c3e50; margin-bottom: 3px; }
+    .profile-header p { font-size: 0.9rem; color: #64748b; }
 
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-    .profile-header img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .profile-header h2 {
-      margin: 0;
-      font-size: 1.4rem;
-    }
+    .profile-info p { margin: 6px 0; font-size: 0.95rem; }
+    .profile-info .label { font-weight: 600; color: #2c3e50; }
+    .profile-info .status { color: green; font-weight: bold; }
 
-    .profile-info p {
-      margin: 6px 0;
-    }
-    .label {
-      font-weight: 600;
-      color: #1e3a8a;
-    }
-    .status {
-      color: green;
-      font-weight: bold;
-    }
+    /* Activities */
+    .activity-card h3 { margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; color: #2c3e50; }
+    .activity-item { margin-bottom: 8px; font-size: 0.95rem; }
+    .activity-date { font-size: 0.85rem; color: #64748b; }
 
-    .activity-card h3 {
-      margin-top: 0;
-      margin-bottom: 15px;
-      font-size: 1.2rem;
-      color: #1e3a8a;
-    }
-    .activity-item {
-      margin-bottom: 12px;
-      font-size: 0.95rem;
-    }
-    .activity-date {
-      font-size: 0.85rem;
-      color: #64748b;
-    }
+    hr { border: none; border-top: 1px solid #e5e7eb; margin: 20px 0; }
 
+    /* Responsive */
     @media (max-width: 768px) {
-      .layout {
-        flex-direction: column;
-      }
-      .sidebar {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-      }
-      .main {
-        padding: 20px;
-      }
-      .profile-content {
-        flex-direction: column;
-      }
+      .admin-container { flex-direction: column; }
+      aside.sidebar { width: 100%; flex-direction: row; justify-content: space-around; align-items: center; padding: 15px 10px; }
+      main.main-panel { padding: 20px; }
+      .profile-content { flex-direction: column; }
     }
   </style>
 </head>
 <body>
-  <div class="layout">
+  <div class="admin-container">
     <!-- Sidebar -->
     <aside class="sidebar">
       <div>
-        <h2>MC Admin</h2>
-        <nav>
-          <a href="dashboard.html">Dashboard</a>
-          <a href="appraisals.html">Appraisals</a>
-          <a href="#">Users</a>
-          <a href="#">Properties</a>
-          <a href="#">Statistics</a>
-        </nav>
+        <h2>Sterling Estates</h2>
+        <ul>
+          <li class="active"><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+          <li><a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a></li>
+          <li><a href="users.html"><i class="fas fa-users"></i> Users</a></li>
+          <li><a href="admin-agent.html"><i class="fas fa-user-tie"></i> Agent</a></li>
+          <li><a href="properties.html"><i class="fas fa-building"></i> Properties</a></li>
+          <li><a href="#"><i class="fas fa-chart-bar"></i> Statistics</a></li>
+          <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+        </ul>
       </div>
-      <p class="copyright">&copy; 2025 Sterling Estates</p>
+      <p>&copy; 2025 Sterling Estates</p>
     </aside>
 
     <!-- Main Content -->
-    <main class="main">
+    <main class="main-panel">
       <div class="main-header">
         <h1>Admin Profile</h1>
         <button class="admin-btn">👤 Admin</button>
@@ -204,31 +137,28 @@
             <p><span class="label">Status:</span> <span class="status">Active</span></p>
             <p><span class="label">Role:</span> Administrator</p>
             <p><span class="label">Email:</span> clay.jensen@email.com</p>
-            <p><span class="label">Contact:</span> (+61) (45687) (45687)</p>
+            <p><span class="label">Contact:</span> (+61) 45687 45687</p>
             <p><span class="label">Region:</span> Central US</p>
           </div>
         </div>
 
-        <!-- Activities -->
+        <!-- Recent Activities -->
         <div class="activity-card">
           <h3>Recent Activities</h3>
-          <div class="activity-item">✅ You added a role <i>'Sales Lead'</i></div>
-          <div class="activity-date">19/02/2023 10:40:55 AM</div>
+          <div class="activity-item">✅ Added role <i>'Sales Lead'</i></div>
+          <div class="activity-date">19/02/2023 10:40 AM</div>
 
-          <div class="activity-item">🔧 Assigned task <i>'API Integration'</i> to role <i>'Technical Lead - BE'</i></div>
-          <div class="activity-date">19/02/2023 09:40:55 AM</div>
+          <div class="activity-item">🔧 Assigned task <i>'API Integration'</i> to <i>'Technical Lead - BE'</i></div>
+          <div class="activity-date">19/02/2023 09:40 AM</div>
 
-          <div class="activity-item">🔧 Assigned task <i>'API Integration'</i> to role <i>'Technical Lead - BE'</i></div>
-          <div class="activity-date">19/02/2023 09:40:55 AM</div>
-
-          <hr style="margin: 20px 0;">
+          <hr>
 
           <h3>Team Activities</h3>
           <div class="activity-item">👤 Bryce Walker added role <i>'Worker - 2'</i></div>
-          <div class="activity-date">11/02/2023 10:40:55 AM</div>
+          <div class="activity-date">11/02/2023 10:40 AM</div>
 
-          <div class="activity-item">📌 Bryce Walker assigned task to role <i>'Worker - 1'</i></div>
-          <div class="activity-date">11/02/2023 10:40:55 AM</div>
+          <div class="activity-item">📌 Assigned task to <i>'Worker - 1'</i></div>
+          <div class="activity-date">11/02/2023 10:40 AM</div>
         </div>
       </div>
     </main>

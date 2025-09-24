@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Users | Admin Panel</title>
+  <title>Agents | Admin Panel</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -53,10 +53,9 @@
       </div>
       <p style="font-size: 13px;">&copy; 2025 Sterling Estates</p>
     </aside>
-
     <main class="main-panel">
       <header>
-        <h1>Manage Users</h1>
+        <h1>Manage Agents</h1>
         <div class="admin-user" onclick="toggleDropdown()">
           <div class="avatar">A</div>
           <div class="dropdown" id="profile-dropdown">
@@ -69,7 +68,7 @@
       <section class="content-section">
         <div class="search-box">
           <i class="fas fa-search"></i>
-          <input type="text" id="search-input" placeholder="Search user...">
+          <input type="text" id="search-input" placeholder="Search agent...">
         </div>
 
         <table>
@@ -82,15 +81,15 @@
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="users-table-body"></tbody>
+          <tbody id="agents-table-body"></tbody>
         </table>
       </section>
     </main>
   </div>
 
 <script>
-// Fetch all users from API and display in table
-async function fetchUsers() {
+// Fetch all agents from API and display in table
+async function fetchAgents() {
   try {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -106,35 +105,26 @@ async function fetchUsers() {
       }
     });
 
-    if (!res.ok) {
-      if (res.status === 401 || res.status === 403) {
-        alert("Access denied! Redirecting to login.");
-        localStorage.removeItem("token");
-        window.location.href = "/admin-login.html";
-        return;
-      }
-      throw new Error(`HTTP error! Status: ${res.status}`);
-    }
+    if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 
     let data = await res.json();
 
-    // Filter only regular users (role: 'user')
-    data = data.filter(user => user.role === "user");
+    // Filter only agents (role: 'agent')
+    data = data.filter(user => user.role === "agent");
 
-    const tableBody = document.getElementById("users-table-body");
+    const tableBody = document.getElementById("agents-table-body");
     tableBody.innerHTML = "";
 
-    // Populate table rows
-    data.forEach(user => {
+    data.forEach(agent => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${user.email}</td>
-        <td>${user.username || "-"}</td>
-        <td>${new Date(user.createdAt).toLocaleString()}</td>
-        <td><img src="${user.avatar || 'default.png'}" alt="avatar" width="40" height="40" class="avatar-img"></td>
+        <td>${agent.email}</td>
+        <td>${agent.username || "-"}</td>
+        <td>${new Date(agent.createdAt).toLocaleString()}</td>
+        <td><img src="${agent.avatar || 'default.png'}" alt="avatar" width="40" height="40" class="avatar-img"></td>
         <td>
-          <button class="toggle-btn ${user.isActive ? 'deactivate' : 'activate'}" data-id="${user._id}">
-            ${user.isActive ? 'Deactivate' : 'Activate'}
+          <button class="toggle-btn ${agent.isActive ? 'deactivate' : 'activate'}" data-id="${agent._id}">
+            ${agent.isActive ? 'Deactivate' : 'Activate'}
           </button>
         </td>
       `;
@@ -142,22 +132,21 @@ async function fetchUsers() {
     });
 
   } catch (err) {
-    console.error("Error fetching users:", err);
+    console.error("Error fetching agents:", err);
   }
 }
 
-// Activate / Deactivate button click handler
-document.getElementById("users-table-body").addEventListener("click", async (e) => {
+// Activate / Deactivate agent
+document.getElementById("agents-table-body").addEventListener("click", async (e) => {
   if (!e.target.classList.contains("toggle-btn")) return;
 
-  const userId = e.target.dataset.id;
+  const agentId = e.target.dataset.id;
   const btn = e.target;
   const token = localStorage.getItem("token");
-  const action = btn.textContent.toLowerCase(); // "activate" or "deactivate"
+  const action = btn.textContent.toLowerCase();
 
   try {
-    // Call the correct endpoint based on action
-    const url = `http://localhost:5000/api/user/${action}/${userId}`;
+    const url = `http://localhost:5000/api/user/${action}/${agentId}`;
     const res = await fetch(url, {
       method: "PUT",
       headers: {
@@ -166,12 +155,10 @@ document.getElementById("users-table-body").addEventListener("click", async (e) 
       }
     });
 
-    if (!res.ok) throw new Error(`Failed to ${action} user`);
+    if (!res.ok) throw new Error(`Failed to ${action} agent`);
 
-    const updatedUser = await res.json();
-
-    // Update button text and style
-    btn.textContent = updatedUser.isActive ? "Deactivate" : "Activate";
+    const updatedAgent = await res.json();
+    btn.textContent = updatedAgent.isActive ? "Deactivate" : "Activate";
     btn.classList.toggle("activate");
     btn.classList.toggle("deactivate");
 
@@ -180,36 +167,32 @@ document.getElementById("users-table-body").addEventListener("click", async (e) 
   }
 });
 
-// Live search by email or username
+// Live search for agents
 document.getElementById("search-input").addEventListener("input", () => {
   const filter = document.getElementById("search-input").value.toLowerCase();
-  const rows = document.querySelectorAll("#users-table-body tr");
+  const rows = document.querySelectorAll("#agents-table-body tr");
 
   rows.forEach(row => {
     const email = row.children[0].textContent.toLowerCase();
     const username = row.children[1].textContent.toLowerCase();
-    if (email.includes(filter) || username.includes(filter)) {
-      row.style.display = "";
-    } else {
-      row.style.display = "none";
-    }
+    row.style.display = email.includes(filter) || username.includes(filter) ? "" : "none";
   });
 });
 
-// Toggle dropdown menu for admin profile
+// Toggle dropdown menu
 function toggleDropdown() {
   const dropdown = document.getElementById("profile-dropdown");
   dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
 }
 
-// Logout function
+// Logout
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   window.location.href = "/admin-login.html";
 }
 
-// Close dropdown when clicking outside
+// Close dropdown on outside click
 window.addEventListener("click", function(e) {
   if (!e.target.closest(".admin-user")) {
     const dropdown = document.getElementById("profile-dropdown");
@@ -217,8 +200,8 @@ window.addEventListener("click", function(e) {
   }
 });
 
-// Initialize table on page load
-document.addEventListener("DOMContentLoaded", fetchUsers);
+// Load agents on page load
+document.addEventListener("DOMContentLoaded", fetchAgents);
 </script>
 
 </body>

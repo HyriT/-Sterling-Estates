@@ -39,20 +39,40 @@ export const updateUser = async (req, res, next) => {
     }
 };
 
+// Deactivate user
 export const deactivateUser = async (req, res, next) => {
-    try {
-        const user = await User.findByIdAndUpdate(
-            req.user.id,
-            { isActive: false },
-            { new: true }
-        );
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.params.id, // take the ID from params
+      { isActive: false },
+      { new: true }
+    );
 
-        res.clearCookie('access_token');
-        res.status(200).json({ message: 'Your account has been deactivated.' });
-    } catch (error) {
-        next(error);
-    }
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
 };
+
+// Activate user
+export const activateUser = async (req, res, next) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      { isActive: true },
+      { new: true }
+    );
+
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
 //Get Users Listings
 export const getUserListing = async (req, res, next) => {
     if (req.user.id === req.params.id) {
