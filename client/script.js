@@ -1,12 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Session Management
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (user) {
-    document.getElementById("login-nav")?.classList.add("hidden");
-    document.getElementById("profile-menu")?.classList.remove("hidden");
+
+  // Merr të dhënat e përdoruesit nga localStorage
+  const storedData = JSON.parse(localStorage.getItem("user"));
+  const user = storedData?.user;
+  const token = storedData?.token;
+
+  const profileMenu = document.getElementById("profile-menu");
+  const loginBtn = document.querySelector(".nav-btn"); 
+  const loginLink = document.getElementById("login-link"); 
+  const protectedLinks = document.querySelectorAll(".protected-link");
+
+  // Kontrolli i login për shfaqjen e protected links
+  if (user && token) {
+    profileMenu?.classList.remove("hidden");
+    loginBtn?.classList.add("hidden");
+    loginLink?.classList.add("hidden");
+    protectedLinks.forEach(link => link.classList.remove("hidden"));
+  } else {
+    profileMenu?.classList.add("hidden");
+    loginBtn?.classList.remove("hidden");
+    loginLink?.classList.remove("hidden");
+    protectedLinks.forEach(link => link.classList.add("hidden"));
   }
 
-  // Appraisal Form Submission
+  // Appraisal Form
   const appraisalForm = document.getElementById("appraisal-form");
   if (appraisalForm) {
     const showMessage = (msg, isError = false) => {
@@ -21,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
         font-weight: 500;
         box-shadow: 0 2px 6px rgba(0,0,0,0.2);
         max-width: 300px;
-        position: relative;
       `;
       appraisalForm.appendChild(msgBox);
       setTimeout(() => msgBox.remove(), 4000);
@@ -29,58 +45,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     appraisalForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+      const email = appraisalForm.querySelector('input[type="email"]').value.trim();
+      const mobile = appraisalForm.querySelector('input[name="mobile"]').value.trim();
+      const submitBtn = appraisalForm.querySelector('button[type="submit"]');
 
-      const emailInput = appraisalForm.querySelector('input[type="email"]');
-const mobileInput = appraisalForm.querySelector('input[name="mobile"]');
-const mobile = mobileInput.value.trim();    
-  const submitBtn = appraisalForm.querySelector('button[type="submit"]');
-
-      const email = emailInput.value.trim();
-
-      // Validation
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       const phoneRegex = /^\+?[\d\s-]{8,}$/;
 
-      if (!email || !mobile) {
-        showMessage("Please fill in all fields.", true);
-        return;
-      }
+      if (!email || !mobile) return showMessage("Please fill in all fields.", true);
+      if (!emailRegex.test(email)) return showMessage("Invalid email address.", true);
+      if (!phoneRegex.test(mobile)) return showMessage("Invalid mobile number.", true);
 
-      if (!emailRegex.test(email)) {
-        showMessage("Please enter a valid email address.", true);
-        return;
-      }
-
-      if (!phoneRegex.test(mobile)) {
-        showMessage("Please enter a valid mobile number.", true);
-        return;
-      }
-console.log("Email:", email);
-console.log("Mobile:", mobile);
-
-      // Show confirmation (optional)
-      showMessage(`Submitting your request...`);
-
-      // Disable button while sending
+      showMessage("Submitting your request...");
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
 
       try {
-        const response = await fetch("http://localhost:5000/api/new", {
+        const res = await fetch("http://localhost:5000/api/new", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, mobile }),
         });
 
-        if (response.ok) {
-          showMessage(" Appraisal request submitted!");
+        if (res.ok) {
+          showMessage("Appraisal request submitted!");
           appraisalForm.reset();
         } else {
-          const error = await response.json();
-          showMessage(` ${error.message || "Submission failed."}`, true);
+          const err = await res.json();
+          showMessage(err.message || "Submission failed.", true);
         }
       } catch (err) {
-        console.error("Submission error:", err);
+        console.error(err);
         showMessage("Network error. Please try again.", true);
       } finally {
         submitBtn.disabled = false;
@@ -89,104 +84,47 @@ console.log("Mobile:", mobile);
     });
   }
 
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  // Carousel i ekipit
   const carousel = document.getElementById("team-carousel");
   const leftArrow = document.querySelector(".left-arrow");
   const rightArrow = document.querySelector(".right-arrow");
 
   if (carousel && leftArrow && rightArrow) {
-    leftArrow.addEventListener("click", () => {
-      carousel.scrollBy({ left: -300, behavior: "smooth" });
-    });
+    leftArrow.addEventListener("click", () => carousel.scrollBy({ left: -300, behavior: "smooth" }));
+    rightArrow.addEventListener("click", () => carousel.scrollBy({ left: 300, behavior: "smooth" }));
 
-    rightArrow.addEventListener("click", () => {
-      carousel.scrollBy({ left: 300, behavior: "smooth" });
-    });
-
-    function updateArrowVisibility() {
-      leftArrow.style.display = carousel.scrollLeft <= 0 ? 'none' : 'block';
-      rightArrow.style.display = (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) ? 'none' : 'block';
+    function updateArrows() {
+      leftArrow.style.display = carousel.scrollLeft <= 0 ? "none" : "block";
+      rightArrow.style.display = (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 1) ? "none" : "block";
     }
 
-    carousel.addEventListener('scroll', updateArrowVisibility);
-    window.addEventListener('resize', updateArrowVisibility);
-    updateArrowVisibility();
+    carousel.addEventListener("scroll", updateArrows);
+    window.addEventListener("resize", updateArrows);
+    updateArrows();
   }
 
-  // Controll login
-  const user = JSON.parse(localStorage.getItem("user"));
-  const profileMenu = document.getElementById("profile-menu");
-  const loginBtn = document.querySelector(".nav-btn");
-
-  if (profileMenu && loginBtn) {
-    if (user && user.email) {
-      profileMenu.classList.remove("hidden");
-      loginBtn.classList.add("hidden");
-    } else {
-      profileMenu.classList.add("hidden");
-      loginBtn.classList.remove("hidden");
-    }
-  }
-});
-
-function toggleDropdown() {
-  const dropdown = document.getElementById("dropdown-menu");
-  if (dropdown) dropdown.classList.toggle("hidden");
-}
-
-// Logout
-function logout() {
-  localStorage.removeItem("user");
-  window.location.reload();
-}
-
-window.toggleDropdown = toggleDropdown;
-window.logout = logout;
-
-document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  const profileMenu = document.getElementById("profile-menu");
-  const loginBtn = document.querySelector(".nav-btn");
-  const protectedLinks = document.querySelectorAll(".protected-link");
-
-  if (profileMenu && loginBtn) {
-    if (user && user.email) {
-      profileMenu.classList.remove("hidden");
-      loginBtn.classList.add("hidden");
-      protectedLinks.forEach(link => link.classList.remove("hidden"));
-    } else {
-      profileMenu.classList.add("hidden");
-      loginBtn.classList.remove("hidden");
-      protectedLinks.forEach(link => link.classList.add("hidden"));
-    }
-  }
-});
-
-window.addEventListener("scroll", function() {
-  const header = document.querySelector("header");
-  if (window.scrollY > 50) { 
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
-});
-document.addEventListener("DOMContentLoaded", () => {
+  // Animacion i property rows
   const propertyRows = document.querySelectorAll(".property-row");
-
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("show");
-        observer.unobserve(entry.target); 
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 }); 
+  }, { threshold: 0.1 });
 
-  propertyRows.forEach(row => {
-    observer.observe(row);
-  });
+  propertyRows.forEach(row => observer.observe(row));
 });
 
+// Dropdown toggle
+function toggleDropdown() {
+  const dropdown = document.getElementById("dropdown-menu");
+  dropdown?.classList.toggle("hidden");
+}
+
+// Logout funksioni
+function logout() {
+  localStorage.removeItem("user");
+  window.location.href = "auth.html"; 
+}

@@ -1,7 +1,8 @@
-
+document.addEventListener("DOMContentLoaded", () => {
   const BASE_URL = "http://localhost:5000";
   const LOGIN_URL = `${BASE_URL}/api/auth/signin`;
   const REGISTER_URL = `${BASE_URL}/api/auth/signup`;
+  const FORGOT_URL = `${BASE_URL}/api/auth/forgot-password`;
 
   const loginForm = document.getElementById("login-form");
   const registerForm = document.getElementById("register-form");
@@ -10,6 +11,14 @@
   const loginContainer = document.getElementById("login-container");
   const registerContainer = document.getElementById("register-container");
 
+  const forgotLink = document.getElementById("forgot-password");
+  const forgotModal = document.getElementById("forgot-modal");
+  const forgotClose = document.getElementById("forgot-close");
+  const forgotSubmit = document.getElementById("forgot-submit");
+  const forgotEmail = document.getElementById("forgot-email");
+  const forgotError = document.getElementById("forgot-error");
+
+  // Toggle forms
   showRegister.addEventListener("click", (e) => {
     e.preventDefault();
     loginContainer.classList.add("hidden");
@@ -39,6 +48,7 @@
     }
   }
 
+  // Login
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     clearErrorMessages();
@@ -62,14 +72,14 @@
 
       if (!res.ok) throw new Error(data.message || "Login failed");
 
-
-      localStorage.setItem("user", JSON.stringify(data.user || {}));
+localStorage.setItem("user", JSON.stringify({ token: data.token, user: data.user }));
       window.location.href = "home.html";
     } catch (err) {
       showError(loginForm, err.message);
     }
   });
 
+  // Register
   registerForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     clearErrorMessages();
@@ -104,62 +114,44 @@
       showError(registerForm, err.message);
     }
   });
-//   fetch('/api/auth/google', {
-//   method: 'POST',
-//   headers: { 'Content-Type': 'application/json' },
-//   body: JSON.stringify({
-//     email: googleUserEmail,
-//     name: googleUserName,
-//     photo: googleUserPhotoURL,
-//   }),
-//   credentials: 'include' 
-// });
-const FORGOT_URL = `${BASE_URL}/api/auth/forgot-password`;
 
-const forgotLink = document.getElementById("forgot-password");
-const forgotModal = document.getElementById("forgot-modal");
-const forgotClose = document.getElementById("forgot-close");
-const forgotSubmit = document.getElementById("forgot-submit");
-const forgotEmail = document.getElementById("forgot-email");
-const forgotError = document.getElementById("forgot-error");
+  // Forgot password modal
+  forgotLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    forgotModal.classList.remove("hidden");
+    forgotError.style.display = "none";
+    forgotEmail.value = "";
+  });
 
-forgotLink.addEventListener("click", (e) => {
-  e.preventDefault();
-  forgotModal.classList.remove("hidden");
-  forgotError.style.display = "none";
-  forgotEmail.value = "";
-});
-
-forgotClose.addEventListener("click", () => {
-  forgotModal.classList.add("hidden");
-});
-
-forgotSubmit.addEventListener("click", async () => {
-  const email = forgotEmail.value.trim();
-
-  if (!email) {
-    forgotError.textContent = "Please enter your email";
-    forgotError.style.display = "block";
-    return;
-  }
-
-  try {
-    const res = await fetch(FORGOT_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) throw new Error(data.message || "Failed to send reset link");
-
-    alert(" Reset password link has been sent to your email.");
+  forgotClose.addEventListener("click", () => {
     forgotModal.classList.add("hidden");
-  } catch (err) {
-    forgotError.textContent = err.message;
-    forgotError.style.display = "block";
-  }
+  });
+
+  forgotSubmit.addEventListener("click", async () => {
+    const email = forgotEmail.value.trim();
+
+    if (!email) {
+      forgotError.textContent = "Please enter your email";
+      forgotError.style.display = "block";
+      return;
+    }
+
+    try {
+      const res = await fetch(FORGOT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.message || "Failed to send reset link");
+
+      alert("Reset password link has been sent to your email.");
+      forgotModal.classList.add("hidden");
+    } catch (err) {
+      forgotError.textContent = err.message;
+      forgotError.style.display = "block";
+    }
+  });
 });
-
-

@@ -154,54 +154,55 @@ export const getAllListings= async (req, res, next) => {
     next(error);
   }
 };
-export const getProperties = async (req, res, next) => {
+export const filterListings = async (req, res) => {
   try {
+    // Merr filterat nga query params
+    const {
+      minPrice,
+      maxPrice,
+      bedrooms,
+      bathrooms,
+      location,
+      type,       // sale ose rent
+    } = req.query;
 
-    const { location, type,bathroom,bedroom, maxPrice, sort = 'createdAt', order = 'desc' } = req.query;
-    console.log("Query params:", { location, type,bathroom,bedroom, maxPrice, sort, order }); 
+    // Ndërto query objekt
     const query = {};
 
+    if (minPrice) query.regularPrice = { $gte: Number(minPrice) };
+    
+    if (maxPrice) {
+      // maxPrice nuk mund te jete me i madh se regularPrice
+      query.regularPrice = query.regularPrice || {};
+      query.regularPrice.$lte = Number(maxPrice);
+    }
+
+    if (bedrooms) {
+      if (bedrooms === '4+') query.bedrooms = { $gte: 4 };
+      else query.bedrooms = Number(bedrooms);
+    }
+
+    if (bathrooms) {
+      if (bathrooms === '3+') query.bathrooms = { $gte: 3 };
+      else query.bathrooms = Number(bathrooms);
+    }
+
     if (location) {
+      // Kërkon tek address me regex case-insensitive
       query.address = { $regex: location, $options: 'i' };
-      console.log("Filtering by location:", query.address);
-    }
-     if (type && type !== 'all') {
-      query.type = type;
-      console.log("Filtering by type:", query.type);
     }
 
-    if (bathroom) {
-      query.bathroom = Number(bathroom);
-      console.log("Filtering by type:", query.bathroom);
-    }
-     if (bedroom) {
-      query.bedroom = Number(bedroom);
-      console.log("Filtering by type:", query.bedroom);
-    }
+    if (type) query.type = type;  // sale ose rent
 
-     if (minPrice || maxPrice) {
-      query.regularPrice = {};
-      if (minPrice) query.regularPrice.$gte = Number(minPrice);
-      if (maxPrice) query.regularPrice.$lte = Number(maxPrice);
-      console.log("Filtering price ", minPrice,maxPrice);
-    }
-
-    console.log("MongoDB query object:", query);
-
-    const listings = await Listing.find(query)
-      .sort({ [sort]: order === 'asc' ? 1 : -1 })
-      .lean();
-
-    console.log("Listings found:", listings.length); 
-    if (listings.length > 0) {
-      console.log("First listing:", listings[0]); 
-    }
+    const listings = await Listing.find(query).sort({ regularPrice: 1 }); // mund te sortosh sipas dëshirës
 
     res.status(200).json(listings);
   } catch (error) {
-    console.error("Error in getListingsFiltered:", error);
-    next(error);
+    console.error('Filter Listings Error:', error);
+    res.status(500).json({ message: 'Server Error' });
   }
 };
+
+
 
 

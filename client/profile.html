@@ -17,31 +17,29 @@
     </div>
   </div>
 
-  <script>
-    async function loadProfile() {
-      try {
-        const token = localStorage.getItem('token'); // merr tokenin e ruajtur pas login
-        if (!token) return window.location.href = '/login.html'; // nëse nuk ka token, ridrejto te login
+ <script>
+async function loadProfile() {
+  try {
+    const userData = JSON.parse(localStorage.getItem('user')); // merr objektin { token, user }
+    if (!userData || !userData.token) return window.location.href = '/login.html';
 
-        const res = await fetch('http://localhost:3000/api/user/profile', {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        });
-        if (!res.ok) throw new Error('Failed to fetch profile');
+    const token = userData.token;
+    const user = userData.user;
 
-        const user = await res.json();
-        document.getElementById('name').textContent = user.name;
-        document.getElementById('email').textContent = user.email;
-        document.getElementById('phone').textContent = user.phone || '-';
-        document.getElementById('address').textContent = user.address || '-';
-      } catch (err) {
-        console.error(err);
-        alert('Could not load profile');
-      }
-    }
+    // Plotëso fushat e profilit
+    document.getElementById('name').textContent = user.name;
+    document.getElementById('email').textContent = user.email;
+    document.getElementById('phone').textContent = user.phone || '-';
+    document.getElementById('address').textContent = user.address || '-';
 
-    loadProfile();
-  </script>
+  } catch (err) {
+    console.error(err);
+    alert('Could not load profile');
+  }
+}
+
+loadProfile();
+</script>
+
 </body>
 </html>

@@ -1,235 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login / Register - MC Real Estate</title>
-    <link rel="stylesheet" href="style.css">
-  <link  
-rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <style>
-  
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login / Register - MC Real Estate</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
 /* AUTH Section */
-.auth-section {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
+body { margin:0; font-family: 'Poppins', sans-serif; }
+.auth-section { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 60px 20px; }
+.auth-container { background-color: #486973; padding: 45px 35px; max-width: 420px; width: 100%; border-radius: 12px; box-shadow: 0 15px 30px rgb(255, 255, 255); margin-top: 100px; }
+.auth-container h2 { font-size: 30px; font-weight: 700; margin-bottom: 28px; color: #ffffff; text-align: center; }
+.form-group { margin-bottom: 22px; text-align: left; }
+.form-group label { display: block; margin-bottom: 7px; font-weight: 600; font-size: 15px; color: #ffffff; }
+.form-group input { width: 100%; padding: 12px 14px; border: 1.8px solid #cbd5db; border-radius: 7px; font-size: 16px; transition: border-color 0.3s ease; }
+.form-group input:focus { border-color: #16404D; outline: none; }
+.auth-container button { width: 100%; padding: 14px; background-color: #ffffff; border: none; border-radius: 8px; color: #0f2e39; font-weight: 700; font-size: 18px; cursor: pointer; transition: background-color 0.3s ease; }
+.auth-container button:hover { background-color: #01ffb3; }
+.auth-link { margin-top: 18px; font-size: 15px; color: #fdfdfd; margin-left:40px; }
+.auth-link a { color: #01ffb3; font-weight: 700; text-decoration: none; cursor: pointer; transition: color 0.3s ease; }
+.auth-link a:hover { color: #fff9ee; text-decoration: underline; }
+.hidden { display: none; }
+.error-msg { color: #e57373; font-size: 0.9em; margin-bottom: 14px; text-align: left; font-weight: 600; }
+.social-login { margin: 20px 0 25px; display: flex; justify-content: center; gap: 25px; }
+.social-login a { display: inline-flex; align-items: center; justify-content: center; width: 37px; height:37px; border-radius: 50%; color: white; font-size: 22px; transition: background-color 0.3s ease; text-decoration: none; }
+#forgot-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; z-index: 2000; display: flex; }
+#forgot-modal .modal-content { background: #fff; padding: 30px; border-radius: 10px; width: 380px; position: relative; }
+#forgot-modal .modal-content h3 { margin-bottom: 20px; font-size: 22px; text-align:center; }
+#forgot-modal .modal-content .form-group label { font-weight:600; color:#333; }
+#forgot-modal .modal-content .form-group input { width:100%; padding:10px; margin-top:8px; border:1px solid #ccc; border-radius:6px; }
+#forgot-modal .modal-content button { margin-top:10px; width:100%; padding:12px; border:none; border-radius:6px; cursor:pointer; }
+#forgot-submit { background:#486973; color:#fff; }
+#forgot-close { background:#ccc; color:#333; }
+#forgot-modal {
+  display: none; /* <-- Modal fshihet gjithmonë fillimisht */
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
   align-items: center;
-  padding: 60px 20px;
+  justify-content: center;
+  z-index: 2000;
 }
 
-.auth-container {
-  background-color: #486973;
-  padding: 45px 35px;
-  max-width: 420px;
-  width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 15px 30px rgb(255, 255, 255);
-  margin-top: 100px;
-}
-.auth-container h2 {
-  font-size: 30px;
-  font-weight: 700;
-  margin-bottom: 28px;
-  color: #ffffff;
-  text-align: center;
+#forgot-modal.show {
+  display: flex; /* <-- Modal shfaqet vetëm kur klikohet */
 }
 
-.form-group {
-  margin-bottom: 22px;
-  text-align: left;
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 380px;
+  position: relative;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 7px;
-  font-weight: 600;
-  font-size: 15px;
-  color: #ffffff;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1.8px solid #cbd5db;
-  border-radius: 7px;
-  font-size: 16px;
-  transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-  border-color: #16404D;
-  outline: none;
-}
-
-.auth-container button {
-  width: 100%;
-  padding: 14px;
-  background-color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  color: #0f2e39;
-  font-weight: 700;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.auth-container button:hover {
-  background-color: #01ffb3;
-}
-
-.auth-link {
-  margin-top: 18px;
-  font-size: 15px;
-  color: #fdfdfd;
-  margin-left:40px;
-}
-
-.auth-link a {
-  color: #01ffb3;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.auth-link a:hover {
-  color: #fff9ee;
-  text-decoration: underline;
-}
-
-.hidden {
-  display: none;
-}
-
-.error-msg {
-  color: #e57373;
-  font-size: 0.9em;
-  margin-bottom: 14px;
-  text-align: left;
-  font-weight: 600;
-}
-
-  .social-login {
-    margin: 20px 0 25px;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-  }
-
-  .social-login a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 37px;
-    height:37px;
-    border-radius: 50%;
-    color: white;
-    font-size: 22px;
-    transition: background-color 0.3s ease;
-    text-decoration: none;
-  }
-
-
-
-  </style>
+</style>
 </head>
 <body>
-  <header id="main-header">
-      <div style="font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2rem; color: #ffffff;">
-  <span style="color: #f1f1f1;"><i class="fas fa-home"></i> </i> Sterling Estates</span>
-</div>    
-    <nav>
-      <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="team.html">Agent</a></li>
-      </ul>
-    </nav>
-  </header>
+<header id="main-header">
+  <div style="font-weight: 700; font-size: 2rem; color: #ffffff;">
+    <span style="color: #f1f1f1;"><i class="fas fa-home"></i> Sterling Estates</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="team.html">Agent</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <section class="auth-section">
-    <!-- Login -->
-    <div class="auth-container" id="login-container">
-      <h2>Welcome Back</h2>
-      <form id="login-form">
-        <p class="error-msg" style="display:none;"></p>
-        <div class="form-group">
-          <label for="login-email">Email</label>
-          <input type="email" id="login-email" placeholder="Enter your email" required />
-        </div>
-        <div class="form-group">
-          <label for="login-password">Password</label>
-          <input type="password" id="login-password" placeholder="Enter your password" required />
-        </div>
-           <!-- Forgot password link -->
-    <p class="auth-link" style="margin-left:0; text-align:right;">
-      <a href="#" id="forgot-password">Forgot Password?</a>
-    </p>
-    <!-- Forgot Password Modal -->
-<div id="forgot-modal" class="hidden" 
-     style="position: fixed; inset: 0; background: rgba(0,0,0,0.6); 
-            display: flex; align-items: center; justify-content: center; z-index: 1000;">
-  <div style="background: #fff; padding: 30px; border-radius: 10px; width: 380px; position: relative;">
-    <h3 style="margin-bottom: 20px; font-size: 22px; text-align:center;">Reset Password</h3>
-    <p id="forgot-error" style="color:red; font-size:14px; display:none; margin-bottom:10px;"></p>
+<section class="auth-section">
+  <!-- Login -->
+  <div class="auth-container" id="login-container">
+    <h2>Welcome Back</h2>
+    <form id="login-form">
+      <p class="error-msg hidden"></p>
+      <div class="form-group">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Enter your password" required />
+      </div>
+      <p class="auth-link" style="margin-left:0; text-align:right;">
+        <a href="#" id="forgot-password">Forgot Password?</a>
+      </p>
+
+      <!-- Social login -->
+      <div class="social-login">
+        <a href="/auth/google" class="google"><i class="fab fa-google"></i></a>
+        <a href="https://www.facebook.com/login.php" class="facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/accounts/login/" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+
+      <button type="submit">Login</button>
+      <p class="auth-link">Don't have an account? <a href="#" id="show-register">Register here</a></p>
+    </form>
+  </div>
+
+  <!-- Register -->
+  <div class="auth-container hidden" id="register-container">
+    <h2>Register</h2>
+    <form id="register-form">
+      <p class="error-msg hidden"></p>
+      <div class="form-group">
+        <label for="register-username">Username</label>
+        <input type="text" id="register-username" placeholder="Enter your username" required />
+      </div>
+      <div class="form-group">
+        <label for="register-email">Email</label>
+        <input type="email" id="register-email" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label for="register-password">Password</label>
+        <input type="password" id="register-password" placeholder="Create a password" required />
+      </div>
+      <div class="form-group">
+        <label for="register-password-confirm">Confirm Password</label>
+        <input type="password" id="register-password-confirm" placeholder="Confirm your password" required />
+      </div>
+      <button type="submit">Register</button>
+      <p class="auth-link">Already have an account? <a href="#" id="show-login">Login here</a></p>
+    </form>
+  </div>
+
+</section>
+<!-- Forgot Password Modal -->
+<div id="forgot-modal" class="hidden">
+  <div class="modal-content">
+    <h3>Reset Password</h3>
+    <p id="forgot-error" style="color:red; font-size:14px; display:none;"></p>
     <div class="form-group">
-      <label for="forgot-email" style="font-weight:600;">Enter your email</label>
-      <input type="email" id="forgot-email" placeholder="Enter your email" required />
+      <label for="forgot-email">Enter your email</label>
+      <input type="email" id="forgot-email" placeholder="Enter your email" />
     </div>
-    <button id="forgot-submit" style="margin-top:15px; width:100%; padding:12px; border:none; background:#486973; color:#fff; border-radius:6px; cursor:pointer;">Send Reset Link</button>
-    <button id="forgot-close" style="margin-top:10px; width:100%; padding:10px; border:none; background:#ccc; color:#333; border-radius:6px; cursor:pointer;">Cancel</button>
+    <button type="button" id="forgot-submit">Send Reset Link</button>
+    <button type="button" id="forgot-close">Cancel</button>
   </div>
 </div>
-
-
-        <!-- Social login icons -->
-        <div class="social-login">
-          <a href="/auth/google" class="google" title="Login with Google" aria-label="Login with Google">
-            <i class="fab fa-google"></i>
-          </a>
-          <a href="https://www.facebook.com/login.php" class="facebook" title="Login with Facebook" aria-label="Login with Facebook" target="_blank" rel="noopener">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/accounts/login/" class="instagram" title="Login with Instagram" aria-label="Login with Instagram" target="_blank" rel="noopener">
-            <i class="fab fa-instagram"></i>
-          </a>
-        </div>
-
-        <button type="submit">Login</button>
-        <p class="auth-link">Don't have an account? <a href="#" id="show-register">Register here</a></p>
-      </form>
-    </div>
-    </div>
-
-    <!-- Register -->
-    <div class="auth-container hidden" id="register-container">
-      <h2>Register</h2>
-      <form id="register-form">
-        <p class="error-msg" style="display:none;"></p>
-        <div class="form-group">
-          <label for="register-username">Username</label>
-          <input type="text" id="register-username" placeholder="Enter your  username" required />
-        </div>
-        <div class="form-group">
-          <label for="register-email">Email</label>
-          <input type="email" id="register-email" placeholder="Enter your email" required />
-        </div>
-        <div class="form-group">
-          <label for="register-password">Password</label>
-          <input type="password" id="register-password" placeholder="Create a password" required />
-        </div>
-        <div class="form-group">
-          <label for="register-password-confirm">Confirm Password</label>
-          <input type="password" id="register-password-confirm" placeholder="Confirm your password" required />
-        </div>
-        <button type="submit">Register</button>
-        <p class="auth-link">Already have an account? <a href="#" id="show-login">Login here</a></p>
-      </form>
-    </div>
-  </section>
 <script src="auth.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </body>
 </html>

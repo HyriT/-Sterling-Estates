@@ -267,22 +267,28 @@
   <span style="color: #f1f1f1;"><i class="fas fa-home"></i> </i> Sterling Estates</span>
 </div>
         <nav>
-      <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="team.html" class="active">Agents</a></li>
-        <li class="protected-link"><a href="listing.html">Properties</a></li>
-        <li class="protected-link"><a href="blog.html">Blog</a></li>
-        <li class="protected-link"><a href="contact.html">Contact Us</a></li>
-        <li class="nav-btn"><a href="login.html">Log In</a></li>
-        <li id="profile-menu" class="profile hidden">
-          <div class="avatar">👤</div>
-          <ul class="dropdown hidden">
-            <li><a href="profile.html">My Profile</a></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </li>
+  <ul>
+    <li><a href="home.html">Home</a></li>
+    <li><a href="team.html">Agent</a></li>
+    
+    <li class="protected-link"><a href="listing.html">Properties</a></li>
+    <li class="protected-link"><a href="blog.html">Blog</a></li>
+    <li class="protected-link"><a href="contact.html">Contact Us</a></li>
+
+
+<li id="login-link"><a href="auth.html"> Sign in</a></li>
+    <li class="nav-btn"><a href="auth.html">Sign up</a></li>
+
+    <li id="profile-menu" class="profile hidden">
+      <div class="avatar" onclick="toggleDropdown()">👤</div>
+      <ul class="dropdown hidden" id="dropdown-menu">
+        <li><a href="profile.html">My Profile</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
       </ul>
-    </nav>
+    </li>
+  </ul>
+</nav>
+
 
     </header>
   <section class="hero1">
@@ -377,7 +383,7 @@
       <h3>Quick Links</h3>
       <ul>
         <li><a href="home.html">Home</a></li>
-        <li><a href="aboutUs.html">About Us</a></li>
+        <li><a href="team.html">Agent</a></li>
         <li><a href="listing.html">Properties</a></li>
         <li><a href="contact.html">Contact Us</a></li>
       </ul>
@@ -388,7 +394,7 @@
       <h3>Contact Us</h3>
       <p>Email: info@serealestate.com</p>
       <p>Phone: (123) 456-7890</p>
-      <p>Address: 123 Real Estate Ave, Dream City</p>
+                <p>Address:Rruga Perlat Rexhepi,Tirane,Albania</p>
     </div>
 
     <!-- Social Media -->

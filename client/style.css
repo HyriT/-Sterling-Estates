@@ -23,12 +23,12 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px 80px;
-  position: absolute; /* qëndron sipër imazhit */
+  position: absolute; 
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: transparent; /* pa background */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -63,11 +63,23 @@ nav ul li a {
   font-size: 18px;
   font-weight: 400;
   transition: all 0.3s ease;
+    position: relative;
+
 }
 
-nav ul li a:hover {
-  color: #f9f0f0;
-  transform: translateY(-2px);
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 2px;
+  background: #f6d9bd;
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
 }
 
 /* Button in navbar */
@@ -407,6 +419,13 @@ nav ul li a:hover {
     font-size: 20px;
     margin-bottom: 15px;
     font-weight: 600;
+    color: #003366;
+  }
+    .footer-section h3:hover {
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #04294d;
   }
   
   .footer-section p, .footer-section ul li a {
@@ -430,6 +449,7 @@ nav ul li a:hover {
   
   .footer-section ul li a:hover {
     color: #209e8d;
+    font-size: 18px;
   }
   
   .footer-bottom {

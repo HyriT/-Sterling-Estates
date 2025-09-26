@@ -36,6 +36,11 @@ const userSchema = new mongoose.Schema(
     lastLogin: {
       type: Date,
     },
+      isVerify: { type: Boolean,default:false }, // koha e skadimit të OTP
+      otp: { type: String },
+      otpExpires: { type: Date },
+
+
   },
   {
     timestamps: true, 
