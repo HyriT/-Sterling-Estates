@@ -5,41 +5,351 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Profile - Real Estate</title>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+  <style>
+   body {
+  font-family: "Poppins", sans-serif;
+  background: #f4f6f9;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-container {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 900px;
+  margin: 60px auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 14px;
+  background: none;
+  border: none;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tabs button.active {
+  border-bottom: 3px solid #2193b0;
+  color: #2193b0;
+}
+
+.tabs button:hover {
+  color: #2193b0;
+}
+
+/* Tab content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Form styling */
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #2193b0;
+  box-shadow: 0 0 5px rgba(33,147,176,0.3);
+}
+
+button.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background: #2193b0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button.submit-btn:hover {
+  background: #6dd5ed;
+}
+
+/* Property cards (favorites/bookings) */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.property-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px;
+  background: #fafafa;
+  transition: 0.3s;
+}
+
+.property-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.property-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.property-card h4 {
+  margin: 5px 0;
+  color: #333;
+}
+
+.property-card p {
+  font-size: 14px;
+  color: #777;
+}
+
+  </style>
 </head>
 <body>
+
+  <header id="main-header">
+    <div style="font-weight: 700; font-size: 2rem; color: #ffffff;">
+      <span>Sterling Estates</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="listing.html">Properties</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li id="profile-menu" class="profile">
+          <div class="avatar">👤</div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
   <div class="profile-container">
     <h1>My Profile</h1>
-    <div id="profile-info">
-      <p><strong>Name:</strong> <span id="name"></span></p>
-      <p><strong>Email:</strong> <span id="email"></span></p>
-      <p><strong>Phone:</strong> <span id="phone"></span></p>
-      <p><strong>Address:</strong> <span id="address"></span></p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button onclick="showTab('info')">Personal Info</button>
+      <button onclick="showTab('favorites')">Favorites</button>
+      <button onclick="showTab('bookings')">Bookings</button>
+      <button onclick="showTab('security')">Security</button>
+    </div>
+
+    <!-- Tab 1: Personal Info -->
+    <div id="info" class="tab-content active">
+      <form id="profile-form">
+        <label>Username:</label>
+        <input type="text" id="name">
+        <label>Email:</label>
+        <input type="email" id="email" disabled>
+        <label>Phone:</label>
+        <input type="text" id="phone">
+        <label>Address:</label>
+        <input type="text" id="address">
+        <button type="submit" class="submit-btn">Update Profile</button>
+      </form>
+    </div>
+
+    <!-- Tab 2: Favorites -->
+    <div id="favorites" class="tab-content">
+      <h3>My Favorite Properties</h3>
+      <div id="favorites-list"></div>
+    </div>
+
+    <!-- Tab 3: Bookings -->
+    <div id="bookings" class="tab-content">
+      <h3>My Bookings</h3>
+      <div id="bookings-list"></div>
+    </div>
+
+    <!-- Tab 4: Security -->
+    <div id="security" class="tab-content">
+      <h3>Security Settings</h3>
+      <form id="password-form">
+        <label>New Password:</label>
+        <input type="password" id="new-password">
+        <button type="submit" class="submit-btn">Change Password</button>
+      </form>
+      <button onclick="deleteAccount()" class="submit-btn" style="background:#e74c3c; margin-top:20px;">Delete Account</button>
     </div>
   </div>
 
- <script>
-async function loadProfile() {
-  try {
-    const userData = JSON.parse(localStorage.getItem('user')); // merr objektin { token, user }
-    if (!userData || !userData.token) return window.location.href = '/login.html';
-
-    const token = userData.token;
-    const user = userData.user;
-
-    // Plotëso fushat e profilit
-    document.getElementById('name').textContent = user.name;
-    document.getElementById('email').textContent = user.email;
-    document.getElementById('phone').textContent = user.phone || '-';
-    document.getElementById('address').textContent = user.address || '-';
-
-  } catch (err) {
-    console.error(err);
-    alert('Could not load profile');
+<script>
+  const userData = JSON.parse(localStorage.getItem('user')); 
+  if (!userData || !userData.token) {
+    window.location.href = '/auth.html';
   }
-}
 
-loadProfile();
+  const token = userData.token;
+  const user = userData.user;
+  const userId = user._id;
+
+  // --- Tabs control ---
+  function showTab(tabId) {
+    document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+    document.getElementById(tabId).classList.add("active");
+  }
+
+  // --- Fill personal info ---
+  document.getElementById('name').value = user.username || '';
+  document.getElementById('email').value = user.email || '';
+  document.getElementById('phone').value = user.phone || '';
+  document.getElementById('address').value = user.address || '';
+
+  // --- Update profile ---
+  document.getElementById('profile-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    try {
+      const updatedData = {
+        username: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        address: document.getElementById('address').value.trim()
+      };
+
+      const res = await fetch(`http://localhost:5000/api/user/update/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedData)
+      });
+
+      if (!res.ok) throw new Error('Failed to update profile');
+      const result = await res.json();
+      localStorage.setItem('user', JSON.stringify({ token, user: result }));
+      alert('Profile updated successfully!');
+    } catch (err) {
+      console.error(err);
+      alert('Error updating profile');
+    }
+  });
+
+  // --- Favorites (static demo) ---
+  function loadFavorites() {
+    const favorites = [
+      { title: "Modern Apartment", price: 120000, location: "Downtown", image: "https://images.unsplash.com/photo-1572120360610-d971b9b1dfd3?auto=format&fit=crop&w=800&q=80", _id: 1 },
+      { title: "Cozy House", price: 200000, location: "Suburbs", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80", _id: 2 }
+    ];
+
+    const favContainer = document.getElementById('favorites-list');
+    favContainer.innerHTML = favorites.map(p => `
+      <div class="property-card">
+        <img src="${p.image}" alt="${p.title}">
+        <div>
+          <h4>${p.title}</h4>
+          <p>${p.price} € - ${p.location}</p>
+          <a href="#">View</a>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // --- Bookings (static demo) ---
+  function loadBookings() {
+    const bookings = [
+      { propertyTitle: "Luxury Villa", date: "2025-10-15", status: "Confirmed", image: "https://images.unsplash.com/photo-1600585154239-d9e2c3b42d51?auto=format&fit=crop&w=800&q=80" },
+      { propertyTitle: "Beach House", date: "2025-11-01", status: "Pending", image: "https://images.unsplash.com/photo-1572120360611-3fdf4c9bdfed?auto=format&fit=crop&w=800&q=80" },
+      { propertyTitle: "City Loft", date: "2025-12-05", status: "Confirmed", image: "https://images.unsplash.com/photo-1572120360612-d971b9b1dfd3?auto=format&fit=crop&w=800&q=80" }
+    ];
+
+    const bookContainer = document.getElementById('bookings-list');
+    bookContainer.innerHTML = bookings.map(b => `
+      <div class="property-card">
+        <img src="${b.image}" alt="${b.propertyTitle}">
+        <div>
+          <h4>${b.propertyTitle}</h4>
+          <p>Date: ${new Date(b.date).toLocaleDateString()}</p>
+          <p>Status: ${b.status}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // --- Change password ---
+  document.getElementById('password-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const newPassword = document.getElementById('new-password').value;
+    if (!newPassword) return alert("Please enter a new password");
+
+    try {
+      const res = await fetch(`http://localhost:5000/api/user/resetPassword/${userId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ password: newPassword })
+      });
+
+      if (!res.ok) throw new Error("Password update failed");
+      alert("Password updated successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Error updating password");
+    }
+  });
+
+  // --- Delete account ---
+  async function deleteAccount() {
+    if (!confirm("Are you sure you want to delete your account?")) return;
+    try {
+      const res = await fetch(`http://localhost:5000/api/user/${userId}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error("Delete failed");
+      localStorage.removeItem('user');
+      alert("Account deleted successfully");
+      window.location.href = "/auth.html";
+    } catch (err) {
+      console.error(err);
+      alert("Error deleting account");
+    }
+  }
+
+  // Load static data for profile
+  loadFavorites();
+  loadBookings();
 </script>
+
 
 </body>
 </html>

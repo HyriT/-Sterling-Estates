@@ -10,40 +10,47 @@ export const test = (req, res) => {
 };
 //Update User
 export const updateUser = async (req, res, next) => {
-    if (req.user.id !== req.params.id) {
-        return next(errorHandler(401, "You can only update your account!"));
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(401, "You can only update your account!"));
+  }
+
+  try {
+    const updateData = {};
+
+    if (req.body.password) {
+      updateData.password = bcryptjs.hashSync(req.body.password, 10);
     }
 
-    try {
-        if (req.body.password) {
-            req.body.password = bcryptjs.hashSync(req.body.password, 10);
-        }
+    if (req.body.username) updateData.username = req.body.username;
+    if (req.body.email) updateData.email = req.body.email;
+    if (req.body.avatar) updateData.avatar = req.body.avatar;
+    if (req.body.phone) updateData.phone = req.body.phone;
+    if (req.body.address) updateData.address = req.body.address;
 
-        const updatedUser = await User.findByIdAndUpdate(
-            req.params.id,
-            {
-                $set: {
-                    username: req.body.username,
-                    email: req.body.email,
-                    password: req.body.password,
-                    avatar: req.body.avatar,
-                }
-            },
-            { new: true }
-        );
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: updateData },
+      { new: true }
+    );
 
-        const { password, ...rest } = updatedUser._doc;
-        res.status(200).json(rest);
-    } catch (error) {
-        next(error);
+    if (!updatedUser) {
+      return next(errorHandler(404, "User not found!"));
     }
+
+    // fsheh password nga përgjigja
+    const { password, ...rest } = updatedUser._doc;
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
 };
+
 
 // Deactivate user
 export const deactivateUser = async (req, res, next) => {
   try {
     const user = await User.findByIdAndUpdate(
-      req.params.id, // take the ID from params
+      req.params.id, 
       { isActive: false },
       { new: true }
     );

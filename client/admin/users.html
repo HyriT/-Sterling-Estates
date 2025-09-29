@@ -2,75 +2,230 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Profile - Real Estate</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Users | Admin Panel</title>
+    <link rel="stylesheet" href="admin.css" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    .profile-container { max-width: 500px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
-    label { display: block; margin-top: 10px; }
-    input { width: 100%; padding: 8px; margin-top: 4px; }
-    button { margin-top: 15px; padding: 10px 20px; cursor: pointer; }
+   
+    .admin-user { position: relative; cursor: pointer; }
+    .admin-user .avatar { background: #3498db; color: #fff; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+    .admin-user .dropdown { position: absolute; right: 0; top: 45px; background: #fff; color: #333; border: 1px solid #ccc; border-radius: 6px; display: none; flex-direction: column; min-width: 120px; }
+    .admin-user .dropdown a { padding: 8px 12px; text-decoration: none; color: #333; }
+    .admin-user .dropdown a:hover { background: #f1f1f1; }
+    .content-section { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    .search-box { margin-bottom: 15px; position: relative; }
+    .search-box i { position: absolute; top: 10px; left: 10px; color: #999; }
+    .search-box input { width: 100%; padding: 8px 10px 8px 30px; border: 1px solid #ccc; border-radius: 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    table th, table td { border: 1px solid #ccc; padding: 8px; text-align: center; vertical-align: middle; }
+    table th { background: #f1f1f1; }
+    button.toggle-btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: 500; }
+    button.activate { background-color: #28a745; color: #fff; }
+    button.deactivate { background-color: #d9534f; color: #fff; }
+    img.avatar-img { border-radius: 50%; }
   </style>
 </head>
 <body>
-  <div class="profile-container">
-    <h1>My Profile</h1>
-    <form id="profile-form">
-      <label>Name: <input type="text" id="name" required></label>
-      <label>Email: <input type="email" id="email" disabled></label>
-      <label>Phone: <input type="text" id="phone"></label>
-      <label>Address: <input type="text" id="address"></label>
-      <button type="submit">Update Profile</button>
-    </form>
+  <div class="admin-container">
+    <aside class="sidebar">
+      <div>
+        <h2>SE Admin</h2>
+<ul>
+  <li>
+    <a href="admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+  </li>
+  <li>
+    <a href="appraisals.html"><i class="fas fa-file-signature"></i> Appraisals</a>
+  </li>
+  <li class="active">
+    <a href="users.html"><i class="fas fa-users"></i> Users</a>
+  </li>
+  <li>
+    <a href="admin-agent.html"><i class="fas fa-user-tie"></i> Agent</a>
+  </li>
+  <li>
+    <a href="properties.html"><i class="fas fa-building"></i> Properties</a>
+  </li>
+  <li>
+    <a href="statistic.html"><i class="fas fa-chart-bar"></i> Statistics</a>
+  </li>
+  <li>
+    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+  </li>
+</ul>
+
+
+      </div>
+      <p style="font-size: 13px;">&copy; 2025 Sterling Estates</p>
+    </aside>
+
+    <main class="main-panel">
+      <header>
+        <h1>Manage Users</h1>
+        <div class="admin-user" onclick="toggleDropdown()">
+          <div class="avatar">A</div>
+          <div class="dropdown" id="profile-dropdown">
+            <a href="admin-profil.html">My Profile</a>
+            <a href="#" onclick="logout()">Logout</a>
+          </div>
+        </div>
+      </header>
+
+      <section class="content-section">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="search-input" placeholder="Search user...">
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Registered Date</th>
+              <th>Avatar</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body"></tbody>
+        </table>
+      </section>
+    </main>
   </div>
 
-  <script>
-    // Merrim të dhënat e user-it nga localStorage (të ruajtura pas login)
-    const userData = JSON.parse(localStorage.getItem('user')); // supozojmë që login response ruhet si { token, user }
-    if (!userData || !userData.token) {
-      window.location.href = '/login.html';
+<script>
+// Fetch all users from API and display in table
+async function fetchUsers() {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You are not logged in! Redirecting to login.");
+      window.location.href = "admin-login.html";
+      return;
     }
 
-    const token = userData.token;
-    const user = userData.user;
-    const userId = user._id; // supozojmë që backend kthen _id
-
-    // Plotëso input-et me të dhënat e login
-    document.getElementById('name').value = user.name;
-    document.getElementById('email').value = user.email;
-    document.getElementById('phone').value = user.phone || '';
-    document.getElementById('address').value = user.address || '';
-
-    document.getElementById('profile-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      try {
-        const updatedData = {
-          name: document.getElementById('name').value,
-          phone: document.getElementById('phone').value,
-          address: document.getElementById('address').value
-        };
-
-        const res = await fetch(`http://localhost:3000/api/user/update/${userId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify(updatedData)
-        });
-
-        if (!res.ok) throw new Error('Failed to update profile');
-        const result = await res.json();
-
-        // Përditëso localStorage me të dhënat e reja
-        localStorage.setItem('user', JSON.stringify({ token, user: result }));
-
-        alert('Profile updated successfully!');
-      } catch (err) {
-        console.error(err);
-        alert('Error updating profile');
+    const res = await fetch("http://localhost:5000/api/user/allUsers", {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       }
     });
-  </script>
+
+    if (!res.ok) {
+      if (res.status === 401 || res.status === 403) {
+        alert("Access denied! Redirecting to login.");
+        localStorage.removeItem("token");
+        window.location.href = "/admin-login.html";
+        return;
+      }
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    let data = await res.json();
+
+    // Filter only regular users (role: 'user')
+    data = data.filter(user => user.role === "user");
+
+    const tableBody = document.getElementById("users-table-body");
+    tableBody.innerHTML = "";
+
+    // Populate table rows
+    data.forEach(user => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${user.email}</td>
+        <td>${user.username || "-"}</td>
+        <td>${new Date(user.createdAt).toLocaleString()}</td>
+        <td><img src="${user.avatar || 'default.png'}" alt="avatar" width="40" height="40" class="avatar-img"></td>
+        <td>
+          <button class="toggle-btn ${user.isActive ? 'deactivate' : 'activate'}" data-id="${user._id}">
+            ${user.isActive ? 'Deactivate' : 'Activate'}
+          </button>
+        </td>
+      `;
+      tableBody.appendChild(row);
+    });
+
+  } catch (err) {
+    console.error("Error fetching users:", err);
+  }
+}
+
+// Activate / Deactivate button click handler
+document.getElementById("users-table-body").addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("toggle-btn")) return;
+
+  const userId = e.target.dataset.id;
+  const btn = e.target;
+  const token = localStorage.getItem("token");
+  const action = btn.textContent.toLowerCase(); // "activate" or "deactivate"
+
+  try {
+    // Call the correct endpoint based on action
+    const url = `http://localhost:5000/api/user/${action}/${userId}`;
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    });
+
+    if (!res.ok) throw new Error(`Failed to ${action} user`);
+
+    const updatedUser = await res.json();
+
+    // Update button text and style
+    btn.textContent = updatedUser.isActive ? "Deactivate" : "Activate";
+    btn.classList.toggle("activate");
+    btn.classList.toggle("deactivate");
+
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+// Live search by email or username
+document.getElementById("search-input").addEventListener("input", () => {
+  const filter = document.getElementById("search-input").value.toLowerCase();
+  const rows = document.querySelectorAll("#users-table-body tr");
+
+  rows.forEach(row => {
+    const email = row.children[0].textContent.toLowerCase();
+    const username = row.children[1].textContent.toLowerCase();
+    if (email.includes(filter) || username.includes(filter)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+});
+
+// Toggle dropdown menu for admin profile
+function toggleDropdown() {
+  const dropdown = document.getElementById("profile-dropdown");
+  dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+// Logout function
+function logout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("user");
+  window.location.href = "/admin-login.html";
+}
+
+// Close dropdown when clicking outside
+window.addEventListener("click", function(e) {
+  if (!e.target.closest(".admin-user")) {
+    const dropdown = document.getElementById("profile-dropdown");
+    if (dropdown) dropdown.style.display = "none";
+  }
+});
+
+// Initialize table on page load
+document.addEventListener("DOMContentLoaded", fetchUsers);
+</script>
+
 </body>
 </html>

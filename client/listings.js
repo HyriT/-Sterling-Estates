@@ -1,7 +1,6 @@
 const filterForm = document.getElementById('filter-form');
 const propertiesGrid = document.getElementById('properties-grid');
 
-// Funksioni për të krijuar kartën e pronës me butonin Reserve
 function createPropertyCard(p) {
   return `
   <div class="property-card">
@@ -18,7 +17,6 @@ function createPropertyCard(p) {
   `;
 }
 
-// Filtrimi i pronave
 filterForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -31,7 +29,6 @@ filterForm.addEventListener('submit', async (e) => {
     location: document.getElementById('location').value
   };
 
-  // Fshij filter që janë bosh
   Object.keys(filters).forEach(key => {
     if (!filters[key]) delete filters[key];
   });
@@ -41,12 +38,10 @@ filterForm.addEventListener('submit', async (e) => {
     const res = await fetch(`http://localhost:5000/api/listing/filter?${query}`);
     let properties = await res.json();
 
-    // Filtrim ekstra për minPrice
     if (filters.minPrice) {
       properties = properties.filter(p => (p.discountPrice || p.regularPrice) >= Number(filters.minPrice));
     }
 
-    // Popullo grid-in
     propertiesGrid.innerHTML = properties.map(p => createPropertyCard(p)).join('');
 
   } catch (error) {
@@ -58,11 +53,10 @@ propertiesGrid.addEventListener('click', async (e) => {
   if (e.target.classList.contains('reserve-btn')) {
     const propertyId = e.target.dataset.id;
 
-    // Kontrollo nëse përdoruesi është i loguar
     const token = localStorage.getItem('authToken'); 
     if (!token) {
       alert('You need to login to to a booking.');
-      window.location.href = '/auth.html';
+      window.location.href = '/login.html';
       return;
     }
 
